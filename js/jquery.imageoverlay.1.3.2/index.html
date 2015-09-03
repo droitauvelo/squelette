@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>FerretArmy.com jQuery Image Overlay</title>
+	<link rel="stylesheet" media="screen" type="text/css" href="ImageOverlay.css" />
+</head>
+<body>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+	<script type="text/javascript" src="jquery.metadata.2.1/jquery.metadata.js"></script>
+	<script type="text/javascript" src="jquery.ImageOverlay.js"></script>
+
+	<h1>FerretArmy.com jQuery Image Overlay</h1>
+	
+	<p>No options:</p>
+				
+	<ul id="firstGallery" class="image-overlay">
+		<li>
+			<a href="http://www.ferretarmy.com">
+				<img alt="Palm Tree" src="testImages/palmtree.jpg"/>
+				<div class="caption">
+					<h3>Write a Title Here</h3>
+					<p>Put a Caption Here</p>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.blaqdesign.com">
+				<img alt="Iguana" src="testImages/iguana.jpg"/>
+				<div class="caption">
+					<h3>Another Title</h3>
+					<p>click for more info</p>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.google.com">
+				<img alt="Ceynote" src="testImages/ceynote.jpg"/>
+				<div class="caption">
+					<h3>Just a Title Here</h3>
+				</div>
+			</a>
+		</li>
+	</ul>
+	
+	<p>With options set (border_color, overlay_origin, overlay_color, and overlay_text_color, overlay_speed, overlay_speed_out):</p>
+	
+	<ul id="secondGallery" class="image-overlay">
+		<li>
+			<a href="http://www.mozilla.com/">
+				<img alt="firefox" src="testImages/firefox-512-200x200.png"/>
+				<div class="caption">
+					<h3>Get Firefox</h3>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.sxc.hu/photo/70689">
+				<img alt="jungle" src="testImages/jungle.jpg"/>
+				<div class="caption">
+					<h3>Tall Overlay</h3>
+					<p>The overlay height is based upon the content it contains</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+	
+	<p>Advanced Usage, utilizing the <a href="http://plugins.jquery.com/project/metadata">metadata plugin</a>:</p>
+	
+	<ul id="thirdGallery" class="image-overlay { overlay_speed: 'slow' }">
+		<li>
+			<a href="http://www.balupton.com/sandbox/jquery_lightbox_bal/demo/" class="{ animate: false, overlay_origin: 'top' }">
+				<img alt="bamboo" src="testImages/bamboo.jpg"/>
+				<div class="caption">
+					<h3>Connect to a Lightbox</h3>
+					<p>overlay origin is overridden, not animated</p>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.joshuabrentneal.com" class="{ overlay_speed: 'fast', overlay_speed_out: 'slow' }">
+				<img alt="Ships" src="testImages/josh-ships.jpg"/>
+				<div class="caption">
+					<h3>'Ships' by Josh Neal</h3>
+					<p>different in/out speeds</p>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://digg.com/submit?url=www.ferretarmy.com/files/jQuery/ImageOverlay/ImageOverlay.html" class="{ border_color: 'green', overlay_color: '#ccffcc', overlay_text_color: 'green', overlay_speed: 'fast', always_show_overlay: true }">
+				<img alt="cypress" src="testImages/cypress.jpg"/>
+				<div class="caption">
+					<h3>Digg This!</h3>
+					<p>colors, overlay speed overridden, overlay always open</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<script type="text/javascript">
+		// JavaScript for the Image Overlay galleries.
+		$("#firstGallery").ImageOverlay();
+		$("#secondGallery").ImageOverlay({ border_color: "#FF8000", overlay_color: "#610B38", overlay_origin: "top", overlay_text_color: "#FF8000", overlay_speed: 'fast', overlay_speed_out : 'slow' });
+		$("#thirdGallery").ImageOverlay();
+	</script>
+	
+</body>
+</html>

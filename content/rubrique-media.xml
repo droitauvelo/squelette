@@ -1,0 +1,5 @@
+<composition>
+	<nom>Dans les médias</nom>
+	<description>Rubrique "dans les média"</description>
+	<branche type="article" composition="media-niveaux" />
+</composition>

@@ -1,0 +1,24 @@
+<BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
+<div class="contenu-principal">
+
+	<div class="cartouche">
+		[(#LOGO_RUBRIQUE||image_reduire{200,200})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
+	</div>
+
+	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+</div>
+
+	<ul class="liste-items">
+		<BOUCLE_articles_media(ARTICLES){id_rubrique}{par date}{inverse}>
+		<li>[<span class="date">(#DATE|affdate_jourcourt)</span> : ]<a href="#URL_SITE">#TITRE</a>[ <span class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</span>]</li>
+		</BOUCLE_articles_media>
+	</ul>
+
+[(#REM) Gestion du portfolio et des documents ]
+[(#INCLURE{fond=inclure/documents}{id_rubrique})]	
+
+
+[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_contenu_rubrique>

@@ -1,0 +1,33 @@
+[(#REM)
+	Barre de navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site. ]
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {par num titre, titre}>
+<B_rubriques>
+<div class="menu rubriques">
+	<h2 class="h2"><:rubriques:></h2>
+	<ul class="menu-liste">
+	<BOUCLE_rubriques(RUBRIQUES) {id_rubrique=#ID_SECTEUR} {par num titre, titre}>
+		<li class="menu-entree">
+			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+
+			<B_sous_rubriques>
+			<ul class="menu-liste">
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+					<li class="menu-entree"><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+
+		</li>
+	</BOUCLE_rubriques>
+	<BOUCLE_sous_rubriques_ressources(RUBRIQUES){enfants_indirects}{par num titre, titre}>
+	<li class="menu-entree">
+		<a href="#URL_RUBRIQUE">Ressources</a>
+	</li>
+	</BOUCLE_sous_rubriques_ressources>
+	</ul>
+</div>
+</B_rubriques>
+</BOUCLE_rubrique>

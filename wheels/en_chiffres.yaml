@@ -1,0 +1,10 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+bloc_en_chiffre:
+  # raccourci <quote>
+  match: ['<bloc_en_chiffres>', '</bloc_en_chiffres>']
+  replace: ['<div class="bloc_en_chiffres">', '</div>']
+  if_str: '<bloc_en_chiffres>'
+  type: str

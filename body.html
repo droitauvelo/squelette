@@ -1,0 +1,35 @@
+<body>
+	<div class="page">
+		<div class="container toto">
+			<div class="header" id="header">
+				<INCLURE{fond=header/#ENV{type-page},env} />
+			</div>
+			[<div class="navbar navbar-inverse navbar-responsive" id="nav">
+				(#INCLURE{fond=inclure/nav,env}|navbar_responsive)
+			</div>]
+
+			<div id="super_contenu">
+
+				<div class="row-fluid" >
+				<div class="content span7" id="content">
+					<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+					<INCLURE{fond=content/#ENV{type-page},env} />
+				</div>
+				<div class="aside secondary col span5" id="aside">
+					<INCLURE{fond=aside/#ENV{type-page},env} />
+
+				</div>
+
+				</div>
+                <div id="extra" class="row-fluid" >
+                    <INCLURE{fond=extra/#ENV{type-page},env} />
+                </div>
+
+			</div>
+
+			<div class="footer" id="footer">
+				<INCLURE{fond=footer/#ENV{type-page},env} />
+			</div>
+		</div>
+	</div>
+</body>
