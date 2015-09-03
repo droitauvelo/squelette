@@ -1,0 +1,43 @@
+<div class="row">
+<header class="accueil clearfix span7">
+	<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>"
+	><h1 id="logo_site_spip"[ class="(#EDIT{meta-nom_site})"]>[(#LOGO_SITE_SPIP|image_reduire{600,115}) ]
+	<div class="fleche_logo"></div>
+        <div class="header_texte">
+		<div id="association">Association</div> <div id="nom_site">DROIT au VÉLO</div>
+		[<small id="slogan_site_spip"[ class="(#EDIT{meta-slogan_site})"]>(#SLOGAN_SITE_SPIP)</small>]
+	</div>
+	</h1></a>
+	
+</header>
+<div class="span5" class="mega_bouton ">
+	
+	
+<div class="row-fluid">
+
+
+
+    <B_articles>
+        <div class="bloc_contact hidden-phone">
+            <BOUCLE_articles(ARTICLES){page=contact}>
+            <a href="#URL_ARTICLE"  ><span>#TITRE</span></a>
+            <div class="texte_suppl">#DESCRIPTIF</div>
+            </BOUCLE_articles>
+        </div>
+    </B_articles>
+
+
+		<div  class="bloc_adherer hidden-phone">
+			<BOUCLE_articles_adh(ARTICLES){id_article=603}>
+			<a href="#URL_ARTICLE" class=""><span>#TITRE</span></a>
+		</BOUCLE_articles_adh>
+		</div>
+
+			
+			
+			
+
+</div>
+
+</div>
+</div>

@@ -1,0 +1,24 @@
+[(#REM) 
+<!-- Articles syndiques de l'ensemble du site ou d'un site reference donne
+	Recoit en argument :
+		- id_syndic: id du site concernee
+		- nb_jours: nombre de jours de syndication
+-->
+]
+[(#REM) <!-- affichage des syndications de tous les sites sinon --> ]
+<div id="articles_syndiques" class="liste articles_syndiques">
+<B_articles_syndiques>
+
+	
+	<ul class="liste-items articles_syndiques">
+	<BOUCLE_articles_syndiques(SYNDIC_ARTICLES){id_syndic IN #ARRAY{0,38,1,37}}{par date}{inverse}{0,10}>
+	<li class="item">
+		[[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE" rel="bookmark">(#TITRE*)<span class="read-more hide"><i class="icon-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE*|attribut_html)]&raquo;"></i></span></a>]
+	</li>
+	</BOUCLE_articles_syndiques>
+	</ul>
+
+</B_articles_syndiques>
+	<p class="warning">Aucun d'article syndiqué</p>
+<//B_articles_syndiques>
+</div> <!-- commentaires -->

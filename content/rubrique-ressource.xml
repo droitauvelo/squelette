@@ -1,0 +1,6 @@
+<composition>
+	<nom>Ressource</nom>
+	<description>Rubrique ressource</description>
+	<branche type="rubrique" composition="ressource-niveaux" />
+	<branche type="article" composition="ressource-niveaux" />
+</composition>

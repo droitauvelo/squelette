@@ -1,0 +1,11 @@
+<h4 class="h4"><:coordonnees:label_email:></h4>
+<ul class="liste-item">
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+	<li class="item #EDIT{email}"><a href="mailto:#EMAIL">#EMAIL</a></li>
+</BOUCLE_auteur>	
+<B_mail>
+<BOUCLE_mail(EMAILS emails_liens auteurs){id_auteur=#ENV{id_auteur}}{tout}>
+<li class="item #EDIT{email}">#EMAIL</li>
+</BOUCLE_mail>
+</B_mail>
+</ul>
