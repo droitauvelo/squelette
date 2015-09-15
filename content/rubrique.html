@@ -10,40 +10,18 @@
 	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
 </div>
 
-
-
-		<BOUCLE_test_numero(ARTICLES){enfants}{titre==^[0-9]+\.}{0,1}>
-
-		</BOUCLE_test_numero>
-			<B_ordre_numeros>
-				<div class="liste articles">
-				#ANCRE_PAGINATION
-				<h2 class="h2"><:articles_rubrique:></h2>
-				<ul class="liste-items">
-					<BOUCLE_ordre_numeros(ARTICLES){enfants}{doublons}{par num titre, titre} {pagination 10}>
-					#INCLURE{fond=inclure/article-resume,id_article}
-					</BOUCLE_ordre_numeros>
-				</ul>
-				[<div class="pagination">(#PAGINATION)</div>]
-				</div>
-			</B_ordre_numeros>
-		</B_test_numero>
-			<B_articles>
-			<div class="liste articles">
-			#ANCRE_PAGINATION
-			<h2 class="h2"><:articles_rubrique:></h2>
-			<ul class="liste-items">
-			<BOUCLE_articles(ARTICLES){enfants} {!par date} {pagination 10}>
-			#INCLURE{fond=inclure/article-resume,id_article}
-			</BOUCLE_articles>
-			</ul>
-			[<div class="pagination">(#PAGINATION)</div>]
-			</div>
-			</B_articles>
-		<//B_test_numero>
-		
-
-
+    <B_ordre_numeros>
+        <div class="liste articles">
+        #ANCRE_PAGINATION
+        <h2 class="h2"><:articles_rubrique:></h2>
+        <ul class="liste-items">
+            <BOUCLE_ordre_numeros(ARTICLES){id_rubrique}{doublons}{par num titre, titre} {pagination 10}>
+            #INCLURE{fond=inclure/article-resume,id_article}
+            </BOUCLE_ordre_numeros>
+        </ul>
+        [<div class="pagination">(#PAGINATION)</div>]
+        </div>
+    </B_ordre_numeros>
 
 
 	[(#REM) Si aucun article, affiche un plan de la rubrique ]
@@ -70,7 +48,7 @@
 				<B_articles_rub>
 				<div class="plan-article">
 					<ul class="liste-items">
-						<BOUCLE_articles_rub(ARTICLES){enfants} {!par date}>
+						<BOUCLE_articles_rub(ARTICLES) {!par date}>
 						<li><div class="titre #EDIT{titre}"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div></li>
 						</BOUCLE_articles_rub>
 					</ul>
@@ -78,11 +56,7 @@
 				</B_articles_rub>
 			</li>
 			</BOUCLE_sous_rubriques>
-				<BOUCLE_sous_rubriques_ressources(RUBRIQUES){enfants_indirects}{par num titre, titre}>
-				<li class="menu-entree">
-					<a href="#URL_RUBRIQUE">Ressources</a>
-				</li>
-				</BOUCLE_sous_rubriques_ressources>
+
 		</ul>
 		</div>
 
@@ -100,14 +74,14 @@
 				<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
 				<li class="item">
 	<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
-						<B_syndic>
-						<ul>
-								<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
-								<li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
-								</BOUCLE_syndic>
-						</ul>
-						</B_syndic>
-				</li>
+                <B_syndic>
+                <ul>
+                        <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
+                        <li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
+                        </BOUCLE_syndic>
+                </ul>
+                </B_syndic>
+        </li>
 				</BOUCLE_sites>
 		</ul>
 </div>

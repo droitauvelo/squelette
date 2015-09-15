@@ -2,10 +2,14 @@
 	<div class="span6">
 <B_mois_vedette>
 <ul class="evt_vedette">
-<BOUCLE_mois_vedette(EVENEMENTS){titre_mot=vedette}{age<0}{par date}{0,2}{doublons}>
+<BOUCLE_mois_vedette(EVENEMENTS){magnet}{titre_mot=vedette}{age<0}{par date}{0,1}{doublons}>
 	<li>
+        [(#SET{logo,#LOGO_EVENEMENT})]
 	<BOUCLE_articles_vedette(ARTICLES) {id_article}>
-		<div class="logo"><a href="#URL_ARTICLE" rel="bookmark"><img src="[(#ENV{logo_rubrique,' '}|?{#LOGO_ARTICLE_RUBRIQUE,#LOGO_ARTICLE}|sinon{#CHEMIN{images/logo.png}}|image_reduire{300,200}|extraire_attribut{src})]" class="img-rounded " /></a></div>
+
+        [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+
+		<div class="logo"><a href="#URL_ARTICLE" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{300,200}|extraire_attribut{src})]" class="img-rounded " /></a></div>
 	</BOUCLE_articles_vedette>	
 	<div class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
 	<div class="titre"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div>
@@ -21,26 +25,46 @@
 
 </div>	
 <div class="span6">
+    [(#SET{tabevt,#ARRAY})]
+
 <B_mois>
 
 	
 <ul class="mini_agenda">
+
 <BOUCLE_mois(EVENEMENTS){age<0}{par date}{0,5}{doublons}>
 	<li>
-	<BOUCLE_articles(ARTICLES){id_evenement}>
-		<div class="logo pull-left"><a href="#URL_ARTICLE" rel="bookmark"><img src="[(#ENV{logo_rubrique,' '}|?{#LOGO_ARTICLE_RUBRIQUE,#LOGO_ARTICLE}|sinon{#CHEMIN{images/logo.png}}|image_reduire{50,50}|extraire_attribut{src})]" class="img-rounded" /></a></div>
-	</BOUCLE_articles>	
-	<div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
-	<div class="titre"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div>
-	<div class="lieu">#LIEU</div>
-	[<div class="descriptif">(#DESCRIPTIF)[<span class="information"><a href="(#URL_ARTICLE)">En savoir plus</a></span>]</div>]
-	[(#SET{date_debut,#DATE_DEBUT})]
+    [(#SET{logo,#LOGO_EVENEMENT})]
+
+    <BOUCLE_condition(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
+
+
+
+        <BOUCLE_evt_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
+            [(#SET{logo,#LOGO_EVENEMENT})]
+        </BOUCLE_evt_source>
+        <BOUCLE_articles(ARTICLES){id_evenement}>
+
+            [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+            [(#SET{url_article,#URL_ARTICLE})]
+        </BOUCLE_articles>
+        <div class="logo pull-left"><a href="[(#GET{url_article})]" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{80,80}|extraire_attribut{src})]" class="img-rounded spip_logos" /></a></div>
+        <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
+        <div class="titre"><a href="[(#GET{url_article})]" rel="bookmark">#TITRE</a></div>
+        <div class="lieu">#LIEU</div>
+        [<div class="descriptif">(#DESCRIPTIF)<span class="information"><a href="[(#GET{url_article})]">En savoir plus</a></span></div>]
+        [(#SET{date_debut,#DATE_DEBUT})]
+    </BOUCLE_condition>
+        [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
 	<div class="nettoyeur"></div>
 	</li>
+
+
 </BOUCLE_mois>
 </ul>
 <div class="lien_agenda"><a href="[(#URL_PAGE{agenda})]">Voir les autres évenements</a></div>
 </B_mois>
+
 <//B_mois>
 
 </div>	</div>	
