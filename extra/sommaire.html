@@ -1,7 +1,7 @@
 
 
-[<div id="mini_agenda" class="span9">
-    <h3>Agenda</h3>
+[<div id="mini_agenda" class="span8">
+    <h2 class="h2">Agenda</h2>
     <div class="bloc">
         (#INCLURE{fond=inclure/mini_agenda,env})
     </div>
@@ -10,8 +10,18 @@
 
 
 
-<div class="liste articles sommaire_twitter span3">
+<div class="sommaire_twitter span4">
     <h2 class="h2"><a href="https://twitter.com/droitauvelo">Suivez nous...</a></h2>
+    <div class="bloc">
     #INCLURE{fond=inclure/twidget_profile}
+    </div>
+</div>
+
+<div class="liste_partenaire span12">
+    <BOUCLE_articles_partenaire(ARTICLES){id_article=619}>
+    <h2 class="h2">Nos partenaires</h2>
+    [(#DESCRIPTIF)]
+    <p><a href="#URL_ARTICLE" class="btn btn-small">En savoir plus</a></p>
+    </BOUCLE_articles_partenaire>
 
 </div>

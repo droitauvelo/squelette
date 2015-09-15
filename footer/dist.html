@@ -16,7 +16,7 @@
 		<div class="liste forums">
 			<h3>On parle de nous</h3>
 			<ul class="liste-items">
-				<BOUCLE_article(ARTICLES) {id_rubrique=45} {par date}{inverse} {0,10}>
+				<BOUCLE_article(ARTICLES) {id_rubrique=45} {par date}{inverse} {0,8}>
 				<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TITRE)]</a></li>
 				</BOUCLE_article>
 			</ul>
@@ -30,7 +30,7 @@
 
 	<div id="bloc_rss" class="span4">
 		<div class="inner">
-		<h3>Nos partenaires</h3>
+
 		
 		
 		

@@ -1,0 +1,5 @@
+<composition>
+	<nom>Actualité</nom>
+	<description>présentation des dernières actualités</description>
+	<branche type="article" composition="actualite-niveaux" />
+</composition>

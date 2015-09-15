@@ -1,0 +1,41 @@
+<BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
+
+	<!-- Titre de la rubrique -->
+	<div class="cartouche">
+		[<h1 class="#EDIT{titre}">(#TITRE)</h1>]
+	</div>
+
+
+<B_zoom_article>
+
+<div class="menu alaune">
+    <h2 class="h2 accroche">A la une</h2>
+<ul class="menu-liste">
+<BOUCLE_zoom_article(ARTICLES){id_rubrique}{magnet}{par date}{inverse}{doublons}>
+        [(#INCLURE{fond=inclure/article-resume-actu-vedette,id_article})]
+    	<div class="nettoyeur"></div>
+
+</BOUCLE_zoom_article>
+</ul>
+</div>
+<hr />
+</B_zoom_article>				
+
+	
+
+[(#REM) Articles de la rubrique ]
+<B_news>
+<div class="menu articles liste_actu">
+	#ANCRE_PAGINATION
+	<!--<h2><:articles_rubrique:></h2>-->
+	<ul class="menu-liste">
+		<BOUCLE_news(ARTICLES){id_rubrique}{!magnet}{doublons}{par date}{inverse}{pagination}>
+
+            [(#INCLURE{fond=inclure/article-resume-actu,id_article})]
+
+		</BOUCLE_news>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_news>
+</BOUCLE_contenu_rubrique>
