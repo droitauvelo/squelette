@@ -11,7 +11,7 @@
 
 	
 	<ul class="liste-items articles_syndiques">
-	<BOUCLE_articles_syndiques(SYNDIC_ARTICLES){id_syndic IN #ARRAY{0,38,1,37}}{par date}{inverse}{0,5}>
+	<BOUCLE_articles_syndiques(SYNDIC_ARTICLES){id_syndic IN 37,38}{par date}{inverse}{0,6}>
 	<li class="item">
 		[[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE" rel="bookmark">(#TITRE*)<span class="read-more hide"><i class="icon-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE*|attribut_html)]&raquo;"></i></span></a>]
 	</li>
