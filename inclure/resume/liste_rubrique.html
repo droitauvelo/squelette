@@ -1,0 +1,33 @@
+#SET{niveau,#ENV{niveau,0}|plus{1}}
+<BOUCLE_res(RUBRIQUES){id_rubrique}>
+#SET{tab_docart,#ARRAY}
+
+<BOUCLE_rubriques_res(RUBRIQUES){id_parent}{!par date}>
+    [(#SET{tab_docart,#GET{tab_docart}|push{#ARRAY{'objet','rubrique','id',#ID_RUBRIQUE,'date',#DATE,'url',#URL_RUBRIQUE,'titre',#TITRE,'numero',#RANG}}})]
+</BOUCLE_rubriques_res>
+
+<BOUCLE_articles_cond(CONDITION){si #GET{niveau}|<{3}}>
+    <BOUCLE_articles_res(ARTICLES){id_rubrique = #ID_RUBRIQUE}{doublons}{!par date}{0,5}>
+        #SET{tab_docart,#GET{tab_docart}|push{#ARRAY{'objet','article','id',#ID_ARTICLE,'date',#DATE,'url',#URL_ARTICLE,'titre',#TITRE,'numero',#RANG}}}
+    </BOUCLE_articles_res>
+</BOUCLE_articles_cond>
+#SET{tab_docart,#GET{tab_docart}|tri_docart{'numero'}}
+
+
+<B_documentarts_res>
+    <ul class="menu-liste">
+        <BOUCLE_documentarts_res(POUR){tableau #GET{tab_docart}}>
+        <li class="menu-entree">
+            [(#VALEUR|table_valeur{'objet'}|=={"rubrique"}|oui)
+            [(#INCLURE{fond=inclure/resume/item_rubrique,id_rubrique=#VALEUR|table_valeur{'id'}})]
+            [(#INCLURE{fond=inclure/resume/liste_rubrique,id_rubrique=#VALEUR|table_valeur{'id'},niveau=#GET{niveau}})]]
+            [(#VALEUR|table_valeur{'objet'}|=={"article"}|oui)
+            [(#INCLURE{fond=inclure/resume/item_article,id_article=#VALEUR|table_valeur{'id'}})]				]
+        </li>
+        </BOUCLE_documentarts_res>
+    </ul>
+
+</B_documentarts_res>
+
+</BOUCLE_res>
+[(#SET{tab_docart,#ARRAY})]

@@ -1,6 +1,0 @@
-<composition>
-	<nom>Rubrique Acteur-Relais</nom>
-	<description>Rubrique Acteur-Relais</description>
-	<branche type="rubrique" composition="acteur-niveaux" />
-	<branche type="article" composition="acteur-niveaux" />
-</composition>
