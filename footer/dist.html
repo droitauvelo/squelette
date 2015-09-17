@@ -16,7 +16,7 @@
 		<div class="liste forums">
 			<h3>On parle de nous</h3>
 			<ul class="liste-items">
-				<BOUCLE_article(ARTICLES) {id_rubrique=45} {par date}{inverse} {0,8}>
+				<BOUCLE_article(ARTICLES) {id_rubrique=45} {par date}{inverse} {0,6}>
 				<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TITRE)]</a></li>
 				</BOUCLE_article>
 			</ul>
@@ -38,23 +38,23 @@
 		<h3>En Bref</h3>
 		<b_breves>
 		<ul class="liste-items">
-			<BOUCLE_breves(BREVES){0,5}{par date}{inverse}>
+			<BOUCLE_breves(BREVES){0,3}{par date}{inverse}>
 			<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_BREVE">#TITRE</a></li>
 			</BOUCLE_breves>
 		</ul>
 		
 		</b_breves>
 
-		<!--<B_forums_liens>
+	<B_forums_liens>
 		<div class="liste forums">
 			<h3 class="h3"><:derniers_commentaires:></h3>
 			<ul class="liste-items">
-				<BOUCLE_forums_liens(FORUMS?) {plat} {par date}{inverse} {0,5}>
+				<BOUCLE_forums_liens(FORUMS?) {plat} {par date}{inverse} {0,3}>
 				<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></li>
 				</BOUCLE_forums_liens>
 			</ul>
 		</div>
-		</B_forums_liens>		-->
+		</B_forums_liens>
 		
 		
 		
@@ -73,47 +73,19 @@
 	
 	
 	
-<div class="span8">
+<div class="span12">
 <BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee|!={#VAL{Y}|date}|oui)[(#DATE|annee)]]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ] &mdash; #NOM_SITE_SPIP<br />
-<a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a><?php
-if (isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']) {
-?><span class="sep"> | </span><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a><?php
-	if (include_spip('inc/autoriser') AND autoriser('ecrire')){
-	?><span class="sep"> | </span><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a><?php
-	}
-}
-else {
-?><span class="sep"> | </span><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}})]" rel="nofollow" class='login_modal'><:lien_connecter:></a><?php
-}
-?><span class="sep"> |
-</span><a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>">[(#CHEMIN{feed.png}|balise_img{<:icone_suivi_activite:>})]&nbsp;RSS&nbsp;2.0</a>
 
-</div>
-
-
-	
-<div class="span4">
-	
-<!--	
-	
-	<div class="soutien">
-		<h4 class="h4">Nos partenaires</h4>
-		<ul class="jc">
-		[<li><a href="http://www.nordpasdecalais.fr/">(#CHEMIN{images/logo_region_nord.png}|image_reduire{15})</a></li>]
-		[<li><a href="http://www.ademe.fr/">(#CHEMIN{images/logo_ademe.png}|image_reduire{15})</a></li>]
-		</ul>
-	</div>
-	
-	-->
-</div>
-
+[<div id="menu_de_page" class="menu">
+        (#INCLURE{fond=inclure/menu, env, identifiant=basdepage})
+    </div>]
 
 </div>
 
 
 
 </div>
-
+</div>
 
 
 
