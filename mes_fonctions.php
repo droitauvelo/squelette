@@ -30,4 +30,24 @@ function adav_porte_plume_lien_classe_vers_icone($flux){
     }
 
 
-?>
+
+function tri_docart($tab,$key_tri='date',$sens=''){
+    $tab_tri=array();
+    foreach ($tab as $key => $row) {
+        $tab_tri[$key]  = strtolower(wd_remove_accents($row[$key_tri]));
+    }
+    array_multisort($tab_tri, SORT_STRING, $tab);
+    if($sens!='')$tab=array_reverse($tab);
+    return $tab;
+}
+
+function wd_remove_accents($str, $charset='utf-8')
+{
+    $str = htmlentities($str, ENT_NOQUOTES, $charset);
+
+    $str = preg_replace('#&([A-za-z])(?:acute|cedil|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+    $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures e.g. '&oelig;'
+    $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
+
+    return $str;
+}

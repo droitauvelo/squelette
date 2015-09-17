@@ -1,6 +1,0 @@
-<composition>
-	<nom>Fiches bonne pratique</nom>
-	<description>Rubrique Fiches bonne pratique</description>
-	<branche type="rubrique" composition="fiche-niveaux" />
-	<branche type="article" composition="fiche-niveaux" />
-</composition>

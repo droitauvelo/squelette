@@ -1,0 +1,10 @@
+<div class="form-search">
+#FORMULAIRE_RECHERCHE
+</div>
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+<div class="menu rubriques">
+    <div class="muted">Plan de la rubrique #TITRE</div>
+<div class="plan-article">
+    [(#INCLURE{fond=inclure/resume/liste_rubrique,id_rubrique=#ID_RUBRIQUE})]</li>
+</div>
+</BOUCLE_rubrique>
