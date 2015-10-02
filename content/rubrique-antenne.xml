@@ -1,0 +1,5 @@
+<composition>
+	<nom>Antenne</nom>
+	<description>Page de presentation des antennes locales</description>
+	<branche type="article" composition="antenne-niveaux" />
+</composition>

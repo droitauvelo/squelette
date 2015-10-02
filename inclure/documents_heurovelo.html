@@ -1,0 +1,11 @@
+<B_documents_joints>
+	<div class="liste documents documents_joints heurovelo ajax">
+		#ANCRE_PAGINATION
+	<ul class="liste-items">
+		<BOUCLE_documents_joints(DOCUMENTS) {id_article?}{id_rubrique?}{objet?}{id_objet?} {extension !IN gif,jpg,png} {vu=non}{!par num titre, date}{doublons}{pagination 10}>
+		<li class="item">#INCLURE{fond=inclure/resume/numero_heurovelo,id_document,largeur=80}</li>
+		</BOUCLE_documents_joints>
+	</ul>
+	<div class="pagination">#PAGINATION</div>
+	</div>
+</B_documents_joints>

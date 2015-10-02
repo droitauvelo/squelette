@@ -171,13 +171,17 @@ div.subnav {
 		.box-shadow(none);
 
 		& > li > a {
-			background-color: @green;
+			background-color: @yellow;
 			border-color: transparent;
 			color: @white;
 
 			&:hover {
-				background-color: lighten(@green, 10%);
+				background-color: lighten(@yellow, 10%);
 			}
+		}
+		& > li.tbc {
+			background-color: @yellow;
+
 		}
 
 		& > .active > a,
@@ -188,9 +192,14 @@ div.subnav {
 
 		& > .disabled > a,
 		& > .disabled > a:hover {
-			background-color: lighten(@green, 10%);
+			background-color: lighten(@yellow, 10%);
 			color: @white;
 		}
+		& > li.disabled > span {
+			background-color: lighten(@yellow, 10%);color:@white;
+			border-color: transparent;
+		}
+		
 	}
 }
 

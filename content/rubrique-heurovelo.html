@@ -1,0 +1,19 @@
+<BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
+
+<div class="contenu-principal">
+
+	<div class="cartouche">
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
+	</div>
+
+	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+</div>
+
+
+[(#REM) Gestion du portfolio et des documents ]
+[(#INCLURE{fond=inclure/documents_heurovelo}{id_rubrique}{debut_documents_joints})]	
+
+
+[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_contenu_rubrique>
