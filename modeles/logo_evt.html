@@ -1,0 +1,4 @@
+[(#SET{fichier,evenementon#ENV{id}})]
+[(#GET{fichier})]
+
+[(#VAL{IMG/}|preg_files{#GET{fichier}\.(jpg|gif|png)}|table_valeur{0})]
