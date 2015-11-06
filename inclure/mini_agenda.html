@@ -10,12 +10,12 @@
         [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
 
 		<div class="logo"><a href="#URL_ARTICLE" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{300,200}|extraire_attribut{src})]" class="img-rounded " /></a></div>
-	</BOUCLE_articles_vedette>	
-	<div class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
-	<div class="titre"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div>
-	<div class="lieu">#LIEU</div>
-	<div class="descriptif">#DESCRIPTIF</div>
-		[<div class="descriptif">(#DESCRIPTIF)[<span class="information"><a href="(#URL_ARTICLE)">En savoir plus</a></span>]</div>]
+	</BOUCLE_articles_vedette>
+        <div class="titre">
+        <span class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</span>
+	<a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div>
+     <div class="informations">
+        [<span class="lieu">(#LIEU)</span> ][<span class="descriptif[ (#EDIT{descriptif})]">(#DESCRIPTIF|textebrut)[<span class="information"><a href="(#URL_ARTICLE)"> En savoir plus</a></span>]</span></div>]
 	[(#SET{date_debut,#DATE_DEBUT})]
 	<div class="nettoyeur"></div>
 	</li>
@@ -32,7 +32,7 @@
 	
 <ul class="mini_agenda">
 
-<BOUCLE_mois(EVENEMENTS){age<0}{par date}{0,5}{doublons}>
+<BOUCLE_mois(EVENEMENTS){magnet}{age<0}{par date}{0,5}{doublons}>
 	<li>
     [(#SET{logo,#LOGO_EVENEMENT})]
 
