@@ -5,10 +5,9 @@
 	
 <!-- Titre de l'article -->
 <div class="cartouche">
-
 	<div class="surlignable">
 	<BOUCLE_rub_mere(RUBRIQUES){id_rubrique}>
-			<h1 class="rubrique_mere">#TITRE</h1>
+		<h1 class="rubrique_mere">#TITRE</h1>
 	</BOUCLE_rub_mere>
 	[(#LOGO_ARTICLE||image_reduire{200,200})]
 	[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]

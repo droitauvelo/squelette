@@ -15,7 +15,7 @@
         #ANCRE_PAGINATION
         <h2 class="h2"><:articles_rubrique:></h2>
         <ul class="liste-items">
-            <BOUCLE_ordre_numeros(ARTICLES){id_rubrique}{doublons}{par num titre, titre} {pagination 10}>
+            <BOUCLE_ordre_numeros(ARTICLES){id_rubrique}{doublons}{par date}{pagination 10}>
             #INCLURE{fond=inclure/article-resume,id_article}
             </BOUCLE_ordre_numeros>
         </ul>
@@ -48,7 +48,7 @@
 				<B_articles_rub>
 				<div class="plan-article">
 					<ul class="liste-items">
-						<BOUCLE_articles_rub(ARTICLES) {!par date}>
+						<BOUCLE_articles_rub(ARTICLES){id_rubrique} {!par date}>
 						<li><div class="titre #EDIT{titre}"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div></li>
 						</BOUCLE_articles_rub>
 					</ul>

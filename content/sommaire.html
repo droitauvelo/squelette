@@ -14,7 +14,7 @@
 					</ol>
 				<!-- Carousel items -->
 				<div class="carousel-inner">
-					<BOUCLE_docum(DOCUMENTS){id_rubrique}{par num titre}{tout}{vu=non}>
+					<BOUCLE_docum(DOCUMENTS){id_rubrique}{tout}{vu=non}{par hasard}>
 						<div class="item[(#COMPTEUR_BOUCLE|=={1}|oui) active]">
 							<img src="[(#URL_DOCUMENT|image_reduire{800,350}|extraire_attribut{src})]" alt="" />
 							<div class="carousel-caption">
