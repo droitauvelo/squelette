@@ -1,0 +1,49 @@
+<BOUCLE_content(RUBRIQUES){id_rubrique}>
+
+<BOUCLE_option_var(MOTS){id_rubrique}{titre='masquer_liste_rubrique'}{technique=oui}>
+[(#SET{masquer_liste_rubrique,'oui'})]
+</BOUCLE_option_var>
+
+
+[(#SET{option_affichage_liste_article,''})]
+<BOUCLE_option_var2(MOTS){id_rubrique}{titre='affichage sous-sous-rubrique'}{technique=oui}>
+    [(#SET{option_affichage_liste_article,'oui'})]
+</BOUCLE_option_var2>
+
+<B_sous_rubriques>
+    <div class="rubrique-bloc">
+       <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {si #GET{masquer_liste_rubrique}|=={oui}|non}{par num titre, titre}>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+                <a href="#URL_RUBRIQUE"><div class="item ">
+                <h3>#TITRE</h3>
+                [<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF|couper{50})</div>]
+                <BOUCLE_option_rub(CONDITION){si #GET{option_affichage_ssr}|=={oui}}>
+
+                    <ul class="menu-liste list-unstyled">
+                        <B_miniplan>
+                        <BOUCLE_miniplan(RUBRIQUES){id_parent}{par num titre, titre}>
+                        <li class="menu-entree">
+                            <a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+                       </li>
+                        </BOUCLE_miniplan>
+                         </B_miniplan>
+                        <BOUCLE_miniplan_article(ARTICLES) {id_rubrique} {par num titre, titre}>
+                        <li>
+                            <a href="#URL_ARTICLE">#TITRE</a>
+                        </li>
+                        </BOUCLE_miniplan_article>
+                        <li>[(#TOTAL_BOUCLE|>{5}|oui)<a href="#URL_RUBRIQUE">...</a>]</li>
+                        </B_miniplan_article>
+
+                    </ul>
+
+                </BOUCLE_option_rub>
+            </div></a>
+            </div>
+            </BOUCLE_sous_rubriques>
+
+    </div>
+</B_sous_rubriques>
+</BOUCLE_content>
+
+<div class="clearfix"></div>

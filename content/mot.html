@@ -1,4 +1,8 @@
 <BOUCLE_principale(MOTS) {id_mot} {doublons}>
+<div class="row-fluid" >
+    <div class="content col-md-7" id="content">
+        <INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
 <div class="contenu-principal">
 
   <div class="cartouche">
@@ -64,4 +68,15 @@
 </div>
 
 [<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+
+
+    </div>
+
+
+
+    <div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+        <INCLURE{fond=aside/#ENV{type-page},env} />
+    </div>
+</div>
+
 </BOUCLE_principale>

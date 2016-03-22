@@ -1,0 +1,58 @@
+<BOUCLE_content(ARTICLES){id_article}>
+<div class="row-fluid" >
+	<div class="content col-md-7" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+
+[(#INCLURE{fond=inclure/outils})]
+
+<article>
+	<header class="cartouche">
+
+		<h1>
+			[<small class="#EDIT{surtitre} surtitre">(#SURTITRE)</small><br/>]
+			<span class="#EDIT{titre}">#TITRE</span>[
+			<small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
+		]</h1>
+
+		<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+
+	</header>
+
+	<div class="main">
+
+        <div class="span pull-right">
+            <INCLURE{fond=inclure/agenda-a-venir,env,ajax} />
+        </div>
+		[<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|adaptive_images)</div>]
+		[<div class="#EDIT{texte} texte surlignable">(#TEXTE|adaptive_images)</div>]
+
+
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	</div>
+
+	<footer>
+		[<div class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|adaptive_images)</div>]
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+
+	<aside>
+		[(#REM) Gestion du portfolio et des documents ]
+		[(#INCLURE{fond=inclure/documents_heurovelo}{id_article}{debut_documents_joints})]
+	</aside>
+
+
+
+	</article>
+
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
+</div>
+
+</BOUCLE_content>

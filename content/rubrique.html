@@ -1,4 +1,8 @@
 <BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
+<div class="row-fluid" >
+	<div class="content col-md-12" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
 
 <div class="contenu-principal">
 
@@ -10,85 +14,58 @@
 	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
 </div>
 
-    <B_ordre_numeros>
-        <div class="liste articles">
-        #ANCRE_PAGINATION
-        <h2 class="h2"><:articles_rubrique:></h2>
-        <ul class="liste-items">
-            <BOUCLE_ordre_numeros(ARTICLES){id_rubrique}{doublons}{par num titre, titre} {pagination 10}>
-            #INCLURE{fond=inclure/article-resume,id_article}
-            </BOUCLE_ordre_numeros>
-        </ul>
-        [<div class="pagination">(#PAGINATION)</div>]
-        </div>
-    </B_ordre_numeros>
-
-
-	[(#REM) Si aucun article, affiche un plan de la rubrique ]
-	<B_sous_rubriques>
-	<div class="menu rubriques">
-		<h2 class="h2"><:sous_rubriques:></h2>
-		<ul class="menu-liste">
-			<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
-			<li class="menu-entree">
-				<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
-
-				[(#REM) Une boucle recursive pour le mini plan]
-				<B_miniplan>
-				<ul class="menu-liste">
-					<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
-					<li class="menu-entree">
-						<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
-						<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
-					</li>
-					</BOUCLE_miniplan>
-				
-				</ul>
-				</B_miniplan>
-				<B_articles_rub>
-				<div class="plan-article">
-					<ul class="liste-items">
-						<BOUCLE_articles_rub(ARTICLES){id_rubrique} {!par date}>
-						<li><div class="titre #EDIT{titre}"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div></li>
-						</BOUCLE_articles_rub>
-					</ul>
-				</div>
-				</B_articles_rub>
-			</li>
-			</BOUCLE_sous_rubriques>
-
-		</ul>
-		</div>
-
-	</B_sous_rubriques>
-
-
-[(#REM) Gestion du portfolio et des documents ]
-[(#INCLURE{fond=inclure/documents}{id_rubrique})]	
-
-[(#REM) Sites de la rubrique ]
-<B_sites>
-<div class="liste sites">
-		<h2 class="h2"><:sur_web:></h2>
-		<ul class="liste-items">
-				<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-				<li class="item">
-	<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
-                <B_syndic>
-                <ul>
-                        <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
-                        <li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
-                        </BOUCLE_syndic>
-                </ul>
-                </B_syndic>
-        </li>
-				</BOUCLE_sites>
-		</ul>
+[(#REM)Les Rubriques ]
+<div class="bloc_section bloc_section_rubrique">
+	<div class="row">
+		[(#INCLURE{fond=inclure/plan_rubrique_bloc}{id_rubrique})]
+	</div>
 </div>
-</B_sites>
 
-[(#REM) Proposer un site ]
-#FORMULAIRE_SITE
+
+[(#REM) Articles de la rubrique ]
+
+[(#SET{tri_article,'num titre'})]
+[(#SET{tri_article_sens,'direct'})]
+
+<BOUCLE_option_rubrique(MOTS){id_rubrique}{type='options_affichage'}{technique=oui}>
+
+
+		[(#TITRE|=={tri_antichronologique}|oui)[(#SET{tri_article,date})][(#SET{tri_article_sens,'inverse'})]]
+		[(#TITRE|=={tri_chronologique}|oui)[(#SET{tri_article,date})][(#SET{tri_article_sens,'1'})]]
+		[(#TITRE|=={tri_masquer_liste_article}|oui)[(#SET{masquer_liste_article,'oui'})]]
+
+</BOUCLE_option_rubrique>
+
+[(#GET{masquer_liste_article}|non)
+	[<div class="bloc_section bloc_section_article">
+		<div class="ajax">
+			(#INCLURE{fond=inclure/plan_article_bloc,id_rubrique,tri=#GET{tri_article},tri_sens=#GET{tri_article_sens},ajax,env})
+		</div>
+	</div>]]
+
+
+
+[(#REM) Documents joints a la rubrique ]
+[<div class="bloc_section bloc_section_document">
+	<div class="row">
+		(#INCLURE{fond=inclure/documents}{id_rubrique})
+	</div>
+</div>]
+
+
+
+
 
 [<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-12" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
+</div>
+
 </BOUCLE_contenu_rubrique>

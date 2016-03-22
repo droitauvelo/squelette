@@ -1,4 +1,9 @@
 <BOUCLE_breve_principal(BREVES) {id_breve}>
+<div class="row-fluid" >
+    <div class="content col-md-7" id="content">
+        <INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+
 <div class="contenu-principal">
 
   <div class="cartouche">
@@ -16,4 +21,15 @@ NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-des
 <a href="#forum" name="forum" id="forum"></a>
 <INCLURE{fond=inclure/forum}{id_breve}>
 [<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_breve:></a></p>]
+
+
+    </div>
+
+
+
+    <div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+        <INCLURE{fond=aside/#ENV{type-page},env} />
+    </div>
+</div>
+
 </BOUCLE_breve_principal>

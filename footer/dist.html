@@ -16,7 +16,7 @@
 		<div class="liste forums">
 			<h3>On parle de nous</h3>
 			<ul class="liste-items">
-				<BOUCLE_article(ARTICLES) {id_rubrique=45} {par date}{inverse} {0,6}>
+				<BOUCLE_article(ARTICLES) {id_rubrique=45} {par date}{inverse} {0,5}>
 				<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TITRE)]</a></li>
 				</BOUCLE_article>
 			</ul>
@@ -31,10 +31,17 @@
 	<div id="bloc_rss" class="span4">
 		<div class="inner">
 
-		
-		
-		
-		
+
+
+			<BOUCLE_heurovelo(DOCUMENTS){id_article=677} {par date}{inverse} {0,1}>
+			<div class="liste forums">
+				<h3 class="h3">L’ HeurOvélO- dernier numéro</h3>
+				[(#LOGO_DOCUMENT|#URL_DOCUMENT|image_reduire{200,300})]
+
+				<div class="titre"><a href="#URL_DOCUMENT">#TITRE</a></div>
+			</div>
+			</BOUCLE_heurovelo>
+		<!--
 		<h3>En Bref</h3>
 		<b_breves>
 		<ul class="liste-items">
@@ -42,26 +49,18 @@
 			<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_BREVE">#TITRE</a></li>
 			</BOUCLE_breves>
 		</ul>
-		
+
 		</b_breves>
 
-	<B_forums_liens>
-		<div class="liste forums">
-			<h3 class="h3"><:derniers_commentaires:></h3>
-			<ul class="liste-items">
-				<BOUCLE_forums_liens(FORUMS?) {plat} {par date}{inverse} {0,3}>
-				<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></li>
-				</BOUCLE_forums_liens>
-			</ul>
-		</div>
-		</B_forums_liens>
+		-->
+
 		
 		
 		
 		</div>
 	</div>
 
-	<div id="bloc_rss" class="span4">
+	<div id="bloc_media" class="span4">
 		<div class="inner">
 		<h3>Le vélo dans les média</h3>
 		<INCLURE{fond=inclure/site/liste-articles_syndiques}>
@@ -74,9 +73,9 @@
 	
 	
 <div class="span12">
-<BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee|!={#VAL{Y}|date}|oui)[(#DATE|annee)]]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ] &mdash; #NOM_SITE_SPIP<br />
+<BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee|!={#VAL{Y}|date}|oui)[(#DATE|annee)]]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ] &mdash; #NOM_SITE_SPIP
 
-[<div id="menu_de_page" class="menu">
+[<div id="menu_bas_de_page" class="menu">
         (#INCLURE{fond=inclure/menu, env, identifiant=basdepage})
     </div>]
 

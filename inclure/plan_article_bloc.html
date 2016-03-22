@@ -1,0 +1,13 @@
+<B_articles>
+    <div class="liste articles article-bloc">
+                    #ANCRE_PAGINATION
+
+                <BOUCLE_articles(ARTICLES){id_rubrique}{si |=={oui}|non} {tri #ENV{tri,'titre'}, #ENV{tri_sens,'direct'}} {pagination 20}>
+                     [<div class="item col-md-6">(#INCLURE{fond=inclure/resume/article-bloc,id_article})</div>]
+                </BOUCLE_articles>
+            <div class="clearfix"></div>
+            [<div class="pagination">(#PAGINATION)</div>]
+
+        <div class="clearfix"></div>
+    </div>
+</B_articles>

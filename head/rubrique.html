@@ -1,0 +1,9 @@
+<BOUCLE_rubrique_head(RUBRIQUES) {id_rubrique}>
+[(#SEO_META_TAGS)]
+[(#MODELE{insert_head_og, env})]
+[<link rel="canonical" href="(#URL_RUBRIQUE|url_absolue)" />]
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</BOUCLE_rubrique_head>
+[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico}|url_absolue_si)" />
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico}|url_absolue_si)" />]]

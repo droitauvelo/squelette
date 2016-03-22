@@ -1,8 +1,21 @@
 [(#REM) Fil d'Ariane ]
+<div class="row-fluid" >
+	<div class="content col-md-7" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 <div class="contenu-principal">
 	<div class="cartouche">
 		<h1 class="h1"><:pass_erreur:>[ (#ENV{status})]</h1>
 	</div>
 	[<div class="chapo">(#ENV*{erreur}|propre)</div>]
 	#FORMULAIRE_LOGIN{#ENV{cible},'',0}
+</div>
+
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
 </div>
