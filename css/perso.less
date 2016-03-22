@@ -13,7 +13,7 @@ a:hover { background-color: transparent; }
   .jqvmap-label { z-index: 3000; }
   #super_contenu { background: #FFF; padding: 1.5em 1.5em 4em 1.5em; }
 }
-#header { border: none 0px; margin: 0; padding: 0; background: transparent url(../images/fond_entete.png) no-repeat 280px 42px;
+#header { border: none 0px; margin: 0; padding: 0; background: transparent url(../images/fond_entete.png) no-repeat 280px 42px; min-height: 146px;
 
   .fleche_logo { width: 46px; height: 46px; position: absolute; top: 50px; left: 100px; background: transparent url(../images/fleche_logo.png) no-repeat top left; }
   h1 { margin: 0; }
@@ -95,9 +95,21 @@ a:hover { background-color: transparent; }
 
 }
 
-/* Repositionnement du bouton menu à gauche près du menu Responsive */
 
-@media screen and (max-width: 767px) {
+
+@media screen and (max-width: @screen-lg-min) {
+
+  #nav a{
+  font-size:0.9em;
+  }
+
+}
+
+@media screen and (max-width: @screen-md) {
+
+  #nav a {
+    font-size: 1em;
+  }
   .navbar-responsive {
     position: absolute;
     right: auto;
@@ -109,15 +121,26 @@ a:hover { background-color: transparent; }
   }
   .navbar-toggle {
     float: none;
-   margin: 0.5em
+    margin: 0.5em
   }
   .collapse.in,
   .navbar-collapse {
     display: none;
   }
-  #header {
-    padding-left: 40px;
+
+}
+
+
+/* Repositionnement du bouton menu à gauche près du menu Responsive */
+
+@media screen and (max-width: @screen-sm) {
+
+  #nav a{
+    font-size:1em;
   }
+
+
+
 }
 
 /* Sidr : indentation multi-niveaux sur menu Responsive */
@@ -282,7 +305,12 @@ a:hover { background-color: transparent; }
     .liste-items li { clear: left; padding: 0.5em 0; }
     .liste-items .logo { float: left; clear: left; }
   }
-  @media (max-width: 767px) {
+
+
+
+
+
+  @media (max-width: @screen-sm) {
 
     .page .container { padding: 0 }
     .bloc_contact { display: none; }
@@ -433,3 +461,21 @@ div.cs_blocs {
 
 
 
+
+
+#bouton_recherche{ margin:0.25em 0.5em; }
+#morphsearch_modal{
+
+color:@blueDark;
+  label{font-size:1.5em;margin:0 0.5em 0 0;}
+  .form-group{ display:block;}
+#recherche{ color:@blueDark;font-size:1.5em;padding:0.5em 1em; border:1px @gray-lighter solid; width: calc(~"100% - 3em");line-height: 1.4}
+  .morphsearch-content{
+    display:none;
+
+
+  }
+
+  .morphsearch-submit{margin:1em 2em;width: calc(~"100% - 4em");}
+
+}

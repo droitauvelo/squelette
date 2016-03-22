@@ -1,9 +1,7 @@
 <div class="result">
- <ul class="list-unstyled">
+ <table class="table table-striped table-hover">
     {{#questions}}
-      
-		<li><span class="pull-right">page</span><a href="{{url}}">{{ titre }}</a></li>
-      
-    {{/questions}}
-</ul>
+		<tr><td><a href="{{url}}">{{ titre }}</a></td><td>{{ nature }}</td></tr>
+   {{/questions}}
+</table>
 </div>

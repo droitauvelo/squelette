@@ -51,3 +51,69 @@ function wd_remove_accents($str, $charset='utf-8')
 
     return $str;
 }
+
+
+
+
+function lunr_data()
+{
+
+    $rubriques = recuperer_fond('liste/lunr_rubrique');
+
+    $res= sql_query('SELECT id_rubrique,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_rubriques r LEFT JOIN spip_mots_liens m on  m.objet=\'rubrique\' and id_objet=id_rubrique where r.id_rubrique IN('.$rubriques.') group by id_rubrique, titre');
+
+    $tab_mots_sql = sql_allfetsel('id_mot, titre', 'spip_mots');
+    $tab_mots = array();
+    foreach ($tab_mots_sql as $mots) {
+        $tab_mots[$mots['id_mot']] = $mots['titre'];
+    }
+
+    while ($d = sql_fetch($res)) {
+        $tab_id_mot = explode(':', $d['id_mots']);
+        foreach ($tab_id_mot as $id_mot) {
+            $d['mots'][] = $tab_mots[$id_mot];
+        }
+        $d['mots'] = implode(', ', $d['mots']);
+        $d['titre'] = supprimer_numero($d['titre']);
+        $d['nature'] = 'rubrique';
+        $d['id'] = $d['id_rubrique'];
+        unset($d['id_rubrique']);
+        unset($d['id_mots']);
+        $data[] = $d;
+
+    }
+
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =1 and date > DATE_SUB(NOW(),INTERVAL 200 DAY) group by id_rubrique, titre');
+
+    $tab_mots_sql = sql_allfetsel('id_mot, titre', 'spip_mots');
+    $tab_mots = array();
+    foreach ($tab_mots_sql as $mots) {
+        $tab_mots[$mots['id_mot']] = $mots['titre'];
+    }
+
+    while ($d = sql_fetch($res)) {
+        $tab_id_mot = explode(':', $d['id_mots']);
+        foreach ($tab_id_mot as $id_mot) {
+            $d['mots'][] = $tab_mots[$id_mot];
+        }
+        $d['mots'] = implode(', ', $d['mots']);
+        $d['titre'] = supprimer_numero($d['titre']);
+        $d['nature'] = 'actu';
+        $d['id'] = $d['id_article'];
+        unset($d['id_rubrique']);
+        unset($d['id_mots']);
+        $data[] = $d;
+
+    }
+
+
+
+
+    return $data;
+}
+
+function  balise_LUNR_DATA($p)
+{
+    $p->code = "lunr_data()";
+    return $p;
+}

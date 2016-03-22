@@ -16,29 +16,6 @@ str(lunr); // adds lunr.stemmerSupport
 fr(lunr); // adds lunr.de key
 
 
-var renderQuestionList = function (qs) {
-if (qs){
-
-truc=$("#lunr-acces-rapide").val()
-
-$("#question-list-container")
-.empty()
-.append(Mustache.to_html(questionList, {questions: qs}))
-if (truc !='')
-$("#question-list-container").append('<div class="lien_recherche"><a  class="btn btn-primary btn-sm" href="#URL_PAGE**{recherche,recherche='+truc+'}">Rechercher "'+truc+'" dans l\'ensemble du site</a></div>')
-
-
-}}
-
-var index = lunr(function () {
-
-this.use(lunr.fr);
-this.field('titre', {boost: 10})
-this.field('mots')
-this.ref('id')
-
-});
-
 
 
 
@@ -52,11 +29,21 @@ truc=$("input#recherche").val()
 $("#result_recherche_acces_rapide")
 .empty()
 .append(Mustache.to_html(questionList, {questions: qs}))
+
 if (truc !='')
 $("#result_recherche_acces_rapide").append('<div class="lien_recherche"><a  class="btn btn-primary btn-sm" href="#URL_PAGE**{recherche,recherche='+truc+'}">Rechercher "'+truc+'" dans l\'ensemble du site</a></div>')
 
+if (qs.length==0){
 
-}}
+    $('.morphsearch-content').slideUp();
+    }else{
+    $('.morphsearch-content').slideDown();
+}
+}
+else{
+$('.morphsearch-content').slideUp();
+}
+}
 
 var index = lunr(function () {
 
@@ -70,7 +57,9 @@ this.ref('id')
 
 
 [data=(#LUNR_DATA|json_encode)]
-for(i=0;i<data.length;i++){
+var longueur=data.length;
+
+for(i=0;i<longueur;i++){
 index.add(data[i]);
 }
 
@@ -93,9 +82,10 @@ fn.apply(ctx, args)
 
 $('input#recherche').bind('keyup', debounce(function () {
 
-results = index.search($(this).val()).map(function (result) {
+results = index.search($(this).val()).slice(0,10).map(function (result) {
 truc= data.filter(function (q) { return q.id == parseInt(result.ref, 10) })[0]
-truc['url']=calcule_url(result.ref)
+truc['url']=calcule_url(result.ref,truc['nature'])
+console.log(truc);
 return truc
 })
 
@@ -103,24 +93,20 @@ renderQuestionListRecherche(results)
 }))
 
 
-$('input#lunr-acces-rapide').bind('keyup', debounce(function () {
-
-results = index.search($(this).val()).map(function (result) {
-truc= data.filter(function (q) { return q.id == parseInt(result.ref, 10) })[0]
-truc['url']=calcule_url(result.ref)
-return truc
-})
-
-renderQuestionList(results)
-}))
 
 
 
 })
 
 
-function calcule_url(ref){
+function calcule_url(ref,nature){
 
-if (parseInt(ref)>0)
-return '[(#URL_PAGE*{rubrique,id_rubrique=})]'+ref
+if (parseInt(ref)>0){
+if(nature=='rubrique')
+    return '[(#URL_PAGE*{rubrique,id_rubrique=})]'+ref
+else
+    return '[(#URL_PAGE*{article,id_article=})]'+ref
+
+}
+return '';
 }

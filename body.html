@@ -20,8 +20,13 @@
 				<span>Menu de navigation</span></a>
 				</div>
 			</div>
-				<div class="hidden-xs hidden-sm" id="menuhaut">
-					[<div class="pull-right">(#FORMULAIRE_RECHERCHE_PLEIN_ECRAN)</div>]
+				<div class="hidden-xs hidden-sm  "  id="menuhaut">
+					<div class="pull-right">
+					<button type="button" id="bouton_recherche" class="btn" data-toggle="modal" data-target="#morphsearch_modal" data-toggle="tooltip" data-placement="bottom" title="Rechercher">
+						<span class="glyphicon glyphicon-search"></span> <span class="hidden-md">Rechercher</span>
+					</button>
+					</div>
+
 					(#INCLURE{fond=inclure/nav,env})
 				</div>
 			</div>
@@ -44,6 +49,7 @@
 			<div class="footer" id="footer">
 				<INCLURE{fond=footer/#ENV{type-page},env} />
 			</div>
+			[(#FORMULAIRE_RECHERCHE_PLEIN_ECRAN)]
 		</div>
 	</div>
 </body>

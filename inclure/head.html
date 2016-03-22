@@ -52,6 +52,11 @@
 #INSERT_HEAD
 [<script type="text/javascript" src="(#CHEMIN{js/bootstrap-collapse.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{js/bootstrap-carousel.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-collapse.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-tab.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-dropdown.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-tooltip.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-modal.js})"></script>]
 <!--[if lt IE 9]>
 [<script src="(#CHEMIN{js/html5.js})"></script>]
 [<script src="(#CHEMIN{js/respond.min.js})"></script>]
@@ -74,7 +79,6 @@ jQuery(document).ready(function() {
 	});
 
 	$('#sonnette').hover(function(){
-		console.log("dddd	");
 		ion.sound.play("sonnette");
 
 	})
@@ -96,11 +100,9 @@ ion.sound({
 
 /* [(#EVAL{chr(93)})][(#EVAL{chr(93)})]> */</script>
 <style>
-@media screen and (max-width:960px) {
+@media screen and (max-width:992px) {
 [(#PLUGIN{SIDR}|oui)#menuhaut { display: none; }]
 }
 </style>
 
-[<link rel="stylesheet" href="(#CSS{lib/MorphingSearch/css/component.css})" type="text/css" />]
-[<script type="text/javascript" src="(#CHEMIN{lib/MorphingSearch/js/classie.js})"></script>]
-[<script [data-main="(#URL_PAGE{lunr_app.js})"] src="(#CHEMIN{js/lunr/require.js})"></script>]
+

@@ -1,8 +1,15 @@
 
 
 $(document).ready(function(){
-	
-	
+
+
+
+	$('#morphsearch_modal').on('shown.bs.modal', function (e) {
+
+			$("input#recherche").focus();
+	})
+	$('[data-toggle="tooltip"]').tooltip();
+	$('#bouton_recherche').tooltip();
 	
  $(".panneau").each(function(i){
 	 var id_menu=$(this).attr('id');
@@ -11,7 +18,7 @@ $(document).ready(function(){
 	 
 	 $('.bouton_'+id_menu).append($(this));
 	 $('.bouton_'+id_menu).hover(function(event){
-		 if($(window).width()>768){
+		 if($(window).width()>992){
 		 	$(this).addClass("hover");
 			//var position = $(this).position();
 			//console.log($(this).position());
@@ -19,7 +26,7 @@ $(document).ready(function(){
 			$('#'+id_menu).stop(true,true).delay(20).slideDown();
 		}
 		},function(event){
-			if($(window).width()>768){
+			if($(window).width()>992){
 			$(this).removeClass("hover");
 			$('#'+id_menu).stop(true,true).delay(200).slideUp("fast");
 			}
