@@ -1,27 +1,29 @@
-<BOUCLE_contenu_article(ARTICLES){id_article}>
+<BOUCLE_content(ARTICLES){id_article}>
 
+<div class="row-fluid" >
+	<div class="content col-md-7" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 
-
+		[(#INCLURE{fond=inclure/outils})]
 	
-<!-- Titre de l'article -->
-<div class="cartouche">
-	<div class="surlignable">
-	<BOUCLE_rub_mere(RUBRIQUES){id_rubrique}>
-		<h1 class="rubrique_mere">#TITRE</h1>
-	</BOUCLE_rub_mere>
-	[(#LOGO_ARTICLE||image_reduire{200,200})]
-	[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-	<h1 class="#EDIT{titre} entry-title">[(#TITRE)]</h1>
-	[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-	<div class="information">
-		[(#DATE|nom_jour)] [(#DATE|affdate)]
-            <BOUCLE_mots(MOTS) {id_article?}{id_auteur?}{par titre}{tout}{", "}>
-            <a href="#URL_MOT">#TITRE</a>
-            </BOUCLE_mots>
-
+	<!-- Titre de l'article -->
+	<div class="cartouche">
+		<div class="surlignable">
+		<BOUCLE_rub_mere(RUBRIQUES){id_rubrique}>
+			<h1 class="rubrique_mere">#TITRE</h1>
+		</BOUCLE_rub_mere>
+		[(#LOGO_ARTICLE||image_reduire{200,200})]
+		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+		<h1 class="#EDIT{titre} entry-title">[(#TITRE)]</h1>
+			[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+			<div class="information">
+				[(#DATE|nom_jour)] [(#DATE|affdate)]
+					<BOUCLE_mots(MOTS) {id_article?}{id_auteur?}{par titre}{tout}{", "}>
+					<a href="#URL_MOT">#TITRE</a>
+					</BOUCLE_mots>
+			</div>
+		</div>
 	</div>
-    </div>
-</div>
 						
 
 
@@ -41,7 +43,11 @@
 
         [<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
+	</div>
+	<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
 
+</div>
 
-
-</BOUCLE_contenu_article>
+</BOUCLE_content>

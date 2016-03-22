@@ -1,0 +1,82 @@
+	<div id="morphsearch" class="morphsearch">
+
+
+		<form action="[(#ENV{action})]" method="get" class="morphsearch-form form-inline ">
+			[(#ENV{action}|form_hidden)]
+
+
+				<div class="form-group">
+				<label for="#ENV{_id_champ}"><i class="fa fa-search fa-2x"></i></label>
+				<input type="[(#HTML5|?{search,text})]" class="search text morphsearch-input" size="10" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off"
+					   placeholder="Rechercher..."	/>
+				</div>
+					<button class="morphsearch-submit btn btn-default" type="submit">Lancer la recherche</button>
+
+				<div class="nettoyeur"></div>
+
+		</form>
+
+
+		<div class="morphsearch-content">
+			<div class="container-fluid">
+
+
+				<div class="col-md-4">
+					<h2>Accès rapide</h2>
+
+					<div id="result_recherche_acces_rapide">Tapez quelques lettres dans le champs de recherche  pour voir apparaître vos réponses</div>
+				</div>
+
+			<div class="col-md-4">
+				<h2>Populaire</h2>
+
+				<BOUCLE_mot(MOTS){magnet}{0,8}>
+				<a href="#URL_MOT" class="dummy-media-object">#TITRE</a>
+				</BOUCLE_mot>
+			</div>
+
+
+
+
+
+
+	<div class="col-md-4">
+		<h2>Outils</h2>
+		<BOUCLE_rub1(RUBRIQUES){id_rubrique=1405}>
+		<a class="dummy-media-object" href="#URL_RUBRIQUE">
+			<div class="pull-left"><i class="fa fa-map-marker fa-4x"></i></div>
+			<h3>#TITRE</h3>
+			<p>#DESCRIPTIF</p>
+		</a>
+		</BOUCLE_rub1>
+		<BOUCLE_rub2(RUBRIQUES){id_rubrique=1468}>
+		<a class="dummy-media-object" href="#URL_RUBRIQUE">
+			<div class="pull-left"><i class="fa fa-map-marker fa-4x"></i></div>
+			<h3>#TITRE</h3>
+			<p>#DESCRIPTIF</p>
+		</a>
+		</BOUCLE_rub2>
+		<BOUCLE_rub3(RUBRIQUES){id_rubrique=1515}>
+		<a class="dummy-media-object" href="#URL_RUBRIQUE">
+			<div class="pull-left"><i class="fa fa-map-marker fa-4x"></i></div>
+			<h3>#TITRE</h3>
+			<p>#DESCRIPTIF</p>
+		</a>
+		</BOUCLE_rub3>
+		<BOUCLE_rub4(RUBRIQUES){id_rubrique=1137}>
+		<a class="dummy-media-object" href="#URL_RUBRIQUE">
+			<div class="pull-left"><i class="fa fa-map-marker fa-4x"></i></div>
+			<h3>#TITRE</h3>
+			<p>#DESCRIPTIF</p>
+		</a>
+		</BOUCLE_rub4>
+	</div>
+
+			</div>
+		</div><!-- /morphsearch-content -->
+
+
+			<span class="morphsearch-close"></span>
+
+	</div><!-- /morphsearch -->
+

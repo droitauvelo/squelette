@@ -1,3 +1,7 @@
+<div class="row-fluid" >
+	<div class="content col-md-12" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
 <BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
 <div class="contenu-principal">
 
@@ -98,4 +102,14 @@
 #FORMULAIRE_SITE
 
 [<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-12" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
+</div>
 </BOUCLE_contenu_rubrique>

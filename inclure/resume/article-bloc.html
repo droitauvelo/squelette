@@ -1,0 +1,14 @@
+<BOUCLE_articles(ARTICLES){id_article}>
+
+    <a href="#URL_ARTICLE" rel="bookmark">
+        <article class="entry article hentry">
+            <strong class="entry-title">
+                [(#LOGO_ARTICLE|left|image_reduire{*,80}|image_recadre{80,80})]
+                #TITRE<span  class="read-more hide"><i class="icon-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span>
+            </strong>
+            [<div class="#EDIT{descriptif} descriptif entry-content">(#DESCRIPTIF|couper{#ENV{coupe,300}})</div>]
+             <div class="clearfix"></div>
+        </article>
+    </a>
+
+</BOUCLE_articles>

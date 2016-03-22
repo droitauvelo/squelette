@@ -1,6 +1,22 @@
+<div class="row-fluid" >
+	<div class="content col-md-7" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
 <div class="contenu-principal">
 	<div class="cartouche">
 		<h1 class="h1"><:pass_erreur:> 404</h1>
 	</div>
+	<img src="#CHEMIN{images/en_construction.png}" />
 	[<div class="chapo">(#ENV{erreur})</div>]
+	<p><a href="#URL_SITE_SPIP">Retourner à la page d'accueil</a></p>
+
+</div>
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
 </div>

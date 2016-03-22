@@ -1,6 +1,8 @@
-[(#REM)
-	Est-ce qu'on se connecte a l'espace prive ou pas ?
-]
+<div class="row-fluid" >
+	<div class="content col-md-7" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+
 [(#ENV{url}|=={''}|?{#SET{prive,' '}})]
 [(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
 
@@ -15,4 +17,14 @@
 	#MENU_LANG_ECRIRE
 	
 	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
+</div>
+
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
+	</div>
 </div>

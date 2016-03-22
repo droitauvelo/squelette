@@ -1,0 +1,8 @@
+<BOUCLE_article_head(ARTICLES) {id_article}>
+[(#SEO_META_TAGS)]
+[(#MODELE{insert_head_og, env})]
+[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
+</BOUCLE_article_head>
+
+[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico}|url_absolue_si)" />
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico}|url_absolue_si)" />]]

@@ -1,26 +1,40 @@
 <body>
 	<div class="page">
-		<div class="container toto">
+
+		<div class="container">
+
 			<div class="header" id="header">
 				<INCLURE{fond=header/#ENV{type-page},env} />
 			</div>
-			[<div class="navbar navbar-inverse navbar-responsive" id="nav">
-				(#INCLURE{fond=inclure/nav,env}|navbar_responsive)
-			</div>]
+
+			[<div class="navbar navbar-inverse " id="nav">
+
+			<div id="mobile-header" class="hidden-lg hidden-md">
+				<div class="navbar-header">
+
+				<a id="responsive-menu-button" href="#sidr-main">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="glyphicon glyphicon-menu-hamburger"></span>
+					</button>
+
+				<span>Menu de navigation</span></a>
+				</div>
+			</div>
+				<div class="hidden-xs hidden-sm" id="menuhaut">
+					[<div class="pull-right">(#FORMULAIRE_RECHERCHE_PLEIN_ECRAN)</div>]
+					(#INCLURE{fond=inclure/nav,env})
+				</div>
+			</div>
+			<div class="form-search hide">
+				#FORMULAIRE_RECHERCHE
+			</div>
+			]
 
 			<div id="super_contenu">
 
-				<div class="row-fluid" >
-				<div class="content span7" id="content">
-					<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
-					<INCLURE{fond=content/#ENV{type-page},env} />
-				</div>
-				<div class="aside secondary col span5" id="aside">
-					<INCLURE{fond=aside/#ENV{type-page},env} />
+				<INCLURE{fond=content/#ENV{type-page},env} />
 
-				</div>
 
-				</div>
                 <div id="extra" class="row-fluid" >
                     <INCLURE{fond=extra/#ENV{type-page},env} />
                 </div>

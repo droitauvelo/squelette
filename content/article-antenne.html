@@ -1,5 +1,13 @@
 <BOUCLE_content(ARTICLES){id_article}>
+
+<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+<div class="row-fluid" >
+    <div class="content col-md-6" id="content">
+
+        [(#INCLURE{fond=inclure/outils})]
 <article>
+
     <header class="cartouche">
         [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
         <h1><span class="#EDIT{titre}">#TITRE</span>[
@@ -7,34 +15,8 @@
             ]</h1>
 
         <p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
-        [(#REM) Inclure le modele des liens de traductions ]
-        <div class="postmeta">
-            #MODELE{article_traductions}
-            <BOUCLE_nb_commentaires(FORUMS) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
-			<span class="comments">
-			<span class="sep">|</span>
-			<a[ href="(#REM|ancre_url{comments})"] [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaires}|attribut_html)"]>[<i class="icon-comment"></i> (#TOTAL_BOUCLE)]</a>
-			</span>
-            ]
-        <//B_nb_commentaires>
-        <BOUCLE_combien(SIGNATURES) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
-			<span class="signatures">
-			<span class="sep">|</span>
-			<a[ href="(#REM|ancre_url{petition})"] [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_signature,zcore:info_nb_signatures}|attribut_html)"]>[<i class="icon-ok-circle"></i> (#TOTAL_BOUCLE)]</a>
-			</span>
-        ]
-    <//B_combien>
-    <B_tags>
-			<span class="tags">
-				<span class="sep">|</span>
-				<ul class="inline">
-                    <BOUCLE_tags(MOTS){id_article}>
-                    <li><a class="label" href="#URL_MOT"><i class="icon-tag"></i> #TITRE</a></li>
-                    </BOUCLE_tags>
-                </ul>
-			</span>
-    </B_tags>
-    </div>
+
+
 
     </header>
 
@@ -54,15 +36,187 @@
         [(#REM) Gestion du portfolio et des documents ]
         [(#INCLURE{fond=inclure/documents,id_article})]
 
-        [(#REM) Petition :
-        La petition ayant une PAGINATION il faut absolument {env}
-        et pourquoi pas ajax
-        ][(#PETITION|oui)<INCLURE{fond=inclure/petition,id_article,env,ajax} />]
+      </aside>
 
-        [(#REM) Forum de l'article
-        NB : pour desactiver les forums de l'article, supprimez simplement la ligne ci-dessous ]
-        <INCLURE{fond=inclure/forum,id_article,repondre_url=(#PARAMETRES_FORUM|url_reponse_forum),repondre_titre=<:repondre_article:>} />
-    </aside>
+
 
 </article>
+</div>
+
+
+<div class="aside secondary col-md-5 col-md-offset-1" id="aside">
+
+
+    <BOUCLE_MOT(MOTS){id_article}>
+
+
+            <B_ACTU_LOCAUX>
+                <h2 class="h2">Actualités</h2>
+                <div  class="liste articles">
+                    [(#ANCRE_PAGINATION)]
+                    <ul  class="liste-items">
+                        <BOUCLE_ACTU_LOCAUX(ARTICLES){id_rubrique=1}{doublons}{id_mot}{par date}{inverse}{id_article!=#ID_ARTICLE}{pagination 5}>
+                        [(#INCLURE{fond=inclure/resume/article-bloc,id_article})]
+                        </BOUCLE_ACTU_LOCAUX>
+                    </ul>
+                    [<div class="pagination">(#PAGINATION)</div>]
+                </div>
+            </B_ACTU_LOCAUX>
+
+
+
+
+            [(#SET{tab_art_evt,#ARRAY})]
+            <B_EVT_LOCAUX>
+
+
+
+                <BOUCLE_EVT_LOCAUX(ARTICLES){id_rubrique!=1}{id_article!=#ID_ARTICLE}{id_mot}{par date}{inverse}>
+
+                <BOUCLE_EVTS(EVENEMENTS){id_article}>
+                [(#SET{tab_art_evt,#GET{tab_art_evt}|push{#ID_ARTICLE}})]
+                </BOUCLE_EVTS>
+                </BOUCLE_EVT_LOCAUX>
+
+
+
+                [(#SET{tabevt,#ARRAY})]
+
+
+
+                <BOUCLE_mois_01(EVENEMENTS){id_article IN #GET{tab_art_evt}}{age<0}>
+                <h2 class="h2">Evénements</h2>
+                </BOUCLE_mois_01>
+                <h3 class="h3">Bientôt</h3>
+
+                <B_mois_vedette>
+                    <ul class="evt_vedette">
+                        <BOUCLE_mois_vedette(EVENEMENTS){id_article IN #GET{tab_art_evt}}{titre_mot=vedette}{age<0}{par date}{0,1}{doublons}>
+                        <li>
+                            [(#SET{logo,#LOGO_EVENEMENT})]
+                            <BOUCLE_articles_vedette(ARTICLES) {id_article}>
+
+                            [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+
+                            <div class="logo"><a href="#URL_ARTICLE" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{300,200}|extraire_attribut{src})]" class="img-rounded " /></a></div>
+                            </BOUCLE_articles_vedette>
+                            <div class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
+                            <div class="titre"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div>
+                            <div class="lieu">#LIEU</div>
+                            <div class="descriptif">#DESCRIPTIF</div>
+                            [<div class="descriptif">(#DESCRIPTIF)[<span class="information"><a href="(#URL_ARTICLE)">En savoir plus</a></span>]</div>]
+                            [(#SET{date_debut,#DATE_DEBUT})]
+                            <div class="nettoyeur"></div>
+                        </li>
+                        </BOUCLE_mois_vedette>
+                    </ul>
+                </B_mois_vedette>
+
+
+                <B_mois>
+
+
+                    <ul class="mini_agenda">
+
+                        <BOUCLE_mois(EVENEMENTS){id_article IN #GET{tab_art_evt}}{age<0}{par date}{0,5}{doublons}>
+                        <li>
+                            [(#SET{logo,#LOGO_EVENEMENT})]
+
+                            <BOUCLE_condition(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
+
+
+
+                            <BOUCLE_evt_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
+                            [(#SET{logo,#LOGO_EVENEMENT})]
+                            </BOUCLE_evt_source>
+                            <BOUCLE_articles(ARTICLES){id_evenement}>
+
+                            [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+                            [(#SET{url_article,#URL_ARTICLE})]
+                            </BOUCLE_articles>
+                            <div class="logo pull-left"><a href="[(#GET{url_article})]" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{60,60}|image_recadre{55,55}|extraire_attribut{src})]" class="img-rounded spip_logos" /></a></div>
+                            <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
+                            <div class="titre"><a href="[(#GET{url_article})]" rel="bookmark">#TITRE</a></div>
+                            <!--<div class="lieu">#LIEU</div>-->
+                            [<div class="descriptif">(#DESCRIPTIF)<span class="information"><a href="[(#GET{url_article})]">En savoir plus</a></span></div>]
+                            [(#SET{date_debut,#DATE_DEBUT})]
+                            </BOUCLE_condition>
+                            [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
+                            <div class="nettoyeur"></div>
+                        </li>
+
+
+                        </BOUCLE_mois>
+                    </ul>
+                    <div class="lien_agenda"><a href="[(#URL_PAGE{agenda})]">Voir les autres évenements</a></div>
+                </B_mois>
+
+                </B_mois_01>
+               <!-- Aucun événement à venir -->
+            <//B_mois_01>
+
+            <B_mois0>
+
+                <h3>Evénements passés</h3>
+                <ul class="mini_agenda">
+
+                    <BOUCLE_mois0(EVENEMENTS){id_article IN #GET{tab_art_evt}}{age>=0}{par date}{0,3}{doublons}>
+                    <li>
+                        [(#SET{logo,#LOGO_EVENEMENT})]
+
+                        <BOUCLE_condition0(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
+
+
+
+                        <BOUCLE_evt_source0(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
+                        [(#SET{logo,#LOGO_EVENEMENT})]
+                        </BOUCLE_evt_source0>
+                        <BOUCLE_articles0(ARTICLES){id_evenement}>
+
+                        [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+                        [(#SET{url_article,#URL_ARTICLE})]
+                        </BOUCLE_articles0>
+                        <div class="logo pull-left"><a href="[(#GET{url_article})]" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{60,60}|image_recadre{55,55}|extraire_attribut{src})]" class="img-rounded spip_logos" /></a></div>
+                        <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
+                        <div class="titre"><a href="[(#GET{url_article})]" rel="bookmark">#TITRE</a></div>
+                        <!--<div class="lieu">#LIEU</div>-->
+                        [<div class="descriptif">(#DESCRIPTIF)<span class="information"><a href="[(#GET{url_article})]">En savoir plus</a></span></div>]
+                        [(#SET{date_debut,#DATE_DEBUT})]
+                        </BOUCLE_condition0>
+                        [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
+                        <div class="nettoyeur"></div>
+                    </li>
+
+
+                    </BOUCLE_mois0>
+                </ul>
+                <div class="lien_agenda"><a href="[(#URL_PAGE{agenda})]">Voir les autres évenements</a></div>
+            </B_mois0>
+
+        <//B_mois0>
+
+
+
+
+
+
+        </B_EVT_LOCAUX>
+
+
+</BOUCLE_MOT>
+
+
+
+
+
+
+
+
+
+
+    <INCLURE{fond=aside/#ENV{type-page},env} />
+
+</div>
+</div>
+
 </BOUCLE_content>

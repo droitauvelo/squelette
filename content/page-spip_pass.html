@@ -1,3 +1,8 @@
+<div class="row-fluid" >
+	<div class="content col-md-7" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+
 <div class="contenu-principal">
 	<h1 class="h1 spip">#NOM_SITE_SPIP</h1>
 
@@ -8,5 +13,15 @@
 		[(#ENV{p}|oui)
 			#FORMULAIRE_MOT_DE_PASSE
 		]
+	</div>
+</div>
+
+
+	</div>
+
+
+
+	<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+		<INCLURE{fond=aside/#ENV{type-page},env} />
 	</div>
 </div>

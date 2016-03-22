@@ -1,0 +1,126 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+requirejs.config({
+baseUrl: "#CHEMIN{'js/lunr'}"
+});
+
+
+require([
+'#CHEMIN{js/lunr/mustache.js}',
+'#CHEMIN{js/lunr/elasticlunr.min.js}',
+'#CHEMIN{js/lunr/lunr.stremmer.support.min.js}',
+'#CHEMIN{js/lunr/lunr.fr.min.js}',
+'text!templates/question_list.mustache'
+], function ( Mustache, lunr,str,fr, questionList) {
+
+str(lunr); // adds lunr.stemmerSupport
+fr(lunr); // adds lunr.de key
+
+
+var renderQuestionList = function (qs) {
+if (qs){
+
+truc=$("#lunr-acces-rapide").val()
+
+$("#question-list-container")
+.empty()
+.append(Mustache.to_html(questionList, {questions: qs}))
+if (truc !='')
+$("#question-list-container").append('<div class="lien_recherche"><a  class="btn btn-primary btn-sm" href="#URL_PAGE**{recherche,recherche='+truc+'}">Rechercher "'+truc+'" dans l\'ensemble du site</a></div>')
+
+
+}}
+
+var index = lunr(function () {
+
+this.use(lunr.fr);
+this.field('titre', {boost: 10})
+this.field('mots')
+this.ref('id')
+
+});
+
+
+
+
+
+
+var renderQuestionListRecherche = function (qs) {
+if (qs){
+
+truc=$("input#recherche").val()
+
+$("#result_recherche_acces_rapide")
+.empty()
+.append(Mustache.to_html(questionList, {questions: qs}))
+if (truc !='')
+$("#result_recherche_acces_rapide").append('<div class="lien_recherche"><a  class="btn btn-primary btn-sm" href="#URL_PAGE**{recherche,recherche='+truc+'}">Rechercher "'+truc+'" dans l\'ensemble du site</a></div>')
+
+
+}}
+
+var index = lunr(function () {
+
+this.use(lunr.fr);
+this.field('titre', {boost: 10})
+this.field('mots')
+this.ref('id')
+
+});
+
+
+
+[data=(#LUNR_DATA|json_encode)]
+for(i=0;i<data.length;i++){
+index.add(data[i]);
+}
+
+
+
+
+var debounce = function (fn) {
+var timeout
+return function () {
+var args = Array.prototype.slice.call(arguments),
+ctx = this
+
+clearTimeout(timeout)
+timeout = setTimeout(function () {
+fn.apply(ctx, args)
+}, 200)
+}
+}
+
+
+$('input#recherche').bind('keyup', debounce(function () {
+
+results = index.search($(this).val()).map(function (result) {
+truc= data.filter(function (q) { return q.id == parseInt(result.ref, 10) })[0]
+truc['url']=calcule_url(result.ref)
+return truc
+})
+
+renderQuestionListRecherche(results)
+}))
+
+
+$('input#lunr-acces-rapide').bind('keyup', debounce(function () {
+
+results = index.search($(this).val()).map(function (result) {
+truc= data.filter(function (q) { return q.id == parseInt(result.ref, 10) })[0]
+truc['url']=calcule_url(result.ref)
+return truc
+})
+
+renderQuestionList(results)
+}))
+
+
+
+})
+
+
+function calcule_url(ref){
+
+if (parseInt(ref)>0)
+return '[(#URL_PAGE*{rubrique,id_rubrique=})]'+ref
+}
