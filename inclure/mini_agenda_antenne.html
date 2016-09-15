@@ -1,0 +1,76 @@
+
+<B_mois_vedette>
+<ul class="evt_vedette">
+<BOUCLE_mois_vedette(EVENEMENTS){titre_mot=vedette}{id_mot?}{age_fin<0}{par date}{0,2}{doublons}>
+	<li>
+        [(#SET{logo,#LOGO_EVENEMENT|image_reduire{0,700}})]
+        <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
+            <div class="item">
+	<BOUCLE_articles_vedette(ARTICLES) {id_article}>
+        [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE|image_reduire{0,700}})]]
+        [(#GET{logo}|non) [(#SET{logo,#CHEMIN{images/logo.png}|image_reduire{0,700}})]]
+       [<div class="logo pic grow">(#GET{logo}|inserer_attribut{class,"img-responsive img-rounded"})</div>]
+	</BOUCLE_articles_vedette>
+
+        <div class="titre clearfix">
+            <span class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</span>
+	       #TITRE
+        </div>
+        <div class="informations">
+            [<span class="lieu">(#LIEU)</span> ]
+        </div>
+	        [(#SET{date_debut,#DATE_DEBUT})]
+        <div class="nettoyeur"></div>
+                </div>
+            </a>
+	</li>
+</BOUCLE_mois_vedette>
+</ul>
+</B_mois_vedette>
+
+
+    [(#SET{tabevt,#ARRAY})]
+
+<B_mois>
+
+	
+<ul class="mini_agenda">
+
+<BOUCLE_mois(EVENEMENTS){id_mot?}{age<0}{par date}{doublons}>
+	<li>
+    [(#SET{logo,#LOGO_EVENEMENT})]
+
+    <BOUCLE_condition(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
+        <BOUCLE_evt_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
+        [(#SET{logo,#LOGO_EVENEMENT})]
+        </BOUCLE_evt_source>
+        <BOUCLE_articles(ARTICLES){id_evenement}>
+
+        [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+        [(#SET{url_article,#URL_ARTICLE})]
+        </BOUCLE_articles>
+
+        <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
+        <div class="item">
+            <div class="logo pull-left"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{80,80}|extraire_attribut{src})]" class="img-rounded spip_logos" /></div>
+            <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
+            <div class="titre">#TITRE</div>
+            <div class="lieu">#LIEU</div>
+            [(#SET{date_debut,#DATE_DEBUT})]
+        </div>
+        </a>
+    </BOUCLE_condition>
+        [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
+	<div class="nettoyeur"></div>
+	</li>
+
+
+</BOUCLE_mois>
+</ul>
+
+</B_mois>
+
+<//B_mois>
+
+
+

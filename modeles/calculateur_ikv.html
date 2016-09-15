@@ -1,0 +1,211 @@
+<div class="calculateur_IKV#ENV{id}">
+<div class="container-fluid">
+    <form class="" id="form">
+
+        <div class="form-group">
+            <label for="nbKmDay" class="col-sm-9 control-label">Nombre de kilomètres parcouru par jour (Aller/Retour)</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="nbKmDay" name="nbKmDay" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nbDayWork" class="col-sm-9 control-label">Nombre de jours travaillés par semaine</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="nbDayWork" name="nbDayWork" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nbWeekWork" class="col-sm-9 control-label">Nombre de semaines travaillées par an</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="nbWeekWork" name="nbWeekWork" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-9 col-sm-3">
+                <button type="submit" class="btn btn-primary" onclick="checkData();">Calculer</button>
+            </div>
+        </div>
+
+    </form>
+
+
+    <table class="table table-striped" id="result" style="display:none">
+        <tr>
+            <td>Nombre de kilomètres par an</td>
+            <td> <span id="nbKmYear">0</span> km/an </td>
+        </tr>
+
+        <tr>
+            <td>IKV brut</td>
+            <td> <span id="ikvBrut">0</span> €</td>
+        </tr>
+
+        <tr>
+            <td>Valeur soumise à cotisation</td>
+            <td> <span id="valCotis">0</span> € </td>
+        </tr>
+
+        <tr>
+            <td>Valeur non soumise à cotisation</td>
+            <td> <span id="valNonCotis">0</span> € </td>
+        </tr>
+
+        <tr>
+            <td>Charges salariales</td>
+            <td> <span id="chargeS">0</span> € </td>
+        </tr>
+
+        <tr>
+            <td>Charges patronales</td>
+            <td> <span id="chargeP">0</span> € </td>
+        </tr>
+
+        <tr>
+            <td>Impôts</td>
+            <td> <span id="impots">0</span> € </td>
+        </tr>
+
+        <tr>
+            <td>Coût pour l’employeur</td>
+            <td> <span id="employeur">0</span> € </td>
+        </tr>
+
+        <tr>
+            <td> <strong>IKV disponible pour le cycliste</strong> </td>
+            <td> <strong> <span id="ikv">0</span> € </strong> </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+<script>
+    // NE PAS MODIFIER
+    $.validator.setDefaults({
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent().parent());
+            } else {
+                error.insertAfter(element.parent());
+            }
+        }
+    });
+
+    /**
+     * Fonction qui vérifie la concordance
+     * des données du formulaire
+     */
+    function checkData()
+    {
+        $('form').submit(false);
+
+        $("#form").validate({
+            rules: {
+                // Règle sur le nombre de kilomètre parcouru par jour
+                nbKmDay: {
+                    required: true,
+                    number: true
+                },
+                // Règle sur le nombre de jour travaillés par semaine
+                nbDayWork: {
+                    required: true,
+                    range: [1, 7]
+                },
+                // Règle sur le nombre de semaines travaillées par an
+                nbWeekWork: {
+                    required: true,
+                    range: [1, 52]
+                }
+            },
+            messages: {
+                nbKmDay: {
+                    required: "Veuillez saisir le nombre de kilomètre parcouru par jour",
+                    number: "Veuillez saisir un nombre entier"
+                },
+                nbDayWork: {
+                    required: "Veuillez saisir le nombre de jour travaillés par semaine",
+                    range: "Veuillez saisir un nombre entre 1 et 7"
+                },
+                nbWeekWork: {
+                    required: "Veuillez saisir le nombre de semaine travaillées par an",
+                    range: "Veuillez saisir un nombre entre 1 et 52"
+                }
+            },
+            submitHandler: function(form) {
+                calculerIKV();
+            }
+        });
+    }
+
+    /**
+     * Fonction qui Calcule l'IKV
+     */
+    function calculerIKV()
+    {
+        // On récupère les valeurs entrées
+        var nbKmDay = $("#nbKmDay").val();
+        var nbDayWork = $("#nbDayWork").val();
+        var nbWeekWork = $("#nbWeekWork").val();
+
+        // Calcule du nombre de kilomètre par an
+        var nbKmYear = nbKmDay * nbDayWork * nbWeekWork;
+        $("#nbKmYear").html(nbKmYear);
+
+        // Calcule de l'IKV brut
+        var ikvBrut = arrondi(nbKmYear * 0.25);
+        $("#ikvBrut").html(ikvBrut);
+
+        // Calcule de la valeur soumise à cotisation
+        var valCotis = 0;
+        var val = ikvBrut - 200;
+        if (val > 0) { valCotis = val; }
+        $("#valCotis").html(valCotis);
+
+        // Calcule de la valeur non soumise à cotisation
+        var valNonCotis = 200;
+        if (ikvBrut < 200) { valNonCotis = ikvBrut }
+        $("#valNonCotis").html(valNonCotis);
+
+        // Calcule des charges salariales
+        var chargeS = arrondi(0.3 * valCotis);
+        $("#chargeS").html(chargeS);
+
+        // Calcule des charges patronales
+        var chargeP = arrondi(0.3 * valCotis);
+        $("#chargeP").html(chargeP);
+
+        // Calcule des impôts
+        var impots = arrondi((valCotis - chargeS) * 0.08);
+        $("#impots").html(impots);
+
+        // Calcule du coût pour l'employeur
+        var employeur = ikvBrut + chargeP;
+        $("#employeur").html(employeur);
+
+        // Calcule de l'IKV disponible pour le cycliste
+        var ikv = valCotis - chargeS - impots + valNonCotis;
+        $("#ikv").html(ikv);
+
+        // NE PAS MODIFIER
+        $("#result").hide();
+        $("#result").fadeIn('slow');
+    }
+
+    // Fonction qui arrondi à 2 chiffres après la virgule
+    function arrondi(nombre) {
+        return Math.round(nombre * 100) / 100;
+    }
+</script>
+</div>

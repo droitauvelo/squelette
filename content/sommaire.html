@@ -1,6 +1,6 @@
 <div class="row-fluid" >
 	<div class="content col-md-7" id="content">
-		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
 
 <div class="contenu-principal">
 
@@ -18,7 +18,7 @@
 					</ol>
 				<!-- Carousel items -->
 				<div class="carousel-inner">
-					<BOUCLE_docum(DOCUMENTS){id_rubrique}{tout}{vu=non}{par hasard}>
+					<BOUCLE_docum(DOCUMENTS){id_rubrique}{tout}{vu=non}{par num titre}>
 						<div class="item[(#COMPTEUR_BOUCLE|=={1}|oui) active]">
 							<img src="[(#URL_DOCUMENT|image_reduire{800,350}|extraire_attribut{src})]" alt="" />
 							<div class="carousel-caption">

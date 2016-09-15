@@ -7,17 +7,18 @@
 				<INCLURE{fond=header/#ENV{type-page},env} />
 			</div>
 
+
 			[<div class="navbar navbar-inverse " id="nav">
 
 			<div id="mobile-header" class="hidden-lg hidden-md">
 				<div class="navbar-header">
 
-				<a id="responsive-menu-button" href="#sidr-main">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="glyphicon glyphicon-menu-hamburger"></span>
-					</button>
+					<a id="responsive-menu-button" href="#sidr-main">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="glyphicon glyphicon-menu-hamburger"></span>
+						</button>
 
-				<span>Menu de navigation</span></a>
+						<span>Menu de navigation</span></a>
 				</div>
 			</div>
 				<div class="hidden-xs hidden-sm  "  id="menuhaut">
@@ -27,22 +28,26 @@
 					</button>
 					</div>
 
-					(#INCLURE{fond=inclure/nav,env})
-				</div>
+
+			(#INCLURE{fond=inclure/nav,env})
+		</div>
 			</div>
-			<div class="form-search hide">
-				#FORMULAIRE_RECHERCHE
-			</div>
-			]
+
+
+		]
+
 
 			<div id="super_contenu">
 
 				<INCLURE{fond=content/#ENV{type-page},env} />
 
 
-                <div id="extra" class="row-fluid" >
+                <div id="extra"  >
                     <INCLURE{fond=extra/#ENV{type-page},env} />
+
                 </div>
+
+				<div class="clearfix"></div>
 
 			</div>
 
@@ -50,6 +55,11 @@
 				<INCLURE{fond=footer/#ENV{type-page},env} />
 			</div>
 			[(#FORMULAIRE_RECHERCHE_PLEIN_ECRAN)]
+
+
+			[<script src="(#CHEMIN{js/scripts_footer.js})"></script>]
+			[<script src="(#URL_PAGE{lunr_app.js})"></script>]
+
 		</div>
 	</div>
 </body>

@@ -1,0 +1,534 @@
+<BOUCLE_rem(CONDITION){si #REM}>
+<!-- titre=<multi>[fr]Simple (deux colonnes, responsive)[en]Simple (two columns, responsive)</multi> -->
+</BOUCLE_rem>
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}{lang_select}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>#TITRE</title>
+
+    <!-- Open Graph Protocol -->
+    [
+    <meta property="og:title" content="(#TITRE|attribut_html)"/>
+    ]
+    <meta property="og:type" content="article"/>
+    [
+    <meta property="og:image"
+          content="(#LOGO_NEWSLETTER_NORMAL|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)"/>
+    ]
+    [
+    <meta property="og:url" content="(#URL_NEWSLETTER|url_absolue)"/>
+    ]
+    [
+    <meta property="og:description" content="(#INTRODUCTION|supprimer_tags|entites_html)"/>
+    ]
+    [
+    <meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)"/>
+    ]
+
+    <style type="text/css">
+        #outlook a { padding: 0; }
+        body { width: 100% !important; }
+        body { margin: 0; padding: 0; }
+        img { border: none; font-size: 16px; font-weight: bold; height: auto; line-height: 100%; outline: none; text-decoration: none; text-transform: capitalize; -ms-interpolation-mode: bicubic; }
+        img#headerImage { font-size: 28px; }
+        #backgroundTable { height: 100% !important; margin: 0; padding: 0; width: 100% !important; }
+        body, .backgroundTable { background-color: #ebebeb; }
+        #templateContainer { border: 1px solid #DDDDDD; }
+        h1, .h1, h2, .h2, h3, .h3, h4, .h4 { color: #202020; display: block; font-family: 'Helvetica Neue', Helvetica, Arial; font-size: 14px; font-weight: bold; line-height: 100%; margin-bottom: 10px; text-align: left; }
+        h1, .h1 { font-size: 20px; }
+        h2, .h2 { font-size: 16px; }
+        h3, .h3 { font-size: 15px; }
+        h4, .h4 { font-size: 14px; }
+        h5, .h5 { font-size: 13px; }
+        h6, .h6 { font-size: 12px; }
+        p { margin:0; }
+        #templatePreheader { background-color: #FAFAFA; }
+        .preheaderContent div { color: #303030; font-family: 'Helvetica Neue', Helvetica, Arial; font-size: 12px; line-height: 100%; text-align: left; }
+        .preheaderContent div a:link, .preheaderContent div a:visited { color: #336699; font-weight: normal; text-decoration: underline; }
+        .preheaderContent div img { height: auto; max-width: 600px; }
+        #templateHeader { border-bottom: 0; }
+        .headerContent { color: #202020; font-family: 'Helvetica Neue', Helvetica, Arial; font-size: 34px; font-weight: bold; line-height: 100%; padding: 0; text-align: center; vertical-align: middle; }
+        .headerContent a:link, .headerContent a:visited { color: #336699; font-weight: normal; text-decoration: underline; }
+        #headerImage { height: auto; max-width: 600px !important; }
+        #templateContainer, .bodyContent { background-color: #FDFDFD; }
+        .bodyContent div { color: #333; font-family: 'Helvetica Neue', Helvetica, Arial; font-size: 12px; line-height: 150%; text-align: left; }
+        .bodyContent div a:link, .bodyContent div a:visited { color: #00babb; font-weight: normal; text-decoration: underline; }
+        .bodyContent div .spip_documents_center { display: table; clear: both; margin: 1em auto; }
+        .bodyContent div .spip_documents_left { margin-right: 15px; margin-bottom: 5px; }
+        .bodyContent div .spip_documents_right { margin-left: 15px; margin-bottom: 5px; }
+        .bodyContent img { display: inline; margin-bottom: 10px; max-width: 100%; }
+        div.information { border-radius: 10px; background-color: #F1f1f1; padding: 0.5em 1em; font-size: 0.9em; margin-bottom: 1em; width: auto; }
+        div.fond_couleur { padding: 10px; background-color: #F1f1f1; }
+        div.important { padding: 10px; background-color: #F1f1DD; border: 2px solid #DDDDAA; }
+        div.blink { text-decoration: blink; font-weight: bold; color: #000000; }
+        #templateFooter {  border-top: 0; }
+        .footerContent div { color: #707070; font-family: 'Helvetica Neue', Helvetica, Arial; font-size: 14px; line-height: 125%; text-align: left; }
+        .footerContent div a:link, .footerContent div a:visited { color: #00babb; font-weight: normal; text-decoration: underline; }
+        .footerContent img { display: inline; }
+        #social {  border: 1px solid #F5F5F5; }
+        #social div { text-align: center; }
+        #utility {   }
+        #utility div { text-align: center; }
+        img.puce { margin-bottom: 0 }
+        .spip_code, .spip_cadre { color: #606060; font-family: Courier, "Courier New", monospace; }
+        textarea.spip_cadre { width: 100%; }
+        .coloration_code ol { list-style: none; }
+        @media only screen and (max-width: 640px) {
+            html, body { width: 100% !important; }
+            img { max-width: 100% !important; }
+            #templatePreheader { width: 100% !important; }
+            .preheaderContent, .bodyContent, .footerContent { padding: 0 !important; }
+            #templateContainer { width: 100% !important; border: 0 !important; }
+            #templateHeader { width: 100% !important; border: 0 !important; }
+            #templateBody { width: 100% !important; }
+            #templateBodyHeader { width: 100% !important; }
+            #templateBody2 { width: 100% !important; }
+            #colonnedroite { display: block !important; width: 100% !important; }
+            #colonnegauche { display: block !important; width: 100% !important; }
+            #templateFooterr { width: 100% !important; }
+            #templateFooter { width: 100% !important; }
+            #canspamBar { width: auto !important; }
+            .archive_link { max-width: 50% }
+            .padding { padding-left: 0 !important; padding-right: 0 !important; }
+            .text { font-size: 11px !important; color: #101010 !important; }
+        }
+
+        .bodyContent .date{font-weight:bold;color:#333;margin-top:10px;color:#0099BB;}
+        .bodyContent .lieu{font-weight:bold;}
+        .bodyContent .lieu_espace{margin-top:0.75em}
+        .bodyContent .lieu_special{font-size:11px;font-weight:bold;color:#017eb6;}
+        #message_intro{font-size:12px;font-weight:bold;text-align:justify;margin:0 0 0.75em 0}
+        #numero{padding:10px 5px;font-weight:bold;font-size:18px;}
+        #numero_intro{font-size:12px;padding:5px;font-weight:bold;}
+        .bodyContent .information{ background:#FCFCFC;border-style:solid;border-color: #F1F1F1;border-width:2px;padding:10px;margin-bottom:10px;line-height: 16px;}
+        .focus{ background:#F1F1FF;border-style:solid;border-color: #F1F1F1;border-width:2px;padding:10px;}
+        .focus ul{ padding-left:15px;}
+
+        a {color:#00babb;}
+        span.bleu {color:#017eb6;}
+
+        td.photo p {text-align:center;line-height:1.5;font-size:1.2em}
+        td.contenu{text-align:justify;line-height:1.4}
+        td.contenu .padleft{padding:0 0 0 15px;}
+        td.contenu .padright{padding:0 15px 0 0;}
+        .antennes {font-size:11px;}
+        .couleur1 {color:#909;}
+        div.information{ background:#FCFCFC;border-style:solid;border-color: #F1F1F1;border-width:2px;padding:10px;margin-bottom:10px;line-height: 16px;}
+
+    </style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
+      style="-webkit-text-size-adjust: none;margin: 0;padding: 0;background-color: #f1fcce;width: 100% !important;">
+<center>
+
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable"
+           style="margin: 0;padding: 0;background-color: #ebebeb;height: 100% !important;width: 100% !important;">
+        <tr>
+            <td align="center" valign="top" style="border-collapse: collapse;">
+                <!-- // Begin Template Preheader \\ -->
+                <table border="0" cellpadding="0" cellspacing="0" width="700" id="templatePreheader"
+                       style="border: 0 none;background-color: #ebebeb;">
+                    <tr>
+                        <td align="center" valign="top" style="border-collapse: collapse;">
+                            <!-- // Begin Template Header \\ -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="446" id="templatePreHeaderContent"
+                                   style="border-bottom: 0;">
+                                <tr>
+                                    <td class="headerContent"
+                                        style="border-collapse: collapse;color: #202020;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;">
+
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <!-- // End Template Header \\ -->
+                        </td>
+                        <td valign="top" width="254" style="border-collapse: collapse;" class="archive_link">
+                            <div style="color: #505050;font-family: Arial;font-size: 12px;line-height: 100%;text-align: left;">
+                                <:newsletter:info_email_not_displaying:><br><a href="#URL_NEWSLETTER" target="_blank"
+                                                                               style="color: #336699;font-weight: normal;text-decoration: underline;">
+                                    <:newsletter:info_email_voir_en_ligne:>
+                                </a>.
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <!-- // End Template Preheader \\ -->
+
+                <table border="0" cellpadding="0" cellspacing="0" width="700" id="templateContainer">
+
+                    <tr>
+                        <td align="center" valign="top" style="border-collapse: collapse;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="700" id="templateHeader">
+                                <tr>
+                                    <td align="center" valign="top" style="border-collapse: collapse;"
+                                        id="colonnegaucheHeader">
+                                        <!-- // Begin Template Body \\ -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="500" id="templateBody">
+                                            <tr>
+                                                <td valign="top" class="bodyContent"
+                                                    style="border-collapse: collapse;background-color: #FFFFFF;">
+
+                                                    <!-- // Begin Module: Standard Content \\ -->
+                                                    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td valign="top" style="border-collapse: collapse;">
+                                                                <div
+                                                                        style="color: #505050;font-family: Arial;font-size: 14px;line-height: 150%;text-align: left;">
+
+                                                                    <!-- // Begin Module: Standard Header Image \\ -->
+                                                                    [(#LOGO_SITE_SPIP|sinon{#LOGO_SITE_SPIP}|image_passe_partout{80,76}
+                                                                    |inserer_attribut{alt,[(#LOGO_NEWSLETTER_NORMAL|non)ADAV]}
+                                                                    |inserer_attribut{border,'0'}
+                                                                    |inserer_attribut{style,'margin: 0;padding: 0 10px 0
+                                                                    0;width:
+                                                                    auto;border: 0;height: 80px;line-height:
+                                                                    100%;outline:
+                                                                    none;font-size:28px;text-decoration: none;'}
+                                                                    |inserer_attribut{id,headerImage})]
+
+                                                                    [(#CHEMIN{images/minutOvelO-logo.jpg}|sinon{#LOGO_SITE_SPIP}|image_passe_partout{80,76}
+                                                                    |inserer_attribut{alt,[(#LOGO_NEWSLETTER_NORMAL|non)La minutovélo]}
+                                                                    |inserer_attribut{border,'0'}
+                                                                    |inserer_attribut{style,'margin: 0;padding: 0;width:
+                                                                    auto;border: 0;height: 80px;line-height:
+                                                                    100%;outline:
+                                                                    none;font-size:28px;text-decoration: none;'}
+                                                                    |inserer_attribut{id,headerImage})]
+                                                                    <!-- // End Module: Standard Header Image \\ -->
+
+                                                                    [<h1 class="#EDIT{titre} h1"
+                                                                         style="color: #202020;display: block;font-family: Arial;font-size: 20px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">
+                                                                    (#TITRE|substr{15}|ucfirst)</h1>]
+                                                                    [
+                                                                    <div class="#EDIT{chapo}">
+                                                                        (#CHAPO|image_reduire{560,0})
+                                                                    </div>
+                                                                    ]
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- // End Module: Standard Content \\ -->
+
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                        <!-- // End Template Body \\ -->
+                                    </td>
+
+                                    <td align="center" valign="top" style="border-collapse: collapse;"
+                                        id="colonnedroiteHeader">
+                                        <!-- // Begin Template Body \\ -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="200"
+                                               id="templateBody2">
+                                            <tr>
+                                                <td valign="top" class="bodyContent"
+                                                    style="border-collapse: collapse;background-color: #FFFFFF;">
+                                                    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td valign="top" style="border-collapse: collapse;">
+                                                                [
+                                                                <div class="#EDIT{texte}">
+                                                                    (#TEXTE|image_reduire{560,0})
+                                                                </div>
+                                                                ]
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="700"
+                                   id="templateContent">
+                                <tr>
+                                    <td align="center" valign="top" style="border-collapse: collapse;"
+                                        id="colonnegauche">
+                                        <!-- // Begin Template Body \\ -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="260"
+                                               id="templateBodyHeader">
+                                            <tr>
+                                                <td valign="top" class="bodyContent"
+                                                    style="border-collapse: collapse;background-color: #FFFFFF;">
+
+
+                                                    <table>
+                                                        <BOUCLE_actualites
+                                                                (SELECTIONS){id_newsletter}>
+                                                            <B_actualites_contenus>
+
+                                                                <BOUCLE_actualites_contenus
+                                                                        (SELECTIONS_CONTENUS){id_selection}{!css == "colonne2 ?"}{par rang}>
+                                                                    <tr>
+                                                                        <td valign="top" class="bodyContent"
+                                                                            style="border-collapse: collapse;">
+
+                                                                            <!-- // Begin Module: Standard Content \\ -->
+                                                                            <table border="0"                                                                                cellpadding="20"
+                                                                                   cellspacing="0"
+                                                                                   width="100%">
+                                                                                <tr>
+                                                                                    <td valign="top"
+                                                                                        style="border-collapse: collapse;">
+                                                                                        <div style="color: #505050;font-family: Arial;font-size: 14px;line-height: 150%;text-align: left;" [ class="(#CHAMP_SQL{css})"]>
+
+                                                                                            [(#SET{largeur,120})]
+                                                                                            [(#SET{style_image,'margin:
+                                                                                            0;margin-left:
+                                                                                            1em;margin-bottom:
+                                                                                            1em;float:right;padding:
+                                                                                            0;max-width:
+                                                                                            100%;border:
+                                                                                            0;height:
+                                                                                            auto;line-height:
+                                                                                            100%;outline:
+                                                                                            none;text-decoration:
+                                                                                            none;'})]
+
+                                                                                            [(#CHAMP_SQL{css}|match{'grande_photo'}|oui)
+                                                                                            [(#SET{largeur,304})]
+                                                                                            [(#SET{style_image,'margin:
+                                                                                            0;margin-bottom:
+                                                                                            1em;padding:
+                                                                                            0;max-width:
+                                                                                            100%;border:
+                                                                                            0;height:
+                                                                                            auto;line-height:
+                                                                                            100%;outline:
+                                                                                            none;text-decoration:
+                                                                                            none;width:100%;'})]
+                                                                                            ]
+
+                                                                                            [(#LOGO_SELECTIONS_CONTENU|image_reduire{#GET{largeur},*}
+                                                                                            |inserer_attribut{alt,''}
+                                                                                            |inserer_attribut{border,'0'}
+                                                                                            |inserer_attribut{style,#GET{style_image}}
+                                                                                            |inserer_attribut{class,logo})]
+
+                                                                                            [(#CHAMP_SQL{css}|match{'pas_de_titre'}|non)
+                                                                                            <h3 class="#EDIT{titre} h3"
+                                                                                                style="color: #202020;display: block;font-family: Arial;font-size: 14px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">
+                                                                                                <span[
+                                                                                                class="(#EDIT{titre})]">#TITRE</span>
+                                                                                            </h3>
+                                                                                            ]
+
+                                                                                            <div class="texte">
+                                                                                                <strong class="titre entry-title"></strong>
+                                                                                                [
+                                                                                                <div class="[(#EDIT{descriptif}) ]descriptif entry-content ">
+                                                                                                    (#DESCRIPTIF)
+                                                                                                </div>
+                                                                                                ]
+                                                                                                [(#CHAMP_SQL{css}|match{'pas_de_lien'}|non)
+                                                                                                <div class="lire_en_ligne">
+                                                                                                    <a href="#URL">
+                                                                                                        <:newsletter:lien_lire_en_ligne:> &laquo;
+                                                                                                            #TITRE &raquo;
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                ]
+                                                                                            </div></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <!-- // End Module: Standard Content \\ -->
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </BOUCLE_actualites_contenus>
+                                                            </B_actualites_contenus>
+                                                        </BOUCLE_actualites>
+                                                    </table>
+
+                                                </td>
+
+
+                                            </tr>
+
+                                        </table>
+                                        <!-- // End Template Body \\ -->
+                                    </td>
+
+                                    <td align="center" valign="top" style="border-collapse: collapse;"
+                                        id="colonnedroite">
+                                        <!-- // Begin Template Body \\ -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="440"
+                                               id="templateBody2">
+                                            <tr>
+                                                <td valign="top" class="bodyContent"
+                                                    style="border-collapse: collapse;background-color: #FFFFFF;">
+
+
+                                                    <BOUCLE_actualites_evt(SELECTIONS){id_newsletter}>
+                                                        <B_actualites_contenus_evts>
+                                                            <table border="0" cellpadding="20" cellspacing="0" width="100%">
+
+                                                                <BOUCLE_actualites_contenus_evts(SELECTIONS_CONTENUS){id_selection}{css == "colonne2 ?"}{par rang}>
+
+                                                                <tr>
+                                                                    <td valign="top" class="bodyContent"
+                                                                        style="border-collapse: collapse;">
+
+                                                                        <!-- // Begin Module: Standard Content \\ -->
+                                                                        <table border="0"                                                                                cellpadding="20"
+                                                                               cellspacing="0"
+                                                                               width="100%">
+                                                                            <tr>
+                                                                                <td valign="top"
+                                                                                    style="border-collapse: collapse;">
+                                                                                    <div style="color: #505050;font-family: Arial;font-size: 14px;line-height: 150%;text-align: left;" [ class="(#CHAMP_SQL{css})"]>
+
+                                                                                    [(#SET{largeur,120})]
+                                                                        [(#SET{style_image,'margin:
+                                                                        0;margin-left:
+                                                                        1em;margin-bottom:
+                                                                        1em;float:right;padding:
+                                                                        0;max-width:
+                                                                        100%;border:
+                                                                        0;height:
+                                                                        auto;line-height:
+                                                                        100%;outline:
+                                                                        none;text-decoration:
+                                                                        none;'})]
+
+                                                                        [(#CHAMP_SQL{css}|match{'grande_photo'}|oui)
+                                                                        [(#SET{largeur,304})]
+                                                                        [(#SET{style_image,'margin:
+                                                                        0;margin-bottom:
+                                                                        1em;padding:
+                                                                        0;max-width:
+                                                                        100%;border:
+                                                                        0;height:
+                                                                        auto;line-height:
+                                                                        100%;outline:
+                                                                        none;text-decoration:
+                                                                        none;width:100%;'})]
+                                                                        ]
+
+                                                                        [(#LOGO_SELECTIONS_CONTENU|image_reduire{#GET{largeur},*}
+                                                                        |inserer_attribut{alt,''}
+                                                                        |inserer_attribut{border,'0'}
+                                                                        |inserer_attribut{style,#GET{style_image}}
+                                                                        |inserer_attribut{class,logo})]
+
+
+                                                                        [(#CHAMP_SQL{css}|match{'pas_de_titre'}|non)
+                                                                        <h3 class="#EDIT{titre} h3"
+                                                                            style="color: #202020;display: block;font-family: Arial;font-size: 14px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">
+                                                                            <span[
+                                                                            class="(#EDIT{titre})]">#TITRE</span>
+                                                                        </h3>
+                                                                        ]
+
+                                                                        <div class="texte">
+                                                                            <strong class="titre entry-title"></strong>
+                                                                            [
+                                                                            <div class="[(#EDIT{descriptif}) ]descriptif entry-content ">
+                                                                                (#DESCRIPTIF)
+                                                                            </div>
+                                                                            ]
+                                                                            [(#CHAMP_SQL{css}|match{'pas_de_lien'}|non)
+                                                                            <div class="lire_en_ligne">
+                                                                                <a href="#URL">
+                                                                                    <:newsletter:lien_lire_en_ligne:> &laquo;
+                                                                                        #TITRE &raquo;
+                                                                                </a>
+                                                                            </div>
+                                                                            ]
+                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+
+                                                                    </td>
+                                                                </tr> </BOUCLE_actualites_contenus_evts>
+                                                            </table>
+                                                        </B_actualites_contenus_evts>
+                                                    </BOUCLE_actualites_evt>
+
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="700" id="templateFooterr">
+
+
+                    <tr>
+                        <td align="center" valign="top" style="border-collapse: collapse;">
+                            <!-- // Begin Template Footer \\ -->
+                            <table border="0" cellpadding="10" cellspacing="0" width="700"
+                                   id="templateFooter" style="border-top: 0;">
+                                <tr>
+                                    <td valign="top" class="footerContent"
+                                        style="border-collapse: collapse;">
+
+                                        <!-- // Begin Module: Standard Footer \\ -->
+                                        <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td colspan="2" valign="middle" id="social"
+                                                    style="border-collapse: collapse;border: 0;">
+                                                    <div
+                                                            style="color:#707070;font-family: Arial;font-size: 12px;line-height: 125%;text-align: center;">
+
+                                                        <em>&copy; <a
+                                                                href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> &mdash;
+                                                            [(#ENV{date}|annee)]</em>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" valign="middle" id="utility"
+                                                    style="border-collapse: collapse;border: 0;">
+                                                    <div class="unsubscribe_link"
+                                                         style="color: #707070;font-family: Arial;font-size: 14px;line-height: 125%;text-align: center;">
+                                                        <:newsletter:info_email_reception:> @email@<br/>
+                                                            &nbsp;<a href="@url_unsubscribe@"
+                                                                     style="color: #336699;font-weight: normal;text-decoration: underline;">
+                                                                <:newsletter:label_link_unsubscribe:>
+                                                            </a>&nbsp;
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- // End Module: Standard Footer \\ -->
+
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- // End Template Footer \\ -->
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </td>
+        </tr>
+    </table>
+</center>
+</body>
+</html>
+</BOUCLE_newsletter>
+#FILTRE{newsletters_liens_absolus}

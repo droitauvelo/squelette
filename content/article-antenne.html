@@ -6,217 +6,80 @@
     <div class="content col-md-6" id="content">
 
         [(#INCLURE{fond=inclure/outils})]
-<article>
+        <article>
 
-    <header class="cartouche">
-        [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-        <h1><span class="#EDIT{titre}">#TITRE</span>[
-            <small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
-            ]</h1>
+            <header class="cartouche">
+                [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+                <h1><span class="#EDIT{titre}">#TITRE</span>[
+                    <small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
+                    ]</h1>
 
-        <p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+                <p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
 
 
 
-    </header>
+            </header>
 
-    <div class="main">
-        [<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|adaptive_images)</div>]
-        [<div class="#EDIT{texte} texte surlignable">(#TEXTE|adaptive_images)</div>]
+            <div class="main">
+                [<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|adaptive_images)</div>]
+                [<div class="#EDIT{texte} texte surlignable">(#TEXTE|adaptive_images)</div>]
 
-        [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+                [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+            </div>
+
+            <footer>
+                [<div class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|adaptive_images)</div>]
+                [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+            </footer>
+
+            <aside>
+                [(#REM) Gestion du portfolio et des documents ]
+                [(#INCLURE{fond=inclure/documents,id_article})]
+
+              </aside>
+
+
+
+        </article>
     </div>
 
-    <footer>
-        [<div class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|adaptive_images)</div>]
-        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-    </footer>
 
-    <aside>
-        [(#REM) Gestion du portfolio et des documents ]
-        [(#INCLURE{fond=inclure/documents,id_article})]
+    <div class="aside secondary col-md-5 col-md-offset-1" id="aside">
 
-      </aside>
+        #SET{id_mot,0}
+        <BOUCLE_MOT(MOTS){id_article}>
+            #SET{id_mot,#ID_MOT}
 
-
-
-</article>
-</div>
-
-
-<div class="aside secondary col-md-5 col-md-offset-1" id="aside">
-
-
-    <BOUCLE_MOT(MOTS){id_article}>
-
-
-            <B_ACTU_LOCAUX>
-                <h2 class="h2">Actualités</h2>
-                <div  class="liste articles">
-                    [(#ANCRE_PAGINATION)]
-                    <ul  class="liste-items">
-                        <BOUCLE_ACTU_LOCAUX(ARTICLES){id_rubrique=1}{doublons}{id_mot}{par date}{inverse}{id_article!=#ID_ARTICLE}{pagination 5}>
-                        [(#INCLURE{fond=inclure/resume/article-bloc,id_article})]
-                        </BOUCLE_ACTU_LOCAUX>
-                    </ul>
-                    [<div class="pagination">(#PAGINATION)</div>]
-                </div>
-            </B_ACTU_LOCAUX>
-
-
-
-
-            [(#SET{tab_art_evt,#ARRAY})]
-            <B_EVT_LOCAUX>
-
-
-
-                <BOUCLE_EVT_LOCAUX(ARTICLES){id_rubrique!=1}{id_article!=#ID_ARTICLE}{id_mot}{par date}{inverse}>
-
-                <BOUCLE_EVTS(EVENEMENTS){id_article}>
-                [(#SET{tab_art_evt,#GET{tab_art_evt}|push{#ID_ARTICLE}})]
-                </BOUCLE_EVTS>
-                </BOUCLE_EVT_LOCAUX>
-
-
-
-                [(#SET{tabevt,#ARRAY})]
-
-
-
-                <BOUCLE_mois_01(EVENEMENTS){id_article IN #GET{tab_art_evt}}{age<0}>
-                <h2 class="h2">Evénements</h2>
-                </BOUCLE_mois_01>
-                <h3 class="h3">Bientôt</h3>
-
-                <B_mois_vedette>
-                    <ul class="evt_vedette">
-                        <BOUCLE_mois_vedette(EVENEMENTS){id_article IN #GET{tab_art_evt}}{titre_mot=vedette}{age<0}{par date}{0,1}{doublons}>
-                        <li>
-                            [(#SET{logo,#LOGO_EVENEMENT})]
-                            <BOUCLE_articles_vedette(ARTICLES) {id_article}>
-
-                            [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
-
-                            <div class="logo"><a href="#URL_ARTICLE" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{300,200}|extraire_attribut{src})]" class="img-rounded " /></a></div>
-                            </BOUCLE_articles_vedette>
-                            <div class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
-                            <div class="titre"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></div>
-                            <div class="lieu">#LIEU</div>
-                            <div class="descriptif">#DESCRIPTIF</div>
-                            [<div class="descriptif">(#DESCRIPTIF)[<span class="information"><a href="(#URL_ARTICLE)">En savoir plus</a></span>]</div>]
-                            [(#SET{date_debut,#DATE_DEBUT})]
-                            <div class="nettoyeur"></div>
-                        </li>
-                        </BOUCLE_mois_vedette>
-                    </ul>
-                </B_mois_vedette>
-
-
-                <B_mois>
-
-
-                    <ul class="mini_agenda">
-
-                        <BOUCLE_mois(EVENEMENTS){id_article IN #GET{tab_art_evt}}{age<0}{par date}{0,5}{doublons}>
-                        <li>
-                            [(#SET{logo,#LOGO_EVENEMENT})]
-
-                            <BOUCLE_condition(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
-
-
-
-                            <BOUCLE_evt_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
-                            [(#SET{logo,#LOGO_EVENEMENT})]
-                            </BOUCLE_evt_source>
-                            <BOUCLE_articles(ARTICLES){id_evenement}>
-
-                            [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
-                            [(#SET{url_article,#URL_ARTICLE})]
-                            </BOUCLE_articles>
-                            <div class="logo pull-left"><a href="[(#GET{url_article})]" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{60,60}|image_recadre{55,55}|extraire_attribut{src})]" class="img-rounded spip_logos" /></a></div>
-                            <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
-                            <div class="titre"><a href="[(#GET{url_article})]" rel="bookmark">#TITRE</a></div>
-                            <!--<div class="lieu">#LIEU</div>-->
-                            [<div class="descriptif">(#DESCRIPTIF)<span class="information"><a href="[(#GET{url_article})]">En savoir plus</a></span></div>]
-                            [(#SET{date_debut,#DATE_DEBUT})]
-                            </BOUCLE_condition>
-                            [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
-                            <div class="nettoyeur"></div>
-                        </li>
-
-
-                        </BOUCLE_mois>
-                    </ul>
-                    <div class="lien_agenda"><a href="[(#URL_PAGE{agenda})]">Voir les autres évenements</a></div>
-                </B_mois>
-
-                </B_mois_01>
-               <!-- Aucun événement à venir -->
-            <//B_mois_01>
-
-            <B_mois0>
-
-                <h3>Evénements passés</h3>
-                <ul class="mini_agenda">
-
-                    <BOUCLE_mois0(EVENEMENTS){id_article IN #GET{tab_art_evt}}{age>=0}{par date}{0,3}{doublons}>
-                    <li>
-                        [(#SET{logo,#LOGO_EVENEMENT})]
-
-                        <BOUCLE_condition0(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
-
-
-
-                        <BOUCLE_evt_source0(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
-                        [(#SET{logo,#LOGO_EVENEMENT})]
-                        </BOUCLE_evt_source0>
-                        <BOUCLE_articles0(ARTICLES){id_evenement}>
-
-                        [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
-                        [(#SET{url_article,#URL_ARTICLE})]
-                        </BOUCLE_articles0>
-                        <div class="logo pull-left"><a href="[(#GET{url_article})]" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{60,60}|image_recadre{55,55}|extraire_attribut{src})]" class="img-rounded spip_logos" /></a></div>
-                        <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
-                        <div class="titre"><a href="[(#GET{url_article})]" rel="bookmark">#TITRE</a></div>
-                        <!--<div class="lieu">#LIEU</div>-->
-                        [<div class="descriptif">(#DESCRIPTIF)<span class="information"><a href="[(#GET{url_article})]">En savoir plus</a></span></div>]
-                        [(#SET{date_debut,#DATE_DEBUT})]
-                        </BOUCLE_condition0>
-                        [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
-                        <div class="nettoyeur"></div>
-                    </li>
-
-
-                    </BOUCLE_mois0>
+        </BOUCLE_MOT>
+        <B_ACTU_LOCAUX>
+            <h2 class="h2">Actualités</h2>
+            <div  class="liste articles">
+                [(#ANCRE_PAGINATION)]
+                <ul  class="liste-items">
+                    <BOUCLE_ACTU_LOCAUX(ARTICLES){id_rubrique=1}{age<200}{doublons}{id_mot=#GET{id_mot}}{par date}{inverse}{id_article!=#ID_ARTICLE}{pagination 5}>
+                    [(#INCLURE{fond=inclure/resume/article-bloc,id_article})]
+                    </BOUCLE_ACTU_LOCAUX>
                 </ul>
-                <div class="lien_agenda"><a href="[(#URL_PAGE{agenda})]">Voir les autres évenements</a></div>
-            </B_mois0>
-
-        <//B_mois0>
-
+                [<div class="pagination">(#PAGINATION)</div>]
+            </div>
+        </B_ACTU_LOCAUX>
 
 
+                    <h2 class="h2">Agenda</h2>
+
+                    <div id="mini_agenda" class="col-md-8">
+
+                    <div class="bloc">
+
+                        [(#INCLURE{fond=inclure/mini_agenda_antenne,id_mot=#GET{id_mot}})]
+
+                    </div>
+                </div>
 
 
+        <INCLURE{fond=aside/#ENV{type-page},env} />
 
-        </B_EVT_LOCAUX>
-
-
-</BOUCLE_MOT>
-
-
-
-
-
-
-
-
-
-
-    <INCLURE{fond=aside/#ENV{type-page},env} />
-
-</div>
+    </div>
 </div>
 
 </BOUCLE_content>

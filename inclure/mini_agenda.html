@@ -2,25 +2,28 @@
 	<div class="col-md-6">
 <B_mois_vedette>
 <ul class="evt_vedette">
-<BOUCLE_mois_vedette(EVENEMENTS){magnet}{titre_mot=vedette}{age<0}{par date}{0,1}{doublons}>
+<BOUCLE_mois_vedette(EVENEMENTS){magnet}{titre_mot=vedette}{age_fin<0}{par date}{0,2}{doublons}>
 	<li>
         [(#SET{logo,#LOGO_EVENEMENT|image_reduire{0,700}})]
+        <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
+            <div class="item">
 	<BOUCLE_articles_vedette(ARTICLES) {id_article}>
         [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE|image_reduire{0,700}})]]
-        [(#GET{logo}|non) [(#SET{logo,sinon{#CHEMIN{images/logo.png}})]]
-       [<div class="logo pic grow"><a href="#URL_ARTICLE" rel="bookmark">(#GET{logo}|inserer_attribut{class,"img-responsive img-rounded"})</a></div>]
-
-
+        [(#GET{logo}|non) [(#SET{logo,#CHEMIN{images/logo.png}|image_reduire{0,700}})]]
+       [<div class="logo pic grow">(#GET{logo}|inserer_attribut{class,"img-responsive img-rounded"})</div>]
 	</BOUCLE_articles_vedette>
 
         <div class="titre clearfix">
             <span class="date">[(#DATE_DEBUT|affdate_court)] [ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</span>
-	        <a href="#URL_ARTICLE" rel="bookmark">#TITRE</a>
+	       #TITRE
         </div>
         <div class="informations">
-            [<span class="lieu">(#LIEU)</span> ][<span class="descriptif[ (#EDIT{descriptif})]">(#DESCRIPTIF|textebrut)[<span class="information"><a href="(#URL_ARTICLE)"> En savoir plus</a></span>]</span></div>]
+            [<span class="lieu">(#LIEU)</span> ]
+        </div>
 	        [(#SET{date_debut,#DATE_DEBUT})]
         <div class="nettoyeur"></div>
+                </div>
+            </a>
 	</li>
 </BOUCLE_mois_vedette>
 </ul>
@@ -40,23 +43,32 @@
     [(#SET{logo,#LOGO_EVENEMENT})]
 
     <BOUCLE_condition(CONDITION){si #ID_EVENEMENT_SOURCE|=={0}|ou{#ID_EVENEMENT_SOURCE|in_array{#GET{tabevt}}|non}}>
-
-
-
         <BOUCLE_evt_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
-            [(#SET{logo,#LOGO_EVENEMENT})]
+        [(#SET{logo,#LOGO_EVENEMENT})]
         </BOUCLE_evt_source>
         <BOUCLE_articles(ARTICLES){id_evenement}>
 
-            [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
-            [(#SET{url_article,#URL_ARTICLE})]
+        [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+        [(#SET{url_article,#URL_ARTICLE})]
         </BOUCLE_articles>
-        <div class="logo pull-left"><a href="[(#GET{url_article})]" rel="bookmark"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{80,80}|extraire_attribut{src})]" class="img-rounded spip_logos" /></a></div>
-        <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
-        <div class="titre"><a href="[(#GET{url_article})]" rel="bookmark">#TITRE</a></div>
-        <div class="lieu">#LIEU</div>
-        [<div class="descriptif">(#DESCRIPTIF)<span class="information"><a href="[(#GET{url_article})]">En savoir plus</a></span></div>]
-        [(#SET{date_debut,#DATE_DEBUT})]
+
+       <div class="item">
+            <div class="logo pull-left">
+                <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
+                <img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{80,80}|extraire_attribut{src})]" class="img-rounded spip_logos" />
+                </a>
+            </div>
+            <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
+            <div class="titre">
+                <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
+                #TITRE
+                </a>
+            </div>
+            <div class="lieu">#LIEU</div>
+            [<div class="descriptif #EDit">(#DESCRIPTIF|couper{100})</div>]
+            [(#SET{date_debut,#DATE_DEBUT})]
+        </div>
+
     </BOUCLE_condition>
         [(#SET{tabevt,#GET{tabevt}|push{#ID_EVENEMENT_SOURCE}})]
 	<div class="nettoyeur"></div>
@@ -67,6 +79,7 @@
 </ul>
 <div class="lien_agenda pull-right"><a href="[(#URL_PAGE{agenda})]" class="btn btn-primary">Voir les autres événements</a></div>
 </B_mois>
+    <div class="lien_agenda pull-right"><a href="[(#URL_PAGE{agenda})]" class="btn btn-primary">Voir les autres événements</a></div>
 
 <//B_mois>
 

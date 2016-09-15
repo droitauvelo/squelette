@@ -3,14 +3,12 @@
 <div class="modal fade" id="morphsearch_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<!--	<h4 class="modal-title" id="myModalLabel">Rechercher</h4>-->
-                </div>
+
 			<div class="modal-body">
 
 				<form action="[(#ENV{action})]" method="get" class="morphsearch-form form-inline ">
 					[(#ENV{action}|form_hidden)]
+					<button type="button" class=" pull-right close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 
 					<div class="form-group">

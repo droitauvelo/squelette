@@ -83,13 +83,15 @@ function lunr_data()
 
     }
 
-    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =1 and date > DATE_SUB(NOW(),INTERVAL 200 DAY) group by id_rubrique, titre');
 
     $tab_mots_sql = sql_allfetsel('id_mot, titre', 'spip_mots');
     $tab_mots = array();
     foreach ($tab_mots_sql as $mots) {
         $tab_mots[$mots['id_mot']] = $mots['titre'];
     }
+
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =1 and date > DATE_SUB(NOW(),INTERVAL 200 DAY) group by id_article, titre');
+
 
     while ($d = sql_fetch($res)) {
         $tab_id_mot = explode(':', $d['id_mots']);
@@ -100,11 +102,91 @@ function lunr_data()
         $d['titre'] = supprimer_numero($d['titre']);
         $d['nature'] = 'actu';
         $d['id'] = $d['id_article'];
-        unset($d['id_rubrique']);
+        unset($d['id_article']);
         unset($d['id_mots']);
         $data[] = $d;
 
     }
+
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =45 and date > DATE_SUB(NOW(),INTERVAL 100 DAY)  group by id_article, titre');
+
+    while ($d = sql_fetch($res)) {
+        $tab_id_mot = explode(':', $d['id_mots']);
+        foreach ($tab_id_mot as $id_mot) {
+            $d['mots'][] = $tab_mots[$id_mot];
+        }
+        $d['mots'] = implode(', ', $d['mots']);
+        $d['titre'] = supprimer_numero($d['titre']);
+        $d['nature'] = 'Revue de presse';
+        $d['id'] = $d['id_article'];
+        unset($d['id_article']);
+        unset($d['id_mots']);
+        $data[] = $d;
+
+    }
+
+
+
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique=142  group by id_article, titre');
+
+    while ($d = sql_fetch($res)) {
+        $tab_id_mot = explode(':', $d['id_mots']);
+        foreach ($tab_id_mot as $id_mot) {
+            $d['mots'][] = $tab_mots[$id_mot];
+        }
+        $d['mots'] = implode(', ', $d['mots']);
+        $d['titre'] = supprimer_numero($d['titre']);
+        $d['nature'] = 'Antenne';
+        $d['id'] = $d['id_article'];
+        unset($d['id_article']);
+        unset($d['id_mots']);
+        $data[] = $d;
+
+    }
+
+
+
+
+    $articles = trim(recuperer_fond('liste/lunr_article'));
+    if(!empty($articles)){
+        $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_article IN('.$articles.')  group by id_article, titre');
+
+    while ($d = sql_fetch($res)) {
+        $tab_id_mot = explode(':', $d['id_mots']);
+        foreach ($tab_id_mot as $id_mot) {
+            $d['mots'][] = $tab_mots[$id_mot];
+        }
+        $d['mots'] = implode(', ', $d['mots']);
+        $d['titre'] = supprimer_numero($d['titre']);
+        $d['nature'] = 'Article';
+        $d['id'] = $d['id_article'];
+        unset($d['id_article']);
+        unset($d['id_mots']);
+        $data[] = $d;
+
+    }
+    }
+
+
+
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_evenements r LEFT JOIN spip_mots_liens m on  m.objet=\'evenement\' and id_objet=id_article where date_fin > DATE_SUB(NOW(),INTERVAL 10 DAY)  group by id_article, titre');
+
+    while ($d = sql_fetch($res)) {
+        $tab_id_mot = explode(':', $d['id_mots']);
+        foreach ($tab_id_mot as $id_mot) {
+            $d['mots'][] = $tab_mots[$id_mot];
+        }
+        $d['mots'] = implode(', ', $d['mots']);
+        $d['titre'] = supprimer_numero($d['titre']);
+        $d['nature'] = 'agenda';
+        $d['id'] = $d['id_article'];
+        unset($d['id_article']);
+        unset($d['id_mots']);
+        $data[] = $d;
+
+    }
+
+
 
 
 
@@ -115,5 +197,22 @@ function lunr_data()
 function  balise_LUNR_DATA($p)
 {
     $p->code = "lunr_data()";
+    return $p;
+}
+
+
+
+
+
+
+function  balise_RANGE($p)
+{
+
+    $min = interprete_argument_balise (1, $p);
+    $max = interprete_argument_balise (2, $p);
+    $pas = interprete_argument_balise (3, $p);
+    if(!$pas) $pas=1;
+
+    $p->code = "range($min,$max,$pas)";
     return $p;
 }

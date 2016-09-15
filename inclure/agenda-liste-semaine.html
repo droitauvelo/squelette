@@ -1,0 +1,118 @@
+[(#REM)
+/**
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
+ *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
+ */
+]
+#SET{affichage_duree,#ENV{affichage_duree,#CONFIG{agenda/affichage_duree,12}}}
+#SET{affichage_debut,#CONFIG{agenda/affichage_debut,#ENV{affichage_debut,date_jour}}}
+#SET{date_debut,#ENV{date_debut,#ENV{date}}|agenda_date_debut_liste{#GET{affichage_debut}}}
+#SET{date_prev,#GET{date_debut}|agenda_moisdecal{#GET{affichage_duree}|mult{-1},'Y-m-d H:i:00'}}
+#SET{date_fin,#GET{date_debut}|agenda_moisdecal{#GET{affichage_duree},'Y-m-d H:i:00'}}
+
+[(#REM) Ne pas afficher l'annee de depart, elle est dans le h2)]
+[(#GET{date_debut}|annee|unique{annee}|non)]
+<div id="agenda-liste" class="liste long evenements">
+
+
+
+	[(#SET{tab_mois,#RANGE{0,#GET{affichage_duree},1}})]
+
+	#SET{tab_evt, #ARRAY}
+	#SET{tab_evt_magnet, #ARRAY}
+
+	<BOUCLE_evt_magnet(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{magnet}>
+	[(#SET{tab_evt_magnet,#GET{tab_evt_magnet}|push{#ID_EVENEMENT}})]
+	</BOUCLE_evt_magnet>
+
+	<BOUCLE_evt(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{ignore_magnet}>
+		[(#SET{tab_evt, #GET{tab_evt}|push{#LISTE{ #DATE_DEBUT|affdate{'U'} ,#ID_EVENEMENT, #DATE_DEBUT,#DATE_FIN}}})]
+	</BOUCLE_evt>
+
+
+
+	</B_mois>
+
+	<BOUCLE_mois(DATA){source tableau,#GET{tab_mois}}>
+	[(#SET{mois_boucle,#GET{date_debut}|agenda_moisdecal{#VALEUR,'Y-m-d H:i:00'}})]
+
+	[<h3 class="h3 clearfix month[(#DATE_DEBUT|agenda_date_passee)fini]">(#GET{affichage_duree}|>{1}?{[(#GET{mois_boucle}|nom_mois|unique{mois})[ (#GET{mois_boucle}|annee|unique{annee})]]})</h3>
+	<div class="row">]
+
+
+
+		[(#SET{nb_jour_mois,#GET{mois_boucle}|affdate{'t'}})]
+
+		[(#SET{tab_jours,#RANGE{#GET{date_debut}|jour|plus{0},#GET{nb_jour_mois},1}})]
+
+	<BOUCLE_jours(DATA){source tableau,#GET{tab_jours}}>
+		[(#SET{jour_boucle, #GET{mois_boucle}|affdate{'Y-m-'}|concat{#VALEUR}|concat{' 23:59:59'}})]
+
+
+		[(#GET{jour_boucle}|affdate{N}|=={1}|ou{#VALEUR|=={1}}|oui)
+		<div class="col-md-2">
+			<h4 class="h4 week">Semaine [(#GET{jour_boucle}|affdate{W})]</h4>
+			<div class="liste-items evenements">
+		]
+
+
+
+				[(#SET{nb_supp,0})]
+				[(#SET{break,''})]
+				<BOUCLE_evt2(DATA){source tableau,#GET{tab_evt}}{si #GET{break}|non}>
+
+				[(#VALEUR|table_valeur{0}|<{#GET{jour_boucle}|affdate{'U'}}|oui)
+
+
+				[(#SET{id_evt,#VALEUR|table_valeur{1}})]
+
+				[(#SET{magnet,''})]
+				[(#GET{id_evt}|in_array{#GET{tab_evt_magnet}}|oui)	[(#SET{magnet,'oui'})]	]
+				[<div class="item">
+
+					(#INCLURE{fond=inclure/resume/evt,id_evenement=#GET{id_evt},magnet=#GET{magnet}})
+				</div>]
+
+					[(#SET{nb_supp,#GET{nb_supp}|plus{1}})]
+
+
+				]
+				[(#VALEUR|table_valeur{0}|<{#GET{jour_boucle}|affdate{'U'}}|non)
+				[(#SET{break,'oui'})]
+
+				]
+
+
+				</BOUCLE_evt2>
+
+				[(#GET{nb_supp}|>0|oui)
+					(#SET{tab_evt,#GET{tab_evt}|array_slice{#GET{nb_supp}}})]
+
+				[(#GET{jour_boucle}|affdate{N}|=={7}|oui)
+
+
+								</div>
+					</div>
+							]
+
+		</BOUCLE_jours>
+		[(#GET{jour_boucle}|affdate{N}|=={7}|non)
+	</div>
+</div>
+]
+			</div>
+	</BOUCLE_mois>
+
+
+	</B_mois>
+	faux
+<//B_mois>
+
+
+
+
+
+</div>

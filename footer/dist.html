@@ -8,7 +8,7 @@
 
 
 <div class="row-fluid">
-	<div id="bloc_rss" class="span4">
+	<div id="bloc_rss" class="col-md-4">
 		<div class="inner">
 		
 		
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<div id="bloc_rss" class="span4">
+	<div id="bloc_heurovelo" class="col-md-4">
 		<div class="inner">
 
 
@@ -41,26 +41,13 @@
 				<div class="titre"><a href="#URL_DOCUMENT">#TITRE</a></div>
 			</div>
 			</BOUCLE_heurovelo>
-		<!--
-		<h3>En Bref</h3>
-		<b_breves>
-		<ul class="liste-items">
-			<BOUCLE_breves(BREVES){0,3}{par date}{inverse}>
-			<li class="item">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_BREVE">#TITRE</a></li>
-			</BOUCLE_breves>
-		</ul>
 
-		</b_breves>
 
-		-->
-
-		
-		
 		
 		</div>
 	</div>
 
-	<div id="bloc_media" class="span4">
+	<div id="bloc_media" class="col-md-4">
 		<div class="inner">
 		<h3>Le vélo dans les média</h3>
 		<INCLURE{fond=inclure/site/liste-articles_syndiques}>
@@ -71,8 +58,7 @@
 <div class="row-fluid">
 	
 	
-	
-<div class="span12">
+
 <BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee|!={#VAL{Y}|date}|oui)[(#DATE|annee)]]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ] &mdash; #NOM_SITE_SPIP
 
 [<div id="menu_bas_de_page" class="menu">
@@ -84,11 +70,9 @@
 
 
 </div>
-</div>
 
 
 
-[<script [data-main="(#URL_PAGE{lunr_app.js})&var_mode=recalcul"] src="(#CHEMIN{js/lunr/require.js})"></script>]
 
 
 

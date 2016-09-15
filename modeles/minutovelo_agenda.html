@@ -1,0 +1,31 @@
+[(#SET{date_du_jour,#DATE})]
+
+
+
+
+    <BOUCLE_evt(EVENEMENTS){!id_mot=56}{agenda date_debut,mois, (#ENV{annee,#GET{date_du_jour}|annee}),(#ENV{mois,#GET{date_du_jour}|mois}})}{#ENV{debut,0},#ENV{fin,999}}{par date}>
+        [(#SET{date_evt,#DATE_DEBUT|affdate_court})]
+
+
+
+    [<div class="date">[(#DATE_DEBUT|nom_jour)] (#GET{date_evt})   [ au (#HORAIRE|<>{oui}|et{#DATE_DEBUT|<>{#DATE_FIN}}|oui)[(#DATE_FIN|nom_jour)] [(#DATE_FIN|affdate_court)] ]</div>]
+
+    [<div class="lieu">(#LIEU)
+    [ - (#HORAIRE|=={oui}|oui)
+            [(#DATE_DEBUT|heures)h[[(#DATE_DEBUT|minutes)](#DATE_DEBUT|minutes|!={00}|oui)]]
+            [ à  (#DATE_FIN |heures)h[[(#DATE_FIN|minutes)](#DATE_FIN|minutes|!={00}|oui)]]
+        ]
+
+
+    </div>]
+    [<strong>(#TITRE)</strong>] [<span class="descriptif">(#DESCRIPTIF)</span>]
+
+
+        [(#SET{date_debut,#DATE_DEBUT})]
+[<div class="lien">(#ID_ARTICLE|=={694}|non)
+    <a href="#URL_ARTICLE">En savoir plus</a></div>]
+        <br/>
+
+
+
+    </BOUCLE_evt>

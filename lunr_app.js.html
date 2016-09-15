@@ -1,25 +1,13 @@
 #HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
-requirejs.config({
-baseUrl: "#CHEMIN{'js/lunr'}"
-});
 
 
-require([
-'#CHEMIN{js/lunr/mustache.js}',
-'#CHEMIN{js/lunr/elasticlunr.min.js}',
-'#CHEMIN{js/lunr/lunr.stremmer.support.min.js}',
-'#CHEMIN{js/lunr/lunr.fr.min.js}',
-'text!templates/question_list.mustache'
-], function ( Mustache, lunr,str,fr, questionList) {
-
-str(lunr); // adds lunr.stemmerSupport
-fr(lunr); // adds lunr.de key
-
-
-
-
-
-
+questionList='<div class="result">' +
+    '<table class="table table-striped table-hover">' +
+        '{{#questions}}' +
+        '<tr><td><a href="{{url}}">{{ titre }}</a></td><td>{{ nature }}</td></tr>' +
+        '{{/questions}}' +
+        '</table>' +
+    '</div>';
 
 var renderQuestionListRecherche = function (qs) {
 if (qs){
@@ -35,9 +23,9 @@ $("#result_recherche_acces_rapide").append('<div class="lien_recherche"><a  clas
 
 if (qs.length==0){
 
-    $('.morphsearch-content').slideUp();
-    }else{
-    $('.morphsearch-content').slideDown();
+$('.morphsearch-content').slideUp();
+}else{
+$('.morphsearch-content').slideDown();
 }
 }
 else{
@@ -57,11 +45,19 @@ this.ref('id')
 
 
 [data=(#LUNR_DATA|json_encode)]
-var longueur=data.length;
 
+
+
+
+$(document).ready(function(){
+
+
+var longueur=data.length;
 for(i=0;i<longueur;i++){
-index.add(data[i]);
+    index.add(data[i]);
 }
+
+
 
 
 
@@ -85,7 +81,7 @@ $('input#recherche').bind('keyup', debounce(function () {
 results = index.search($(this).val()).slice(0,10).map(function (result) {
 truc= data.filter(function (q) { return q.id == parseInt(result.ref, 10) })[0]
 truc['url']=calcule_url(result.ref,truc['nature'])
-console.log(truc);
+
 return truc
 })
 
@@ -97,6 +93,11 @@ renderQuestionListRecherche(results)
 
 
 })
+
+
+
+
+
 
 
 function calcule_url(ref,nature){

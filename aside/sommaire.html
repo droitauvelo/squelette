@@ -1,18 +1,10 @@
 <B_zoom_contenus>
     <div class="liste selections actualites">
-        <h2 class="h2">ZOOM</h2>
+        <!-- <h2 class="h2">ZOOM</h2>-->
         <ul class="liste-items">
-            <BOUCLE_zoom_contenus(ARTICLES){id_rubrique<>1}>{magnet}{doublons}>
-            <li class="item [(#CHAMP_SQL{css}|attribut_html)]">
-                <article class="entry contenu hentry">
-                    [(#LOGO_SELECTIONS_CONTENU|image_passe_partout{600,300}|image_recadre{600,300}|image_aplatir{jpg,ffffff}|adaptive_images{600})]
-                    <div class="texte">
-                        <strong class="titre entry-title"><a href="#URL"><span[ class="(#EDIT{titre})]">#TITRE</span></a></strong>
-                        [<div class="[(#EDIT{descriptif}) ]descriptif entry-content ">(#DESCRIPTIF|couper{80,'…'})</div>]
-                    </div>
-                </article>
-            </li>
-            </BOUCLE_zoom_contenus>
+            <BOUCLE_zoom_contenus(ARTICLES){id_rubrique>1}{magnet}{doublons}{0,4}>
+                   #INCLURE{fond=inclure/article-sommaire,id_article}
+             </BOUCLE_zoom_contenus>
         </ul>
     </div>
 </B_zoom_contenus>
@@ -21,9 +13,9 @@
 <BOUCLE_rub_actu(RUBRIQUES){id_rubrique=1}>
 <B_articles_actu>
     <div class="liste articles sommaire_actu">
-        <h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+       <h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
         <ul class="liste-items">
-            <BOUCLE_articles_actu(ARTICLES){magnet}{id_rubrique}{doublons}>
+            <BOUCLE_articles_actu(ARTICLES){magnet}{id_rubrique}{doublons}{0,4}>
             #INCLURE{fond=inclure/article-sommaire,id_article}
             </BOUCLE_articles_actu>
         </ul>

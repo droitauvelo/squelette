@@ -1,0 +1,42 @@
+<BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}>
+
+
+
+[(#SET{annee,#DATE_DEBUT|annee})][(#SET{mois,#DATE_DEBUT|nom_mois})][(#SET{jour,#DATE_DEBUT|jour})]
+<a itemprop="url" class="url" href="[(#URL_ARTICLE)]?id_evenement=#ID_EVENEMENT"  [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
+<article class="entry evt vevent id_#ID_EVENEMENT" id="evenement_#ID_EVENEMENT" itemscope itemtype="http://schema.org/Event">
+	<div class="date_debut">
+
+			[(#DATE_DEBUT|nom_jour)][ (#DATE_DEBUT|jour) ] [ (#DATE_DEBUT|nom_mois) ]
+
+	</div>
+
+
+
+
+			<BOUCLE_condition(CONDITION){si #ENV{magnet}}>
+			<BOUCLE_evt_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}>
+			[(#SET{logo,#LOGO_EVENEMENT})]
+			</BOUCLE_evt_source>
+			<BOUCLE_articles(ARTICLES){id_evenement}>
+
+			[(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE})] ]
+			[(#SET{url_article,#URL_ARTICLE})]
+
+
+			</BOUCLE_articles>
+
+			<div class="logo"><img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{250,250}|extraire_attribut{src})]" class="img-rounded  img-responsive" /></div>
+			</BOUCLE_condition>
+
+	<div class="summary entry-title">
+		<span itemprop="name">#TITRE</span>[ - <span class="lieu">(#LIEU)</span>]
+	</div>
+
+
+</article>
+
+</a>
+</BOUCLE_vevent>
+
+

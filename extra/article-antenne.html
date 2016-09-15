@@ -1,7 +1,21 @@
 <BOUCLE_MOT(MOTS){id_article}>
-
+<div class="row-fluid">
 <div class="content col-md-6" >
 
+    <B_ARTICLE_LOCAUX_ART>
+        <h3 class="h3">Articles</h3>
+        <div  class="liste articles">
+            [(#ANCRE_PAGINATION)]
+            <ul  class="liste-items">
+                <BOUCLE_ARTICLE_LOCAUX_ART(ARTICLES){where id_rubrique NOT IN (1,96,98,29,145,148,99)}{id_secteur!=96}{doublons}{id_mot}{par date}{inverse}{id_article!=#ID_ARTICLE}{pagination 5}>
+                #INCLURE{fond=inclure/article-resume,id_article}
+
+                </BOUCLE_ARTICLE_LOCAUX_ART>
+            </ul>
+
+        </div>
+        [<div class="pagination">(#PAGINATION)</div>]
+    </B_ARTICLE_LOCAUX_ART>
 
 
 
@@ -13,16 +27,18 @@
             <div  class="liste articles">
                 [(#ANCRE_PAGINATION)]
                 <ul  class="liste-items">
-                    <BOUCLE_ARTICLE_LOCAUX(ARTICLES){id_rubrique!=1}{id_article !IN #GET{tab_art_evt}}{doublons}{id_mot}{par date}{inverse}{id_article!=#ID_ARTICLE}{pagination 5}>
+                    <BOUCLE_ARTICLE_LOCAUX(ARTICLES){id_rubrique!=1}{id_secteur=92}{id_article !IN #GET{tab_art_evt}}{doublons}{id_mot}{par date}{inverse}{id_article!=#ID_ARTICLE}{pagination 5}>
                     #INCLURE{fond=inclure/article-resume,id_article}
 
                     </BOUCLE_ARTICLE_LOCAUX>
                 </ul>
-                [<div class="pagination">(#PAGINATION)</div>]
+
             </div>
+            [<div class="pagination">(#PAGINATION)</div>]
         </B_ARTICLE_LOCAUX>
 
 
     </div>
 </div>
+
 </BOUCLE_MOT>
