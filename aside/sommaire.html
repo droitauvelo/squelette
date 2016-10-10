@@ -2,7 +2,7 @@
     <div class="liste selections actualites">
         <!-- <h2 class="h2">ZOOM</h2>-->
         <ul class="liste-items">
-            <BOUCLE_zoom_contenus(ARTICLES){id_rubrique>1}{magnet}{doublons}{0,4}>
+            <BOUCLE_zoom_contenus(ARTICLES){id_rubrique>1}{doublons}{0,4}>
                    #INCLURE{fond=inclure/article-sommaire,id_article}
              </BOUCLE_zoom_contenus>
         </ul>
@@ -15,7 +15,7 @@
     <div class="liste articles sommaire_actu">
        <h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
         <ul class="liste-items">
-            <BOUCLE_articles_actu(ARTICLES){magnet}{id_rubrique}{doublons}{0,4}>
+            <BOUCLE_articles_actu(ARTICLES){id_rubrique}{doublons}{0,4}>
             #INCLURE{fond=inclure/article-sommaire,id_article}
             </BOUCLE_articles_actu>
         </ul>

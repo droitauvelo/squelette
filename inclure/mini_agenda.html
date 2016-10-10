@@ -2,7 +2,7 @@
 	<div class="col-md-6">
 <B_mois_vedette>
 <ul class="evt_vedette">
-<BOUCLE_mois_vedette(EVENEMENTS){magnet}{titre_mot=vedette}{age_fin<0}{par date}{0,2}{doublons}>
+<BOUCLE_mois_vedette(EVENEMENTS){titre_mot=vedette}{age_fin<0}{par date}{0,2}{doublons}>
 	<li>
         [(#SET{logo,#LOGO_EVENEMENT|image_reduire{0,700}})]
         <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
@@ -38,7 +38,7 @@
 	
 <ul class="mini_agenda">
 
-<BOUCLE_mois(EVENEMENTS){magnet}{age<0}{par date}{0,5}{doublons}>
+<BOUCLE_mois(EVENEMENTS){age<0}{par date}{0,5}{doublons}>
 	<li>
     [(#SET{logo,#LOGO_EVENEMENT})]
 
