@@ -90,7 +90,11 @@ function lunr_data()
         $tab_mots[$mots['id_mot']] = $mots['titre'];
     }
 
-    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =1 and date > DATE_SUB(NOW(),INTERVAL 200 DAY) group by id_article, titre');
+
+    $mysql = function_exists('req_mysql_dist');
+
+
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot '.($mysql ?' SEPARATOR ':',').'\':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =1 and date > DATE_SUB(NOW(),INTERVAL 200 DAY) group by id_article, titre');
 
 
     while ($d = sql_fetch($res)) {
@@ -108,7 +112,7 @@ function lunr_data()
 
     }
 
-    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =45 and date > DATE_SUB(NOW(),INTERVAL 100 DAY)  group by id_article, titre');
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot'.($mysql ?' SEPARATOR ':',').'\':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique =45 and date > DATE_SUB(NOW(),INTERVAL 100 DAY)  group by id_article, titre');
 
     while ($d = sql_fetch($res)) {
         $tab_id_mot = explode(':', $d['id_mots']);
@@ -127,7 +131,7 @@ function lunr_data()
 
 
 
-    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique=142  group by id_article, titre');
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot'.($mysql ?' SEPARATOR ':',').'\':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_rubrique=142  group by id_article, titre');
 
     while ($d = sql_fetch($res)) {
         $tab_id_mot = explode(':', $d['id_mots']);
@@ -149,7 +153,7 @@ function lunr_data()
 
     $articles = trim(recuperer_fond('liste/lunr_article'));
     if(!empty($articles)){
-        $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_article IN('.$articles.')  group by id_article, titre');
+        $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot'.($mysql ?' SEPARATOR ':',').'\':\') as id_mots FROM spip_articles r LEFT JOIN spip_mots_liens m on  m.objet=\'article\' and id_objet=id_article where r.id_article IN('.$articles.')  group by id_article, titre');
 
     while ($d = sql_fetch($res)) {
         $tab_id_mot = explode(':', $d['id_mots']);
@@ -169,7 +173,7 @@ function lunr_data()
 
 
 
-    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot SEPARATOR \':\') as id_mots FROM spip_evenements r LEFT JOIN spip_mots_liens m on  m.objet=\'evenement\' and id_objet=id_article where date_fin > DATE_SUB(NOW(),INTERVAL 10 DAY)  group by id_article, titre');
+    $res= sql_query('SELECT id_article,titre,GROUP_CONCAT(id_mot'.($mysql ?' SEPARATOR ':',').'\':\') as id_mots FROM spip_evenements r LEFT JOIN spip_mots_liens m on  m.objet=\'evenement\' and id_objet=id_article where date_fin > DATE_SUB(NOW(),INTERVAL 10 DAY)  group by id_article, titre');
 
     while ($d = sql_fetch($res)) {
         $tab_id_mot = explode(':', $d['id_mots']);
@@ -185,10 +189,6 @@ function lunr_data()
         $data[] = $d;
 
     }
-
-
-
-
 
 
     return $data;
