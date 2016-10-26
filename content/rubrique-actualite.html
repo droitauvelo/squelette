@@ -15,7 +15,7 @@
 <div class="menu alaune">
     <h2 class="h2 accroche">A la une</h2>
 <ul class="menu-liste">
-<BOUCLE_zoom_article(ARTICLES){id_rubrique}{magnet}{par date}{inverse}{doublons}>
+<BOUCLE_zoom_article(ARTICLES){id_rubrique}{par date}{inverse}{doublons}>
         [(#INCLURE{fond=inclure/article-resume-actu-vedette,id_article})]
     	<div class="nettoyeur"></div>
 
@@ -33,7 +33,7 @@
 	#ANCRE_PAGINATION
 	<!--<h2><:articles_rubrique:></h2>-->
 	<ul class="menu-liste">
-		<BOUCLE_news(ARTICLES){id_rubrique}{!magnet}{doublons}{par date}{inverse}{pagination}>
+		<BOUCLE_news(ARTICLES){id_rubrique}{doublons}{par date}{inverse}{pagination}>
 
             [(#INCLURE{fond=inclure/article-resume-actu,id_article})]
 
