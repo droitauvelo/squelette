@@ -1,4 +1,4 @@
-i##############################################################
+##############################################################
 # Fichier .htaccess                               SPIP v 2.0 #
 #                                                            #
 # Permet de controler les URLs et la version de php utilisee #
@@ -42,13 +42,13 @@ RewriteBase /
 
 RewriteRule \bsites/[^/]+/(IMG|local)/(.+)$ $1/$2 [R=301,skip=100]
 
-#droitauvelo.org/DOC vers http://fichiers.droitauvelo.org/DOC
-#droitauvelo.org/MAQUETTES vers http://fichiers.droitauvelo.org/MAQUETTES
-#droitauvelo.org/HEUROVELO vers http://fichiers.droitauvelo.org/HEUROVELO
-#https://droitauvelo.org/carto vers https://carto.droitauvelo.org 
-#RewriteRule ^DOC	http://fichiers.droitauvelo.org/DOC [QSA,L]
 
-
+RedirectMatch seeother ^/carto/(.*)$ http://carto.droitauvelo.org
+RedirectMatch seeother ^/forum/(.*)$ http://forum.droitauvelo.org/$1
+RedirectMatch seeother ^/DOC/(.*)$ http://fichiers.droitauvelo.org/DOC/$1
+RedirectMatch seeother ^/MINUTOVELO/(.*)$ http://fichiers.droitauvelo.org/MINUTOVELO/$1
+RedirectMatch seeother ^/HEUROVELO/(.*)$ http://fichiers.droitauvelo.org/HEUROVELO/$1
+RedirectMatch seeother ^/MAQUETTES/(.*)$ http://fichiers.droitauvelo.org/MAQUETTES/$1
 
 ################ GESTIONS DES URLS SPIP #######################
 
