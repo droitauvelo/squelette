@@ -23,7 +23,7 @@
 			</div>
 				<div class="hidden-xs hidden-sm  "  id="menuhaut">
 					<div class="pull-right">
-					<button type="button" id="bouton_recherche" class="btn" data-toggle="modal" data-target="#morphsearch_modal" data-toggle="tooltip" data-placement="bottom" title="Rechercher">
+					<button type="button" id="bouton_recherche" class="btn" data-toggle="modal" data-target="#lunr_modal" data-toggle="tooltip" data-placement="bottom" title="Rechercher">
 						<span class="glyphicon glyphicon-search"></span> <span class="hidden-md">Rechercher</span>
 					</button>
 					</div>
@@ -54,11 +54,21 @@
 			<div class="footer" id="footer">
 				<INCLURE{fond=footer/#ENV{type-page},env} />
 			</div>
+
+
+
+
+			[
 			[(#FORMULAIRE_RECHERCHE_PLEIN_ECRAN)]
-
-
-			[<script src="(#CHEMIN{js/scripts_footer.js})"></script>]
+			<script type="application/javascript">
+				[var url_rubrique = '(#URL_PAGE*{rubrique,id_rubrique=})';]
+				[var url_article = '(#URL_PAGE*{article,id_article=})';]
+				[var url_recherche = '(#URL_PAGE*{recherche,recherche=})';]
+				[var url_lunr_data = '(#URL_PAGE{lunr_app.js})';]
+			</script>
+			<script src="(#CHEMIN{js/scripts_footer.js})"></script>
 			[<script src="(#URL_PAGE{lunr_app.js})"></script>]
+			]
 
 		</div>
 	</div>

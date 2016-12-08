@@ -1,36 +1,36 @@
 
 <!-- Modal -->
-<div class="modal fade" id="morphsearch_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="lunr_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 
 			<div class="modal-body">
 
-				<form action="[(#ENV{action})]" method="get" class="morphsearch-form form-inline ">
+				<form action="[(#ENV{action})]" method="get" class="lunr-form form-inline ">
 					[(#ENV{action}|form_hidden)]
 					<button type="button" class=" pull-right close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 
 					<div class="form-group">
 						<label for="#ENV{_id_champ}"><span class="glyphicon glyphicon-search"></span></label>
-						<input type="[(#HTML5|?{search,text})]" class="search text morphsearch-input" size="10" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off"
+						<input type="[(#HTML5|?{search,text})]" class="search text lunr-input" size="10" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off"
 							   placeholder="Rechercher..."	/>
 					</div>
-					<button class="morphsearch-submit btn btn-default btn-block btn-primary" type="submit">Lancer la recherche</button>
+					<button class="lunr-submit btn btn-default btn-block btn-primary" type="submit">Lancer la recherche</button>
 
 					<div class="nettoyeur"></div>
 
 				</form>
 
 
-				<div class="morphsearch-content">
+				<div class="lunr-content">
 
 					<strong>Accès rapide</strong>
 
 							<div id="result_recherche_acces_rapide"></div>
 
 
-				</div><!-- /morphsearch-content -->
+				</div><!-- /lunr-content -->
 
 			</div>
 
