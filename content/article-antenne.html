@@ -51,6 +51,29 @@
             #SET{id_mot,#ID_MOT}
 
         </BOUCLE_MOT>
+        <B_SITE_LOCAUX>
+            <h2 class="h2">Site, blog ou réseaux sociaux</h2>
+            <BOUCLE_SITE_LOCAUX(SITES){id_mot=#GET{id_mot}}>
+            <p>Vous pouvez suivre l'activité de l'antenne sur <a href="#URL_SITE">#NOM_SITE</a></p>
+            <p><strong>les 3 derniers articles</strong></p>
+                <B_SITE_ACTU_LOCAUX>
+                <div  class="liste sites">
+
+                    <ul  class="liste-items">
+                        <BOUCLE_SITE_ACTU_LOCAUX(SYNDIC_ARTICLES){id_syndic}{0,3}{par date}{inverse}>
+                            <li><h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+                            <div class="descriptif">#DESCRIPTIF</div>
+                            </li>
+                        </BOUCLE_SITE_ACTU_LOCAUX>
+                    </ul>
+
+                </div>
+                </B_SITE_ACTU_LOCAUX>
+            </BOUCLE_SITE_LOCAUX>
+        </B_SITE_LOCAUX>
+
+
+
         <B_ACTU_LOCAUX>
             <h2 class="h2">Actualités</h2>
             <div  class="liste articles">
