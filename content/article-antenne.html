@@ -88,16 +88,16 @@
         </B_ACTU_LOCAUX>
 
 
-                    <h2 class="h2">Agenda</h2>
+                [<h2 class="h2">Agenda</h2>
 
                     <div id="mini_agenda" class="col-md-8">
 
                     <div class="bloc">
 
-                        [(#INCLURE{fond=inclure/mini_agenda_antenne,id_mot=#GET{id_mot}})]
+                        (#INCLURE{fond=inclure/mini_agenda_antenne,id_mot=#GET{id_mot}})
 
                     </div>
-                </div>
+                </div>]
 
 
         <INCLURE{fond=aside/#ENV{type-page},env} />
