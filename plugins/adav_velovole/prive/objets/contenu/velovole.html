@@ -1,0 +1,42 @@
+<BOUCLE_velovole(VELOVOLES){id_velovole}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:velovole:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_description[ (#DESCRIPTION*|strlen|?{'',vide})]">
+	<label><:velovole:champ_description_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{description} description">(#DESCRIPTION)</span>
+</div>]
+
+[<div class="champ contenu_date_vol[ (#DATE_VOL*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:velovole:champ_date_vol_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_vol} date_vol">(#DATE_VOL|=={0000-00-00 00:00:00}|?{'',[(#DATE_VOL|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_lieu[ (#LIEU*|strlen|?{'',vide})]">
+	<label><:velovole:champ_lieu_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{lieu} lieu">(#LIEU)</span>
+</div>]
+
+[<div class="champ contenu_x[ (#X*|strlen|?{'',vide})]">
+	<label><:velovole:champ_x_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{x} x">(#X)</span>
+</div>]
+
+[<div class="champ contenu_y[ (#Y*|strlen|?{'',vide})]">
+	<label><:velovole:champ_y_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{y} y">(#Y)</span>
+</div>]
+
+[<div class="champ contenu_date_enregistrement[ (#DATE_ENREGISTREMENT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:velovole:champ_date_enregistrement_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_enregistrement} date_enregistrement">(#DATE_ENREGISTREMENT|=={0000-00-00 00:00:00}|?{'',[(#DATE_ENREGISTREMENT|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_code_bycycode[ (#CODE_BYCYCODE*|strlen|?{'',vide})]">
+	<label><:velovole:champ_code_bycycode_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{code_bycycode} code_bycycode">(#CODE_BYCYCODE)</span>
+</div>]
+
+</BOUCLE_velovole>

@@ -1,0 +1,17 @@
+<BOUCLE_v(VELOVOLES){par date}{inverse}>
+    [<div class="col-md-3">
+        <a href="[(#LOGO_VELOVOLE|image_reduire{1200,1200}|extraire_attribut{src})]">
+            <img src="(#LOGO_VELOVOLE|image_reduire{400,400}|extraire_attribut{src})" class="mediabox img-responsive" [alt="(#TITRE)"]/>
+
+        </a>
+    </div>]
+    <div class="col-md-9">
+        [<h3 class="#EDIT{titre} h3">(#TITRE)</h3>]
+        [<div class="#EDIT{description} descriptif">(#DESCRIPTION)</div>]
+        <div class="lieu_date_vol">[(#DATE_VOL|affdate)], [<span class="#EDIT{lieu} lieu">(#LIEU)</span>]</div>
+
+    </div>
+
+
+</BOUCLE_v>
+

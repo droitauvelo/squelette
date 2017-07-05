@@ -1,0 +1,33 @@
+<paquet
+	prefix="adav_velovole"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.5;3.1.*]"
+	logo="prive/themes/spip/images/adav_velovole-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2017-06-12 10:06:10
+	-->
+
+	<nom>Vélos volés</nom>
+	<!-- Où est passé mon vélo ? -->
+
+	<auteur lien='https://www.declic3000.com'>Guillaume Wauquier</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[2.4.0;]" /> 
+	<necessite nom="verifier" compatibilite="[1.0.6;]" /> 
+
+	<pipeline nom="autoriser" inclure="adav_velovole_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/adav_velovole.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/adav_velovole.php" /> 
+	<pipeline nom="affiche_milieu" inclure="adav_velovole_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="adav_velovole_pipelines.php" /> 
+
+	<menu nom="velovoles" titre="velovole:titre_velovoles" parent="menu_edition" icone="images/velovole-16.png" action="velovoles" /> 
+	<menu nom="velovole_creer" titre="velovole:icone_creer_velovole" parent="outils_rapides" icone="images/velovole-new-16.png" action="velovole_edit" parametres="new=oui" /> 
+</paquet>

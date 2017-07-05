@@ -1,0 +1,56 @@
+[(#AUTORISER{voir,velovole,#ID_VELOVOLE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{velovole}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{velovole}|objet_info{url_edit}})]
+<BOUCLE_velovole(VELOVOLES){id_velovole}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,velovole,#ID_VELOVOLE})
+		[(#ID_VELOVOLE|afficher_qui_edite{velovole}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_velovole=#ID_VELOVOLE}|icone_verticale{<:velovole:icone_modifier_velovole:>,velovole,edit,right ajax preload})]
+		]
+		[(#ID_VELOVOLE|afficher_qui_edite{velovole}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_velovole=#ID_VELOVOLE}|icone_verticale{#ID_VELOVOLE|afficher_qui_edite{velovole},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{velovole-24.png}|balise_img{velovole,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{velovole,#ID_VELOVOLE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/velovole,id=#ID_VELOVOLE,id_velovole=#ID_VELOVOLE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,velovole,#ID_VELOVOLE})
+	[(#ID_VELOVOLE|afficher_qui_edite{velovole}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_velovole=#ID_VELOVOLE}|icone_verticale{<:velovole:icone_modifier_velovole:>,velovole,edit,right ajax preload})]
+	]
+	[(#ID_VELOVOLE|afficher_qui_edite{velovole}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_velovole=#ID_VELOVOLE}|icone_verticale{#ID_VELOVOLE|afficher_qui_edite{velovole},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,velovole,id,#ID_VELOVOLE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/velovole-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/velovole-enfants,id_velovole,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,velovole,id_velovole,#ID_VELOVOLE,objet,velovole,id_objet,#ID_VELOVOLE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_velovole>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_velovole>
