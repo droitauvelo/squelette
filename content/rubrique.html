@@ -25,6 +25,7 @@
 [(#TITRE|=={masquer_liste_article}|oui)[(#SET{masquer_liste_article,'oui'})]]
 [(#TITRE|=={masquer_liste_rubrique}|oui)[(#SET{masquer_liste_rubrique,'oui'})]]
 [(#TITRE|=={articles_avant_sous_rubriques}|oui)[(#SET{articles_avant_sous_rubriques,'oui'})]]
+[(#TITRE|=={affichage_date}|oui)[(#SET{affichage_date,'oui'})]]
 </BOUCLE_option_rubrique>
 
 		[(#REM)Les Rubriques ]
@@ -45,7 +46,7 @@
 
 
 [(#GET{masquer_liste_article}|non)
-	[<div class="bloc_section bloc_section_article">
+	[<div class="bloc_section bloc_section_article affichage_date">
 		<div class="ajax">
 			(#INCLURE{fond=inclure/plan_article_bloc,id_rubrique,tri=#GET{tri_article},tri_sens=#GET{tri_article_sens},ajax,env})
 		</div>

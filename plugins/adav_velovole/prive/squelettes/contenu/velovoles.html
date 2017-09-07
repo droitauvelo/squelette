@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/velovoles, env, ajax, sinon=<:velovole:info_aucun_velovole:>}>
-
-[(#AUTORISER{creer,velovole})
-	[(#URL_ECRIRE{velovole_edit,new=oui}|icone_verticale{<:velovole:icone_creer_velovole:>,velovole,new,right})]
-]

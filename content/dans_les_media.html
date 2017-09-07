@@ -1,0 +1,37 @@
+<div class="row-fluid" >
+    <div class="content col-md-7" id="content">
+        <INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+        <div class="contenu-principal">
+            <div class="cartouche">
+                <h1 class="h1">Le vélo dans les média</h1>
+            </div>
+
+
+<div id="articles_syndiques" class="liste articles_syndiques">
+    <B_articles_syndiques>
+
+#ANCRE_PAGINATION
+        <ul class="liste-items articles_syndiques">
+            <BOUCLE_articles_syndiques(SYNDIC_ARTICLES){id_syndic IN 37,38,42}{par date}{inverse}{pagination 20}>
+            <li class="item">
+                [[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]<a href="#URL_ARTICLE" rel="bookmark">(#TITRE*)<span class="read-more hide"><i class="icon-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE*|attribut_html)]&raquo;"></i></span></a>]
+            </li>
+            </BOUCLE_articles_syndiques>
+        </ul>
+[<div class="pagination">(#PAGINATION)</div>]
+    </B_articles_syndiques>
+    <p class="warning">Aucun d'article syndiqué</p>
+<//B_articles_syndiques>
+</div>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="aside secondary col-md-4 col-md-offset-1" id="aside">
+    <INCLURE{fond=aside/#ENV{type-page},env} />
+</div>
+</div>

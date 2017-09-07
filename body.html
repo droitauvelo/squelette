@@ -12,7 +12,6 @@
 
 			<div id="mobile-header" class="hidden-lg hidden-md">
 				<div class="navbar-header">
-
 					<a id="responsive-menu-button" href="#sidr-main">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 							<span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -31,20 +30,15 @@
 
 			(#INCLURE{fond=inclure/nav,env})
 		</div>
-			</div>
-
-
-		]
+			</div>]
 
 
 			<div id="super_contenu">
 
 				<INCLURE{fond=content/#ENV{type-page},env} />
 
-
                 <div id="extra"  >
                     <INCLURE{fond=extra/#ENV{type-page},env} />
-
                 </div>
 
 				<div class="clearfix"></div>
@@ -54,8 +48,6 @@
 			<div class="footer" id="footer">
 				<INCLURE{fond=footer/#ENV{type-page},env} />
 			</div>
-
-
 
 
 			[
