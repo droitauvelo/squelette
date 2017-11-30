@@ -1,10 +1,15 @@
 <BOUCLE_articles(ARTICLES){id_article}>
 
+<BOUCLE_option_rubrique(MOTS){id_rubrique}{type='options_affichage'}{technique=oui}>
+[(#TITRE|=={afficher_les_dates_de_publication}|oui)[(#SET{afficher_les_dates_de_publication,'oui'})]]
+</BOUCLE_option_rubrique>
+
     <a href="#URL_ARTICLE" rel="bookmark">
         <article class="entry article hentry">
             <strong class="entry-title">
                 [(#LOGO_ARTICLE|left|image_reduire{*,80}|image_recadre{80,80})]
-                [<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]
+                [(#GET{afficher_les_dates_de_publication}|oui)
+                [<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr><span class="sep"> &ndash; </span>]]
                 #TITRE<span  class="read-more hide"><i class="icon-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span>
             </strong>
             [<div class="#EDIT{descriptif} descriptif entry-content">(#DESCRIPTIF|couper{#ENV{coupe,300}})</div>]

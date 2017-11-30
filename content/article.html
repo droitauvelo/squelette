@@ -6,6 +6,13 @@
 
 [(#INCLURE{fond=inclure/outils})]
 
+<BOUCLE_option_rubrique(MOTS){id_rubrique}{type='options_affichage'}{technique=oui}>
+
+[(#TITRE|=={afficher_les_dates_de_publication}|oui)[(#SET{afficher_les_dates_de_publication,'oui'})]]
+
+
+</BOUCLE_option_rubrique>
+
 <article>
 	<header class="cartouche">
 
@@ -15,8 +22,9 @@
 			<small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
 		]</h1>
 
+		[(#GET{afficher_les_dates_de_publication}|oui)
 		<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
-
+		]
 	</header>
 
 	<div class="main">
