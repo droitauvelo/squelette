@@ -8,30 +8,31 @@
 			</div>
 
 
-			[<div class="navbar navbar-inverse " id="nav">
+			<div class="navbar navbar-inverse" id="nav">
 
-			<div id="mobile-header" class="hidden-lg hidden-md">
-				<div class="navbar-header">
-					<a id="responsive-menu-button" href="#sidr-main">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="glyphicon glyphicon-menu-hamburger"></span>
+				<div id="menuhaut">
+
+					<div class="pull-right">
+						<button type="button" id="bouton_recherche" class="btn" data-toggle="modal" data-target="#lunr_modal" data-toggle="tooltip" data-placement="bottom" title="Rechercher">
+							<span class="glyphicon glyphicon-search"></span> <span class="hidden-md hidden-xs">Rechercher</span>
 						</button>
+					</div>
+					<div id="mobile-header" class="hidden-lg hidden-md">
+						<div class="navbar-header">
+							<a id="responsive-menu-button" href="#sidr-main">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="glyphicon glyphicon-menu-hamburger"></span>
+								</button>
 
-						<span>Menu de navigation</span></a>
+								<span>Menu de navigation</span></a>
+						</div>
+					</div>
+					[<div class="hidden-xs hidden-sm">
+						 (#INCLURE{fond=inclure/nav,env})
+
+					</div>]
 				</div>
 			</div>
-				<div class="hidden-xs hidden-sm  "  id="menuhaut">
-					<div class="pull-right">
-					<button type="button" id="bouton_recherche" class="btn" data-toggle="modal" data-target="#lunr_modal" data-toggle="tooltip" data-placement="bottom" title="Rechercher">
-						<span class="glyphicon glyphicon-search"></span> <span class="hidden-md">Rechercher</span>
-					</button>
-					</div>
-
-
-			(#INCLURE{fond=inclure/nav,env})
-		</div>
-			</div>]
-
 
 			<div id="super_contenu">
 
