@@ -1,0 +1,20 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un article dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_resume_article(ARTICLES) {id_article} {statut?}>
+<article class="entry article hentry">
+	[<div class="logo pic grow">(#LOGO_ARTICLE|#URL_ARTICLE|sinon{#CHEMIN_IMAGE{bike_pattern.png}}|image_reduire{400}|image_recadre{0,175}|inserer_attribut{class,"img-responsive img-rounded"})</div>]
+	<div class="texte">
+		<div class="information">[<span class="date">(#DATE|affdate)</span>]</div>
+		<h3 class="#EDIT{titre} entry-title"><a href="#URL_ARTICLE">[(#TITRE)]</a></h3>
+		<div class="introduction">
+			[(#REM)&nbsp;[(#INCLURE{fond=thematique/pastille_article}{id_article})]]
+			[(#INTRODUCTION|textebrut|couper{280})]
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</article>
+</BOUCLE_resume_article>

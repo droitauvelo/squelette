@@ -1,0 +1,29 @@
+<BOUCLE_article2(ARTICLES){id_article=#ENV{id_article}}>
+<div class="row-fluid" >
+	<div class="content col-md-12" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+		[(#INCLURE{fond=inclure/outils})]
+
+		<article>
+			<BOUCLE_forum(FORUMS){id_forum}>
+			<header class="cartouche">
+
+				<h1>
+
+					<BOUCLE_ariane(ARTICLES){0,1}{id_article}>
+					<small class="#EDIT{surtitre} surtitre"><a href="#URL_ARTICLE">[(#TITRE|couper{80})]</a></small><br/>
+					</BOUCLE_ariane>
+					[<span class="#EDIT{titre}">(#TITRE|couper{80})</span>]
+				</h1>
+			</header>
+
+			<div class="main">
+				[(#INCLURE{fond=comments-thread}{id_forum})]
+				<div class="clearfix"></div>
+				[(#FORMULAIRE_FORUM)]
+			</div>
+			</BOUCLE_forum>
+		</article>
+	</div>
+</div>
+</BOUCLE_article2>

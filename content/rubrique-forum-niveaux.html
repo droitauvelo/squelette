@@ -1,0 +1,100 @@
+<BOUCLE_rubBAI(RUBRIQUES){id_rubrique}>
+<div class="row-fluid" >
+	<div class="content col-md-12" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+
+		<div class="contenu-principal">
+
+			<div class="cartouche">
+				<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+				[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
+			</div>
+
+			[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+		</div>
+
+
+
+
+
+
+		<table class="table_forum" cellpadding="3" cellspacing="1" >
+			<thead>
+			<TR >
+				<TH   style="text-align:center;" colSpan=2>Rubriques</TH>
+				<TH   style="text-align:center;" width=80px>Sujets</TH>
+				<TH   style="text-align:center;" width=80px>Messages</TH>
+				<TH   style="text-align:center;" width=150px>Derniers  Messages</TH>
+			</TR>
+			</thead>
+			<tbody>
+			<!--Traitement des articles de la rubrique principale
+            Ces articles sont écris par l'informatique, comme si c'était des annonces , des règlements ou des post-it-->
+
+
+			<BOUCLE_artRub(ARTICLES){id_rubrique}{par titre}>
+			<tr style="background-color:#efefef">
+				<td width="25px"> <i class="glyphicon glyphicon-star"></i> </td>
+				<td>
+					<div class="titreLigne"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></div>
+					#DESCRIPTIF</td>
+				<td class="text-center">
+					<BOUCLE_nbSujet1(FORUMS){id_article}{doublons}> </BOUCLE_nbSujet1>
+					[(#TOTAL_BOUCLE)]
+					</B_nbSujet1>
+				</td>
+				<td class="text-center">
+					<BOUCLE_nbMessage1(FORUMS){id_article}{plat}> </BOUCLE_nbMessage1>
+					[(#TOTAL_BOUCLE)]
+					</B_nbMessage1>
+				</td>
+				<td class="text-center">
+					<BOUCLE_dernier_message1(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
+					<BOUCLE_parent1(FORUMS){id_enfant}>
+					<a href="[(#URL_PAGE{forum/article-discussion}|parametre_url{id_forum,[(#ID_FORUM)]})][#(#_dernier_message:ID_FORUM)]">
+						</BOUCLE_parent1>
+						[(#NOM)]<br>
+						<small>[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i:s'})]</small>
+					</a>
+					</BOUCLE_dernier_message1>
+				</td>
+			</tr>
+			</BOUCLE_artRub>
+
+			<BOUCLE_sousRub(RUBRIQUES){id_parent}{par titre}>
+			<tr style="background-color:#d1d7dc"><td colSpan=5><div class=titre2Tableau>[(#TITRE|supprimer_numero)]</div></td></tr>
+			<BOUCLE_artSousRub(ARTICLES){id_rubrique}{par titre}>
+			<tr style="background-color:#efefef">
+				<td width="25px"> <i class="glyphicon glyphicon-star"></i> </td>
+				<td>
+					<div class="titreLigne"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></div>
+					#DESCRIPTIF</td>
+				<td  >
+					<BOUCLE_nbSujet(FORUMS){id_article}{doublons}></BOUCLE_nbSujet>
+					#TOTAL_BOUCLE
+				<//B_nbSujet></td>
+				<td >
+					<BOUCLE_nbMessage(FORUMS){id_article}{plat}{doublons}></BOUCLE_nbMessage>
+					#TOTAL_BOUCLE
+				<//B_nbMessage></td>
+				<td  >
+					<BOUCLE_dernier_message(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
+					<BOUCLE_parent(FORUMS){id_enfant}>
+					<a href="[(#URL_PAGE{forum/article-discussion}|parametre_url{id_forum,[(#ID_FORUM)]})][#(#_dernier_message:ID_FORUM)]">
+						</BOUCLE_parent>
+						[(#NOM)]<br>
+						[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i:s'})]
+					</a>
+					</BOUCLE_dernier_message>
+				</td>
+			</tr>
+			</tbody>
+			</BOUCLE_artSousRub>
+			</BOUCLE_sousRub>
+
+		</table>
+	</div>
+</div>
+
+</BOUCLE_rubBAI>

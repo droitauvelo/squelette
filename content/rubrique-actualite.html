@@ -1,56 +1,42 @@
-<div class="row-fluid" >
-	<div class="content col-md-12" id="content">
-		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
-
 <BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
 
-	<!-- Titre de la rubrique -->
-	<div class="cartouche">
-		[<h1 class="#EDIT{titre}">(#TITRE)</h1>]
+	<div class="content col-md-12" id="content">
+		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+		<div class="bloc_section bloc_section_actualite " id="actualites">
+			<div class="container">
+				<h2>A la une</h2>
+				<div class="menu actualite">
+					<BOUCLE_actu(ARTICLES){id_rubrique}{magnet}{par date}{inverse}{0,3}{doublons}>
+					<div class="col-xs-12 col-md-4 actu">
+						<INCLURE{fond=inclure/resume/article-actu-carre,id_article} />
+						<div class="nettoyeur"></div>
+					</div>
+					</BOUCLE_actu>
+				</div>
+			</div>
+		</div>
+
+		[(#REM) Articles de la rubrique ]
+		<B_news>
+			<div class="container-fluid">
+				<div class="menu articles liste_actu ">
+					#ANCRE_PAGINATION
+					<!--<h2><:articles_rubrique:></h2>-->
+					<div class="row-fluid">
+						<BOUCLE_news(ARTICLES){id_rubrique}{par date}{inverse}{pagination 15}{doublons}>
+						<div class="col-xs-12 col-md-6 col-lg-4 actu">
+							<INCLURE{fond=inclure/resume/article-actu,id_article} />
+						</div>
+						</BOUCLE_news>
+					</div>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
+			</div>
+		</B_news>
 	</div>
-
-
-<B_zoom_article>
-
-<div class="menu alaune">
-    <h2 class="h2 accroche">A la une</h2>
-<ul class="menu-liste">
-<BOUCLE_zoom_article(ARTICLES){id_rubrique}{par date}{inverse}{doublons}>
-        [(#INCLURE{fond=inclure/article-resume-actu-vedette,id_article})]
-    	<div class="nettoyeur"></div>
-
-</BOUCLE_zoom_article>
-</ul>
-</div>
-<hr />
-</B_zoom_article>				
-
-	
-
-[(#REM) Articles de la rubrique ]
-<B_news>
-<div class="menu articles liste_actu">
-	#ANCRE_PAGINATION
-	<!--<h2><:articles_rubrique:></h2>-->
-	<ul class="menu-liste">
-		<BOUCLE_news(ARTICLES){id_rubrique}{doublons}{par date}{inverse}{pagination}>
-
-            [(#INCLURE{fond=inclure/article-resume-actu,id_article})]
-
-		</BOUCLE_news>
-	</ul>
-	[<div class="pagination">(#PAGINATION)</div>]
-</div>
-</B_news>
-
-
-	</div>
-
-
-
 	<div class="aside secondary col-md-12" id="aside">
 		<INCLURE{fond=aside/#ENV{type-page},env} />
 	</div>
-</div>
+
 
 </BOUCLE_contenu_rubrique>

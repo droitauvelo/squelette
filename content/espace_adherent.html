@@ -1,0 +1,24 @@
+#CACHE{1}
+<h1 class="h1">Espace adhérent</h1>
+[(#SESSION{id_auteur}|oui)
+    [(#SESSION{simplasso_statut}|oui)
+        [(#INCLURE{fond=inclure/info_adherent}{env})]
+    ]
+    [(#SESSION{simplasso_statut}|non)
+       <p> Vous êtes actuellement connecté en tant qu'utilisateur SPIP, si vous souhaitez avoir accès à votre espace membre, il vous faut d'abord vous <a href="[(#URL_LOGOUT)]">déconnecter</a>.</p>
+    ]
+]
+
+[(#SESSION{id_auteur}|non)
+    <section class="grid-9 has-gutter-xl">
+        <div class="col-2">
+            <p>&nbsp;</p>
+        </div>
+        <div class="col-5">
+            [(#FORMULAIRE_LOGIN_SIMPLASSO{#URL_PAGE{espace_adherent}})]
+        </div>
+        <div class="col-2">
+            <p>&nbsp;</p>
+        </div>
+    </section>
+]

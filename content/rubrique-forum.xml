@@ -1,0 +1,6 @@
+<composition>
+	<nom>forum</nom>
+	<description>Rubrique Forum</description>
+	<branche type="rubrique" composition="forum-niveaux" />
+	<branche type="article" composition="forum-niveaux" />
+</composition>
