@@ -61,9 +61,9 @@
 
 			<BOUCLE_forums(FORUMS){id_article}{!par date}>
 			<tr [(#COMPTEUR_BOUCLE|alterner{style="background-color:#e0e0e0",style="background-color:#d6d6d6"})]>
-				<td style="text-align:center;vertical-align:middle;width:70px;background:white">[(#LOGO_AUTEUR||image_reduire{60,0})]</td>
+				<td style="width:70px;background:white">[(#LOGO_AUTEUR||image_reduire{60,0})]</td>
 
-				<td>
+				<td class="text-left">
 					<div class="titreLigne">
 						<a href="[(#URL_PAGE{forum-thread}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_forum,#ID_FORUM})]" id="forum#ID_FORUM" title="[(#TEXTE|couper{100})]">#TITRE</a>
 					</div>

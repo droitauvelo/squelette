@@ -36,7 +36,7 @@
 			<BOUCLE_artRub(ARTICLES){id_rubrique}{par titre}>
 			<tr style="background-color:#efefef">
 				<td width="25px"> <i class="glyphicon glyphicon-star"></i> </td>
-				<td>
+				<td class="text-left">
 					<div class="titreLigne"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></div>
 					#DESCRIPTIF</td>
 				<td class="text-center">
@@ -70,14 +70,15 @@
 				<td>
 					<div class="titreLigne"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></div>
 					#DESCRIPTIF</td>
-				<td  >
-					<BOUCLE_nbSujet(FORUMS){id_article}{doublons}></BOUCLE_nbSujet>
+				<td  class="text-left">
+					<BOUCLE_nbSujet(FORUMS){id_article}{doublons}> </BOUCLE_nbSujet>
 					#TOTAL_BOUCLE
-				<//B_nbSujet></td>
+				</B_nbSujet></td>
 				<td >
-					<BOUCLE_nbMessage(FORUMS){id_article}{plat}{doublons}></BOUCLE_nbMessage>
+					<BOUCLE_nbMessage(FORUMS){id_article}{plat}{doublons}> </BOUCLE_nbMessage>
 					#TOTAL_BOUCLE
-				<//B_nbMessage></td>
+				</B_nbMessage>
+				</td>
 				<td  >
 					<BOUCLE_dernier_message(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
 					<BOUCLE_parent(FORUMS){id_enfant}>
