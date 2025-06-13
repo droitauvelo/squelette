@@ -1,0 +1,12 @@
+<h4 class="h4"><:coordonnees:adresses:></h4>
+<B_add>
+<ul class="liste-item">
+<BOUCLE_add(ADRESSES adresses_liens auteurs){id_auteur}>
+	
+<li class="item #EDIT{ville}"><span class="#EDIT{voie}">#VOIE</span>[<br/><span class="#EDIT{complement}">(#COMPLEMENT)]</span></li>	
+<li class="item #EDIT{ville}">#VILLE[ (#PAYS)]</li>
+</BOUCLE_add>
+</ul>
+</B_add>
+<p class="erreur">Aucune adresse renseignée</p>
+<//B_add>
