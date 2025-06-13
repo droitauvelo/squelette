@@ -1,20 +1,47 @@
-# Droit Au Vélo 
+# Site internet de l'association Droit Au Vélo 
 
-Squelette du nouveau site Droit au Velo 
+Ce dépôt de code contient le code PHP et SPIP nécéssaire au fonctionnement du site internet de l'association Droit de vélo. Il est basé sur la technologie Spip.
 
-Les plugins persos 
+# Pré-requis
+
+Pour lancer le serveur, il vous faut au préalable avoir installé :
+
+- Le langage *PHP*
+- Un serveur HTTP (*nginx* ou *Apache*)
+- Une base de donnée (*MariaDB* ou *MySQL*)
+
+Pour le téléchargement et la gestion des dépendances (librairie js), il vous
+faut avoir installer *yarn* sur votre système.
+
+# Installation en local
+
+
+Récupérer le code avec Git :
 
 ```
-svn co svn://zone.spip.org/spip-zone/_plugins_/sociaux/trunk sociaux
-svn co svn://zone.spip.org/spip-zone/_plugins_/modeles_facebook/trunk modeles_facebook
-svn co svn://zone.spip.org/spip-zone/_plugins_/mots_techniques/trunk mots_techniques
-svn co svn://zone.spip.org/spip-zone/_plugins_/jqvmap/trunk jqvmap
-svn co svn://zone.spip.org/spip-zone/_plugins_/uploadhtml5/trunk uploadhtml5
-svn co svn://zone.spip.org/spip-zone/_plugins_/seminaire/trunk seminaire
-svn co svn://zone.spip.org/spip-zone/_plugins_/import_ics/trunk import_ics
-svn co svn://zone.spip.org/spip-zone/_plugins_/icalendar/trunk icalendar
-svn co svn://zone.spip.org/spip-zone/_plugins_/modeles_media/trunk modeles_media
+git clone https://github.com/droitauvelo/squelette.git adav-site
+```
 
+Puis lancer le script d'installation (cela installera Spip en version 4.4 + plugins):
 
+```
+make install
+```
+
+# Activer les plugins
+
+# Utilisation des librairies et outils (gulp et ses modules)
+
+Lors du développement, quand vous souhaitez modifier les feuilles de styles ou
+les js, n'oubliez pas de lancer gulp dans une console à part,
+il s'occupera de compiler les fichiers à chaque modifications des
+fichiers sources.
+
+Pour savoir ce que fait exactement gulp, il suffit de lire
+dans le fichier `squelettes/sources/Gulpfile.js`
+
+```
+cd squelettes/sources/
+gulp
 ```
 
