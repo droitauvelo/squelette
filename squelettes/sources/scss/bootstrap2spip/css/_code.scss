@@ -1,0 +1,62 @@
+@import "scss/_code";
+
+code {
+  white-space:inherit;
+}
+code, .spip_code {
+  color: $code-color;
+  word-break: break-word;
+  background: rgba($gray-500,0.07);
+  border:1px solid rgba($gray-500,0.15);
+  padding: $padding-y-xs $padding-x-xs;
+  @if $enable-rounded {
+    border-radius: $border-radius-sm;
+  }
+
+  // Streamline the style when inside anchors to avoid broken underline and more
+  a > & {
+    color: inherit;
+  }
+  white-space:inherit;
+
+  &>code {
+    border: none;
+    padding: 0;
+    background: none;
+    color:inherit;
+    font-size: 1em
+  }
+}
+
+pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre {
+  font-family: $font-family-monospace;
+  @include font-size($code-font-size);
+}
+
+pre { margin: $rem-vert-margin 0;
+  /* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+@media print {
+  pre { page-break-inside: avoid; }
+}
+
+@include media-breakpoint-down(xs) {
+  /* gestion des mots longs */
+  code, pre, samp { word-wrap: break-word; /* cesure forcee */ }
+  code, pre, samp { white-space: pre-line; /* passage a la ligne specifique pour les elements a chasse fixe */ }
+}
+
+/* Paragraphes spip */
+.spip_cadre, div.spip_code { margin:0;margin-bottom: $rem-vert-margin; width: 100%;}

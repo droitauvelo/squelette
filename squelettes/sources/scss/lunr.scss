@@ -1,0 +1,17 @@
+@import "functions";
+@import "scss/variables";
+@import "mixins";
+@import "variables_perso";
+
+#bouton_recherche{ margin:0 0.5em 0 0.5em; padding:0.25em 0.5em; border:none 0; }
+#bouton_recherche:hover{ background-color: $bleu-clair-adav;color:white; }
+#lunr_modal{
+	clear: both;
+	color:$bleu-adav;
+	label{font-size:1.5em;margin:0 0.5em 0 0;}
+	.form-group{ display:block;}
+	#recherche{ color:$bleu-adav;font-size:1.5em;width:calc(100% - 3em);padding:0.5em 1em; border:1px $gray-100 solid; line-height: 1.4}
+	.lunr-content{ display:none;}
+	.lunr-submit{}
+
+}

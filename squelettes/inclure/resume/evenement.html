@@ -1,7 +1,7 @@
 <BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
 [(#SET{annee,#DATE_DEBUT|annee})][(#SET{mois,#DATE_DEBUT|nom_mois})][(#SET{jour,#DATE_DEBUT|jour})]
 <article class="entry evenement vevent id_#ID_EVENEMENT" id="evenement_#ID_EVENEMENT" itemscope itemtype="http://schema.org/Event">
-	<div class="row-fluid">
+	<div class="row">
 		<div class="col-md-2">
 
 			<span class="banner #EDIT{date_debut}"><span class="label label-inverse"><:agenda:date_fmt_agenda_label{annee=#GET{annee},mois=#GET{mois},jour=#GET{jour}}:></span></span>
@@ -41,7 +41,7 @@
 </div>
 
 			[(#SESSION{id_auteur}|oui)[<a href="(#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT})">modifier l'évenement</a>]]
-			[(#ID_ARTICLE|=={694}|non)<a itemprop="url" class="btn btn-primary pull-right" href="[(#URL_ARTICLE)]">En savoir plus</a>]
+			[(#ID_ARTICLE|=={694}|non)<a itemprop="url" class="btn btn-primary float-right" href="[(#URL_ARTICLE)]">En savoir plus</a>]
 
 
 		</div>

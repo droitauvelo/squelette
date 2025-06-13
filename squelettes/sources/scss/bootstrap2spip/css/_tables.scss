@@ -1,0 +1,20 @@
+@import "scss/_tables";
+
+/* Tableaux SPIP */
+table.spip {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-hover;
+  thead {
+    th {
+      color: $table-head-color;
+      background-color: $table-head-bg;
+      border-color: $table-border-color;
+    }
+  }
+}
+
+table.spip caption {}
+table.spip tr.row_first th {}
+table.spip tr.row_odd td { }
+table.spip tr.row_even td,table.spip tr.row_even th {}

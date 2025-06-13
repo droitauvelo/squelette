@@ -1,26 +1,34 @@
-<div class="menu menu-container navbar-inner">
-#INCLURE{fond=inclure/menu, env, identifiant=barrenav}
-</div>
-<div id="menu_association" class="panneau">
-[(#INCLURE{fond=inclure/panneau,id_rubrique=91,menu=association})]
+<nav id="nav" class="navbar navbar-expand-lg navbar-light">
+    <button id="responsive-menu-button" class="navbar-toggler" type="button" aria-controls="barrenav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span> Menu
+    </button>
+    <div class="collapse navbar-collapse" id="barrenav">
+        [(#INCLURE{fond=inclure/menu, env, identifiant=barrenav})]
+    </div>
+    <a id="bouton_recherche" class="btn btn-primary" data-toggle="modal" data-target="#lunr_modal"  data-placement="bottom" title="Rechercher">
+        <i class="fa fa-search"></i>
+    </a>
 
-</div>
-<div id="menu_politique" class="panneau">
-[(#INCLURE{fond=inclure/panneau,id_rubrique=92,menu=menu_politique})]
-</div>
-<div id="menu_services" class="panneau">
-[(#INCLURE{fond=inclure/panneau,id_rubrique=93,menu=services})]
-</div>
-<div id="menu_mediatheque" class="panneau">
-[(#INCLURE{fond=inclure/panneau,id_rubrique=94,menu=mediatheque})]
-</div>
-<div id="menu_education" class="panneau">
-[(#INCLURE{fond=inclure/panneau,id_rubrique=95,menu=education})]
-</div>
-<div id="menu_evenements" class="panneau">
-[(#INCLURE{fond=inclure/panneau,id_rubrique=96,menu=evenements})]
-</div>
-<div id="menu_carto" class="panneau">
-    [(#INCLURE{fond=inclure/panneau,id_rubrique=150,menu=carto})]
-</div>
+    <div id="menu_association" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=91,menu=association})]
+    </div>
+    <div id="menu_politique" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=92,menu=menu_politique})]
+    </div>
+    <div id="menu_services" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=93,menu=services})]
+    </div>
+    <div id="menu_mediatheque" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=94,menu=mediatheque})]
+    </div>
+    <div id="menu_education" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=95,menu=education})]
+    </div>
+    <div id="menu_evenements" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=96,menu=evenements})]
+    </div>
+    <div id="menu_carto" class="panneau">
+        [(#INCLURE{fond=inclure/panneau,id_rubrique=150,menu=carto})]
+    </div>
 
+</nav>

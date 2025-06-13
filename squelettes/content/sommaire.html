@@ -1,5 +1,5 @@
-<div class="row-fluid" >
-	<div  class="bloc_adherer visible-sm visible-xs-block">
+<div class="row" >
+	<div  class="bloc_adherer d-md-none">
 		<BOUCLE_articles_adh(ARTICLES){id_article=603}>
 		<a href="#URL_ARTICLE" class=""><span>#TITRE à l'association</span></a>
 		</BOUCLE_articles_adh>
@@ -16,7 +16,7 @@
 			
 		<BOUCLE_article_presentation(RUBRIQUES){id_rubrique=91}>
 		<B_docu>
-				<div id="myCarousel" class="carousel slide">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 					<BOUCLE_docu(DOCUMENTS){id_rubrique}{par num titre}{vu=non}>
 					<li data-target="#myCarousel" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [(#COMPTEUR_BOUCLE|=={1}|oui) class="active"]></li>
@@ -25,8 +25,8 @@
 				<!-- Carousel items -->
 				<div class="carousel-inner">
 					<BOUCLE_docum(DOCUMENTS){id_rubrique}{tout}{vu=non}{par num titre}>
-						<div class="item[(#COMPTEUR_BOUCLE|=={1}|oui) active]">
-							<img src="[(#URL_DOCUMENT|image_reduire{800,350}|extraire_attribut{src})]" alt="" />
+						<div class="carousel-item [(#COMPTEUR_BOUCLE|=={1}|oui) active]">
+							<img src="[(#URL_DOCUMENT|image_reduire{630,630}|image_recadre{9:5,'-', center}|extraire_attribut{src})]" alt="" class="d-block w-100" />
 							<div class="carousel-caption">
 								[(#DESCRIPTIF|non)<h3  class="#EDIT{titre}">#TITRE</h3>]
 								[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>]
@@ -34,13 +34,13 @@
 						</div>
 					</BOUCLE_docum>
 				</div>
-					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
+					<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+						<i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+						<span class="sr-only">Précédent</span>
 					</a>
-					<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
+					<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+						<i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
+						<span class="sr-only">Suivant</span>
 					</a>
 				</div>
 			</B_docu>

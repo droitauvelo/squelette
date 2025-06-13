@@ -20,7 +20,7 @@
 
 <h2>[(#GET{date_debut}|affdate_periode{#GET{affichage_duree},#GET{affichage_debut}})]</h2>
 <B_ev>
-	<span class="glyphicon glyphicon-calendar"></span>
+	<i class="fa fa-calendar"></i>
 	<ul class="liste-items evenements">
 	<BOUCLE_ev(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
 		[<li class="item item-header month[(#DATE_DEBUT|agenda_date_passee)fini]">(#GET{affichage_duree}|>{1}?{[(#DATE_DEBUT|nom_mois|unique{mois})[ (#DATE_DEBUT|annee|unique{annee})]]})</li>]

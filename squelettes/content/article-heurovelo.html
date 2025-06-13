@@ -1,5 +1,5 @@
 <BOUCLE_content(ARTICLES){id_article}>
-<div class="row-fluid" >
+<div class="row" >
 	<div class="content col-md-7" id="content">
 		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 
@@ -21,7 +21,7 @@
 
 	<div class="main">
 
-        <div class="span pull-right">
+        <div class="span float-right">
             <INCLURE{fond=inclure/agenda-a-venir,env,ajax} />
         </div>
 		[<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|adaptive_images)</div>]

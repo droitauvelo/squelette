@@ -1,5 +1,5 @@
 <BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
-<div class="row-fluid" >
+<div class="row" >
 	<div class="content col-md-12" id="content">
 		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 
@@ -32,9 +32,7 @@
 
 [(#GET{masquer_liste_rubrique}|non)
 <div class="bloc_section bloc_section_rubrique">
-	<div class="row">
 		[(#INCLURE{fond=inclure/plan_rubrique_bloc}{id_rubrique})]
-	</div>
 </div>]
 
 

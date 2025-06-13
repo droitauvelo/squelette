@@ -5,14 +5,14 @@
 		<div class="modal-content">
 
 			<div class="modal-body">
+				<button type="button" class=" float-right close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-				<form action="[(#ENV{action})]" method="get" class="lunr-form form-inline ">
+				<form action="[(#ENV{action})]" method="get" class="form lunr-form">
 					[(#ENV{action}|form_hidden)]
-					<button type="button" class=" pull-right close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 
 					<div class="form-group">
-						<label for="#ENV{_id_champ}"><span class="glyphicon glyphicon-search"></span></label>
+						<label for="#ENV{_id_champ}"><i class="fa fa-search"></i></label>
 						<input type="[(#HTML5|?{search,text})]" class="search text lunr-input" size="10" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off"
 							   placeholder="Rechercher..."	/>
 					</div>

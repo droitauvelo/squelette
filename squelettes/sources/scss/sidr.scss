@@ -1,0 +1,43 @@
+@import "functions";
+@import "scss/variables";
+@import "mixins";
+@import "variables_perso";
+
+
+
+/* Sidr : indentation multi-niveaux sur menu Responsive */
+
+.sidr {
+
+	.sidr-class-descriptif{display:none;}
+	.sidr-class-lien{display:none;}
+	.sidr-class-lien{display:none;}
+	ul li ul { margin: 0 0 0 1em;
+		li { line-height: 1.2;padding-top:0; }
+		li a{ display:block;line-height: 1.2;padding-top:0.75em;padding-bottom:0.75em; }
+		li.sidr-class-active { box-shadow:none;line-height: 1.2;border: 0 none; }
+		li:hover { box-shadow:none;line-height: 1.2;border: 0 none; }
+		li:hover > a { box-shadow:none;line-height: 1.2;border: 0 none; }
+	}
+}
+
+
+
+
+/* Sidr : transforme le symbole Menu (3 traits) en croiX */
+body.sidr-open #nav .menu-conteneur a.btn > .icon-bar {
+	transform-origin: 25% 50% 0;
+	transform: rotate(45deg);
+	height: 3px;
+	transition: rotate 3s;
+}
+
+body.sidr-open #nav .menu-conteneur a.btn > .icon-bar + .icon-bar {
+	transform: rotate(-45deg);
+	height: 3px;
+}
+body.sidr-open #nav .menu-conteneur a.btn > .icon-bar + .icon-bar + .icon-bar {
+	display: none;
+}
+.sidr-class-description_panneau{display:none;}
+

@@ -1,0 +1,219 @@
+// Habillage du mode debug et autres admineries
+
+@import "css/bootstrap-start";
+
+html {
+  /* Style pour le mode debug */
+  #spip-debug-toggle {
+    top:6px;
+    right: 40px;
+    position: fixed;
+  }
+
+  #spip-debug-header {
+    background: $warning;
+    position: fixed;
+    top:30px;
+    height: 30px;
+    width: 100px;
+    left: auto;
+    right: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  #spip-debug, #debug-profile {
+    background: $gray-300;
+    position: fixed;
+    top:60px;
+    bottom: 0;
+    height: auto;
+    left: 0;
+    right: 0;
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    overflow: auto;
+  }
+  #spip-boucles {
+    margin: 0;
+    border-bottom: 5px solid $gray-900 !important;
+    a {
+      color: $link-color;
+      @include hover-focus-active {
+        color: $link-hover-color;
+        text-decoration: underline;
+      }
+    }
+    @include alert-variant(theme-color-level('info', $alert-bg-level), theme-color-level('info', $alert-border-level), theme-color-level('info', $alert-color-level));
+    color: inherit;
+    fieldset {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0;
+      margin-bottom: 2rem;
+      border:1px solid $gray-500;
+      legend {
+        background: $gray-200;
+        padding: 0.25em $grid-gutter-width;
+        font-family: $font-family-monospace;
+        color: $body-color;
+        font-size: 0.875rem;
+        width: auto;
+        border:1px solid $gray-500;
+        margin: 0;
+        margin-left: -1px;
+        a {
+          float: right;
+          margin-left: 10px;
+          font-size: 1rem;
+          font-family: initial;
+        }
+      }
+      legend +span {
+        font-size: 0.8rem;
+        margin-right: $grid-gutter-width;
+        font-family: $font-family-monospace;
+      }
+      legend +span +br { display: none}
+      .spip-env {
+        margin: $grid-gutter-width;
+        fieldset {
+          font-family: $font-family-monospace;
+          font-size: $code-font-size;
+          background: $white;
+          border:0;
+          margin: 0;
+          width: 100%;
+          legend {
+            font-family: inherit;
+            background: none;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            width: auto;
+            color: inherit;
+            float: left;
+            margin-top:-1.5rem;
+          }
+          table {
+            font-family: inherit;
+            display: block;
+            font-size: 0.8125rem;
+            line-height: 1;
+            tbody, tr, td {
+              font-family: inherit;
+              font-size: inherit;
+              display: flex
+            }
+            tbody {
+              flex-wrap: wrap;
+              tr:nth-child(2n +1) {
+                td {
+                  background: $gray-100;
+                }
+              }
+              tr:nth-child(2n) {
+                td {
+                  background: $gray-300;
+                }
+              }
+            }
+          }
+        }
+        &+table {
+          font-family: inherit;
+          font-size: 0.8125rem;
+          line-height: 1.25em;
+          tr {
+            td {
+              &:nth-child(1),&:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(4) {
+                width: 5rem;
+              }
+              &:nth-child(6),&:nth-child(7),&:nth-child(8) {
+                font-family: $font-family-monospace;
+                font-size: $code-font-size;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #debug_boucle {
+    a {
+      color: $link-color;
+      @include hover-focus-active {
+        color: $link-hover-color;
+        text-decoration: underline;
+      }
+    }
+    fieldset {
+      background: theme-color-level('info', $alert-bg-level);
+      font-family: $font-family-monospace;
+      font-size: 0.8rem;
+      line-height: 1.25;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+      border: 0;
+      legend {
+        font-family: $font-family-monospace;
+        font-size: 1.2em;
+        color: inherit;
+        margin: 0;
+        border: 0;
+        padding: 0.25em $grid-gutter-width;
+        background: $gray-400;
+        &+div {
+          code {
+            background: darken(theme-color-level('info', $alert-bg-level),5%);
+          }
+        }
+      }
+      h3 {
+        font-family: inherit;
+        font-size: inherit;
+        margin: 10px 0;
+        padding: 5px;
+        background: $gray-100;
+      }
+      fieldset {
+        font-family: initial;
+        margin : 1rem 0;
+        padding: 1rem;
+        font-size: 1rem;
+        background: #fff;
+        border-top:3px solid #888;
+        width: auto;
+      }
+    }
+
+  }
+  #debug-profile {
+    display: block;
+    opacity: 1;
+    caption {
+      display: block;
+      width: 100%;
+      font-size: 1em;
+    }
+    &>tbody {
+      display: table;
+      width: 100%;
+      font-size: 0.9em;
+    }
+    table.explain {
+      caption {
+        font-family: $font-family-monospace;
+        display: block;
+        width: 100%;
+      }
+      font-family: $font-family-monospace;
+      tbody {
+        display: table;
+        width: 100%;
+      }
+    }
+  }
+}
+

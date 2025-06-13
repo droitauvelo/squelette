@@ -10,7 +10,7 @@
 	<BOUCLE_articles_vedette(ARTICLES) {id_article}>
         [(#GET{logo}|non) [(#SET{logo,#LOGO_ARTICLE|image_reduire{0,700}})]]
         [(#GET{logo}|non) [(#SET{logo,#CHEMIN{images/logo.png}|image_reduire{0,700}})]]
-       [<div class="logo pic grow">(#GET{logo}|inserer_attribut{class,"img-responsive img-rounded"})</div>]
+       [<div class="logo pic grow">(#GET{logo}|inserer_attribut{class,"img-fluid img-rounded"})</div>]
 	</BOUCLE_articles_vedette>
 
         <div class="titre clearfix">
@@ -53,7 +53,7 @@
         </BOUCLE_articles>
 
        <div class="item">
-            <div class="logo pull-left">
+            <div class="logo float-left">
                 <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
                 <img src="[(#GET{logo}|sinon{#CHEMIN{images/logo.png}}|image_reduire{80,80}|extraire_attribut{src})]" class="img-rounded spip_logos" />
                 </a>
@@ -77,9 +77,9 @@
 
 </BOUCLE_mois>
 </ul>
-<div class="lien_agenda pull-right"><a href="[(#URL_PAGE{agenda})]" class="btn btn-primary">Voir les autres événements</a></div>
+<div class="lien_agenda float-right"><a href="[(#URL_PAGE{agenda})]" class="btn btn-primary">Voir les autres événements</a></div>
 </B_mois>
-    <div class="lien_agenda pull-right"><a href="[(#URL_PAGE{agenda})]" class="btn btn-primary">Voir les autres événements</a></div>
+    <div class="lien_agenda float-right"><a href="[(#URL_PAGE{agenda})]" class="btn btn-primary">Voir les autres événements</a></div>
 
 <//B_mois>
 

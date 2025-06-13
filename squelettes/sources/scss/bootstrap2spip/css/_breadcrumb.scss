@@ -1,0 +1,4 @@
+@import "scss/_breadcrumb";
+
+ul.breadcrumb,ol.breadcrumb {margin-left: 0;}
+.breadcrumb-item .divider {display: none !important;}

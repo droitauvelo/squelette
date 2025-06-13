@@ -15,7 +15,7 @@
 
         <a href="[(#GET{url_article})]" rel="bookmark" [data-event="(#URL_PAGE{evt_ajax,id_evenement=#ID_EVENEMENT})"]>
             <div class="item">
-                [ <div class="logo pull-left"><img src="(#GET{logo}|image_reduire{80,80}|extraire_attribut{src})" class="img-rounded spip_logos" /></div>]
+                [ <div class="logo float-left"><img src="(#GET{logo}|image_reduire{80,80}|extraire_attribut{src})" class="img-rounded spip_logos" /></div>]
                 <div class="date">[(#DATE_DEBUT|affdate_court)][ (#HORAIRE|=={oui}|oui)[(#DATE_DEBUT|heures) h][(#DATE_DEBUT|minutes|!={00}|oui)[(#DATE_DEBUT|minutes)]]]</div>
                 <div class="titre">#TITRE</div>
                 <div class="lieu">#LIEU</div>

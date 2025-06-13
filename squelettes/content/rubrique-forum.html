@@ -1,5 +1,5 @@
 <BOUCLE_rubBAI(RUBRIQUES){id_rubrique}>
-<div class="row-fluid" >
+<div class="row" >
 	<div class="content col-md-12" id="content">
 		<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 
@@ -35,7 +35,7 @@
 			<tr style="background-color:#d1d7dc"><td colSpan="5" class="text-left"><div class=titre2Tableau>[(#TITRE|supprimer_numero)]</div></td></tr>
 			<BOUCLE_artSousRub(ARTICLES){id_rubrique}{par titre}>
 			<tr style="background-color:#efefef">
-				<td width="50px"> <i class="glyphicon glyphicon-star"></i> </td>
+				<td width="50px"><div class="td_icone"> <i class="glyphicon glyphicon-star"></i> </div></td>
 				<td class="text-left">
 					<div class="titreLigne"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></div>
 					#DESCRIPTIF</td>
@@ -53,7 +53,7 @@
 					<a href="[(#URL_PAGE{forum/article-discussion}|parametre_url{id_forum,[(#ID_FORUM)]})][#(#_dernier_message:ID_FORUM)]">
 						</BOUCLE_parent>
 						[(#NOM)]<br>
-						[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i:s'})]
+						<small>[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i:s'})]</small>
 					</a>
 					</BOUCLE_dernier_message>
 				</td>
