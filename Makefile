@@ -1,8 +1,8 @@
 SHELL:=/bin/bash
 
-SPIP_VERSION=3.2
-PLUGINS="yaml numerotation ancres_douces pays spip-bonux-3  \
-        z-core compositions_v3 facteur abomailmans noie   \
+SPIP_VERSION=4.4
+PLUGINS="yaml numerotation ancres_douces pays   \
+        z-core compositions facteur abomailmans noie   \
         albums_3 spipr_dist"
 
 .PHONY: run
